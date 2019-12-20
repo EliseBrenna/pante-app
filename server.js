@@ -28,43 +28,34 @@ app.use(bodyParser.urlencoded({
 //Functions:
 
 // Creating new users
-function createUser(users) {
-    const queryText = `
-      INSERT INTO users(
+async function createUser(name, email, password) {
+    const { rows } = await pool.query(`
+        INSERT INTO users(
           name,
           email,
           password
-      )
-  
-      VALUES(
+        )
+        VALUES(
           $1,
           $2,
           $3
-      )
-  
+        )
       RETURNING *
-      `
-  
-    const queryValues = [
-      users.name,
-      users.handle,
-      users.password,
-    ]
-  
-    return pool.query(queryText, queryValues)
-      .then(({
-        rows
-      }) => {
-        return rows.map((elem) => {
-          return {
-            id: elem.id,
-            name: elem.name,
-            handle: elem.handle,
-            password: elem.password,
-          };
-        });
-      })
-      .then((users) => users[0]);
+      `, [name, email, password]);
+
+    return rows[0]
+}
+
+//Get user profile
+async function getUserByName(email) {
+    const { rows } = await pool.query(`
+        SELECT * FROM 
+            users
+        WHERE
+            email = $1 
+    `, [email]);
+
+    return rows[0];
 }
 
 
@@ -80,9 +71,33 @@ api.get(`/users`, async (req, res) => {
 api.get(`/signup`, async (req, res) => {
     const { name, email, password } = req.body;
     const newUser = await createUser(name, email, password);
-    res.send(newUser)
+    res.send(newUser);
 })
 
+api.get(`/user/:email`, async (req, res) => {
+    const { email } = req.params;
+    const profile = await getUserByName(email);
+    if(!profile) {
+        return res.status(404).send({ Error: `Unknown user with the email: ${email}` })
+    }
+    res.send(profile);
+})
+
+api.post(`/session`, async (req, res) => {
+    const { email, password } = req.body;
+    try{
+
+        const user = await getUserByName(email)
+        if(!user) {
+            return res.status(401).send({ error: 'Unknown user' })
+        }
+
+        if(!password)
+    }
+})
+
+
+//Listens to port:
 const port = process.env.PORT;
 
 app.listen(port, () => {
