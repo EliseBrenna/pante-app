@@ -28,7 +28,16 @@ app.use(bodyParser.urlencoded({
 //Functions:
 
 //Routes:
+api.get(`/users`, async (req, res) => {
+    const users = await getUsers();
+    res.send(users)
+})
 
+api.get(`/signup`, async (req, res) => {
+    const { name, email, password } = req.body;
+    const newUser = await createUser(name, email, password);
+    res.send(newUser)
+})
 
 const port = process.env.PORT;
 
