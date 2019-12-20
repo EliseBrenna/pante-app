@@ -83,18 +83,18 @@ api.get(`/user/:email`, async (req, res) => {
     res.send(profile);
 })
 
-api.post(`/session`, async (req, res) => {
-    const { email, password } = req.body;
-    try{
+// api.post(`/session`, async (req, res) => {
+//     const { email, password } = req.body;
+//     try {
 
-        const user = await getUserByName(email)
-        if(!user) {
-            return res.status(401).send({ error: 'Unknown user' })
-        }
+//         const user = await getUserByName(email)
+//         if(!user) {
+//             return res.status(401).send({ error: 'Unknown user' })
+//         }
 
-        if(!password)
-    }
-})
+//         if(!password)
+//     } catch 
+// })
 
 
 //Listens to port:
