@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="167" height="195" viewBox="0 0 167 195">
+  <defs>
+    <clipPath id="clip-Logoforslag_1_1">
+      <rect width="167" height="195"/>
+    </clipPath>
+  </defs>
+  <g id="Logoforslag_1_1" data-name="Logoforslag 1 – 1" clip-path="url(#clip-Logoforslag_1_1)">
+    <rect width="167" height="195" fill="#ffe6ed"/>
+    <text id="BANK" transform="translate(28 87)" fill="#0008ff" font-size="40" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">BANK</tspan></text>
+    <text id="PANT" transform="translate(32 140)" fill="#0008ff" font-size="40" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">PANT</tspan></text>
+    <line id="Line_6" data-name="Line 6" x2="98" transform="translate(64.5 4)" fill="none" stroke="#0008ff" stroke-width="7" style="mix-blend-mode: darken;isolation: isolate"/>
+    <line id="Line_7" data-name="Line 7" y2="193.876" transform="translate(5.5 0.5)" fill="none" stroke="#0008ff" stroke-width="7" style="mix-blend-mode: darken;isolation: isolate"/>
+    <line id="Line_8" data-name="Line 8" x2="31" transform="translate(5.5 4)" fill="none" stroke="#0008ff" stroke-width="7" style="mix-blend-mode: darken;isolation: isolate"/>
+    <line id="Line_9" data-name="Line 9" x2="98" transform="translate(103.5 190.876) rotate(180)" fill="none" stroke="#0008ff" stroke-width="7" style="mix-blend-mode: darken;isolation: isolate"/>
+    <line id="Line_10" data-name="Line 10" x2="112" transform="translate(29.5 99.5)" fill="none" stroke="#0008ff" stroke-width="3" style="mix-blend-mode: darken;isolation: isolate"/>
+    <line id="Line_4" data-name="Line 4" y2="193.876" transform="translate(162.5 194.375) rotate(180)" fill="none" stroke="#0008ff" stroke-width="7" style="mix-blend-mode: darken;isolation: isolate"/>
+    <line id="Line_5" data-name="Line 5" x2="31" transform="translate(162.5 190.875) rotate(180)" fill="none" stroke="#0008ff" stroke-width="7" style="mix-blend-mode: darken;isolation: isolate"/>
+  </g>
+</svg>
