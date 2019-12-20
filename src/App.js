@@ -1,12 +1,12 @@
 import React from 'react';
-import { HashRouter, Switch, Route} from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div></div>
+    )
+  }
 }
-
-export default App;
