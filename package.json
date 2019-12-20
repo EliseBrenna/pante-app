@@ -18,7 +18,7 @@
     "react-scripts": "3.3.0"
   },
   "scripts": {
-    "postinstall": "nmp run build",
+    "postinstall": "npm run build",
     "start": "node server.js",
     "develop": "react-script-start",
     "build": "react-scripts build",
