@@ -5,7 +5,7 @@ import { checkSession } from '../services/session';
 class Authenticate extends React.Component {
     render() {
         return (
-            <div>Authenticate</div>
+            <div className="test">Authenticate</div>
         )
     }
 }

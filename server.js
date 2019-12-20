@@ -101,5 +101,5 @@ api.get(`/user/:email`, async (req, res) => {
 const port = process.env.PORT;
 
 app.listen(port, () => {
-    console.log(`Pante-app is running at port: ${port}`)
+    console.log(`Pante-app is running at port: http://localhost:${port}`)
 })
