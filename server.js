@@ -27,6 +27,50 @@ app.use(bodyParser.urlencoded({
 
 //Functions:
 
+// Creating new users
+function createUser(users) {
+    const queryText = `
+      INSERT INTO users(
+          name,
+          email,
+          password
+      )
+  
+      VALUES(
+          $1,
+          $2,
+          $3
+      )
+  
+      RETURNING *
+      `
+  
+    const queryValues = [
+      users.name,
+      users.handle,
+      users.password,
+    ]
+  
+    return pool.query(queryText, queryValues)
+      .then(({
+        rows
+      }) => {
+        return rows.map((elem) => {
+          return {
+            id: elem.id,
+            name: elem.name,
+            handle: elem.handle,
+            password: elem.password,
+          };
+        });
+      })
+      .then((users) => users[0]);
+}
+
+
+
+//   Creating activity
+
 //Routes:
 
 
