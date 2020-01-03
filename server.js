@@ -96,6 +96,109 @@ api.get(`/user/:email`, async (req, res) => {
 //     } catch 
 // })
 
+// PANTEMASKIN
+
+function createPantData(session) {
+    const queryText = `
+      INSERT INTO session(
+          code,
+          sum,
+          id
+      )
+  
+      VALUES(
+          $1,
+          $2,
+          $3
+      )
+  
+      RETURNING *
+      `
+  
+    const queryValues = [
+      session.code,
+      session.sum,
+      session.id,
+    ]
+  
+    return pool.query(queryText, queryValues)
+      .then(({
+        rows
+      }) => {
+        return rows.map((elem) => {
+          return {
+            code: elem.code,
+            sum: elem.sum,
+            id: elem.id,
+          };
+        });
+      })
+      .then((session) => session[0]);
+  }
+  
+  app.post('/pant', async function (req, res) {
+    const {
+      code,
+      sum,
+      id,
+    } = req.body;
+  
+    createPantData({
+      code,
+      sum,
+      id,
+      })
+      .then((newSession) => {
+        res.send(newSession);
+      });
+  });
+  
+  
+  
+  function updatePantData(session) {
+    const queryText = `
+      UPDATE session 
+      SET id=$1 WHERE code=$2
+      RETURNING *
+      `
+  
+    const queryValues = [
+      session.userId,
+      session.userCode,
+    ]
+  
+    return pool.query(queryText, queryValues)
+      .then(({
+        rows
+      }) => {
+        return rows.map((elem) => {
+          return {
+            code: elem.code,
+            sum: elem.sum,
+            id: elem.id,
+          };
+        });
+      })
+      .then((session) => session[0]);
+  }
+  
+  app.put('/pant', async function (req, res) {
+    const {
+      userCode,
+      userId,
+    } = req.body;
+  
+    updatePantData({
+      userCode,
+      userId,
+      })
+      .then((newSession) => {
+        res.send(newSession);
+      });
+  });
+
+//   SLUTT PANTEMASKIN
+
 
 //Listens to port:
 const port = process.env.PORT;
