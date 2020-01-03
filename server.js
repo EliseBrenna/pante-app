@@ -15,7 +15,7 @@ app.use(express.static('build'));
 const secret = process.env.SECRET;
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL
 });
 
 //Defining middlewares: 
@@ -27,61 +27,66 @@ app.use(bodyParser.urlencoded({
 
 //Functions:
 
-// Creating new users
-async function createUser(name, email, password) {
-    const { rows } = await pool.query(`
-        INSERT INTO users(
-          name,
-          email,
-          password
-        )
-        VALUES(
-          $1,
-          $2,
-          $3
-        )
-      RETURNING *
-      `, [name, email, password]);
-
-    return rows[0]
+async function getUsers(){
+  const { rows } = await pool.query(`SELECT * FROM users ORDER BY users.id`);
+  return rows.map(camelCase)
 }
+
+// Creating new users
+// async function createUser(name, email, password) {
+//     const { rows } = await pool.query(`
+//         INSERT INTO users(
+//           name,
+//           email,
+//           password
+//         )
+//         VALUES(
+//           $1,
+//           $2,
+//           $3
+//         )
+//       RETURNING *
+//       `, [name, email, password]);
+
+//     return rows[0]
+// }
 
 //Get user profile
-async function getUserByName(email) {
-    const { rows } = await pool.query(`
-        SELECT * FROM 
-            users
-        WHERE
-            email = $1 
-    `, [email]);
+// async function getUserByName(email) {
+//     const { rows } = await pool.query(`
+//         SELECT * FROM 
+//             users
+//         WHERE
+//             email = $1 
+//     `, [email]);
 
-    return rows[0];
-}
+//     return rows[0];
+// }
 
 
 
 //   Creating activity
 
 //Routes:
-api.get(`/users`, async (req, res) => {
-    const users = await getUsers();
-    res.send(users)
-})
+// api.get(`/users`, async (req, res) => {
+//     const users = await getUsers();
+//     res.send(users)
+// })
 
-api.get(`/signup`, async (req, res) => {
-    const { name, email, password } = req.body;
-    const newUser = await createUser(name, email, password);
-    res.send(newUser);
-})
+// api.get(`/signup`, async (req, res) => {
+//     const { name, email, password } = req.body;
+//     const newUser = await createUser(name, email, password);
+//     res.send(newUser);
+// })
 
-api.get(`/user/:email`, async (req, res) => {
-    const { email } = req.params;
-    const profile = await getUserByName(email);
-    if(!profile) {
-        return res.status(404).send({ Error: `Unknown user with the email: ${email}` })
-    }
-    res.send(profile);
-})
+// api.get(`/user/:email`, async (req, res) => {
+//     const { email } = req.params;
+//     const profile = await getUserByName(email);
+//     if(!profile) {
+//         return res.status(404).send({ Error: `Unknown user with the email: ${email}` })
+//     }
+//     res.send(profile);
+// })
 
 // api.post(`/session`, async (req, res) => {
 //     const { email, password } = req.body;
@@ -95,6 +100,11 @@ api.get(`/user/:email`, async (req, res) => {
 //         if(!password)
 //     } catch 
 // })
+
+api.get(`/users`, async (req, res) => {
+  const users = await getUsers();
+  res.send(users)
+})
 
 // PANTEMASKIN
 
@@ -136,7 +146,7 @@ function createPantData(session) {
       .then((session) => session[0]);
   }
   
-  app.post('/pant', async function (req, res) {
+  api.post('/pant', async function (req, res) {
     const {
       code,
       sum,
@@ -182,7 +192,7 @@ function createPantData(session) {
       .then((session) => session[0]);
   }
   
-  app.put('/pant', async function (req, res) {
+  api.put('/pant', async function (req, res) {
     const {
       userCode,
       userId,
@@ -198,7 +208,7 @@ function createPantData(session) {
   });
 
 //   SLUTT PANTEMASKIN
-
+app.use('/api', api)
 
 //Listens to port:
 const port = process.env.PORT;
