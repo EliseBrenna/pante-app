@@ -5,7 +5,7 @@ class Authenticate extends React.Component {
     render() {
         return (
             <div>
-                <img className="logo" src="./logo.svg" />
+                <p>Test</p>
             </div>
         )
     }

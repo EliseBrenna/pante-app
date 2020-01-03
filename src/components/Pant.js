@@ -7,7 +7,7 @@ class Pant extends React.Component {
     this.state = {
         code: '',
         sum: 0,
-        id: 9999,
+        id: 0,
         userCode: '',
         userId: 0,
     }

@@ -8,6 +8,7 @@ import Logout from './components/Logout';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Support from './components/Support';
+import Pant from './components/Pant';
 
 import './App.css';
 
