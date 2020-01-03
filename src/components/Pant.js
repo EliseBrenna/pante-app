@@ -9,7 +9,7 @@ class Pant extends React.Component {
         sum: 0,
         id: 0,
         userCode: '',
-        userId: 0,
+        userId: 0
     }
   } 
 
@@ -40,7 +40,7 @@ class Pant extends React.Component {
     let session = {
       code: this.state.code,
       sum: this.state.sum,
-      id: this.state.id,
+      id: this.state.id
     }
     addPantData(session);
   };

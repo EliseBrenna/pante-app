@@ -110,7 +110,7 @@ api.get(`/users`, async (req, res) => {
 
 function createPantData(session) {
     const queryText = `
-      INSERT INTO session(
+      INSERT INTO activity(
           code,
           sum,
           id
@@ -128,7 +128,7 @@ function createPantData(session) {
     const queryValues = [
       session.code,
       session.sum,
-      session.id,
+      session.id
     ]
   
     return pool.query(queryText, queryValues)
@@ -139,7 +139,7 @@ function createPantData(session) {
           return {
             code: elem.code,
             sum: elem.sum,
-            id: elem.id,
+            id: elem.id
           };
         });
       })
@@ -167,7 +167,7 @@ function createPantData(session) {
   
   function updatePantData(session) {
     const queryText = `
-      UPDATE session 
+      UPDATE activity 
       SET id=$1 WHERE code=$2
       RETURNING *
       `
