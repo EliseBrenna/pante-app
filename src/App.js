@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Support from './components/Support';
 import Pant from './components/Pant';
+import History from './components/History';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ class App extends React.Component {
         <Route path="/signup" component={Signup} />
         <Route path="/support" component={Support} />
         <Route path="/pant" exact component={Pant} />
+        <Route path="/history" component={History} />
       </Switch>
     </HashRouter>
     )

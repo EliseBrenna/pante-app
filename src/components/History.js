@@ -1,10 +1,13 @@
 import React from 'react';
 
-class Support extends React.Component {
+class History extends React.Component {
     render() {
         return (
-            <div>Support
-                 <footer className="nav-bar">
+            <div>
+            <div>
+                History
+            </div>
+            <footer className="nav-bar">
                     <div className="homeIcon">
                         <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"/></svg>
                     </div>
@@ -16,11 +19,10 @@ class Support extends React.Component {
                         <text id="i" transform="translate(0 20)" fill="#f5f5f5" font-size="22" font-family="Georgia-BoldItalic, Georgia" font-weight="700" font-style="italic"><tspan x="0" y="0">i</tspan></text>
                     </svg>
                     </div>  
-                </footer>
+                </footer>    
             </div>
         )
     }
 }
 
-
-export default Support;
+export default History;
