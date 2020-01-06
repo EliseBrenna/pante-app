@@ -130,6 +130,8 @@ function createPantData(session) {
       session.sum,
       session.id
     ]
+
+    
   
     return pool.query(queryText, queryValues)
       .then(({
@@ -147,20 +149,25 @@ function createPantData(session) {
   }
   
   api.post('/pant', async function (req, res) {
+    console.log('got request')
+
     const {
       code,
       sum,
       id,
     } = req.body;
   
-    createPantData({
-      code,
-      sum,
-      id,
+    try {
+      const newSession = await createPantData({
+        code,
+        sum,
+        id,
       })
-      .then((newSession) => {
-        res.send(newSession);
-      });
+  
+      res.send(newSession);
+    } catch (err) {
+      console.log(err);
+    }
   });
   
   
@@ -169,7 +176,13 @@ function createPantData(session) {
     const queryText = `
       UPDATE activity 
       SET id=$1 WHERE code=$2
+      
+      AND 
+      UPDATE users
+      SET sum=$1
+      
       RETURNING *
+
       `
   
     const queryValues = [
@@ -191,6 +204,21 @@ function createPantData(session) {
       })
       .then((session) => session[0]);
   }
+
+  getActivities = async (id) => {
+    const { rows } = pool.query(`
+    SELECT * FROM activity
+    WHERE activity.id = ${id}
+    `)
+
+    return rows.map()
+  }
+
+  api.get('/activity:id', async (req, res) => {
+    const { id } = req.params;
+    const all = await getActivities(id);
+    res.send(all)
+  })
   
   api.put('/pant', async function (req, res) {
     const {
