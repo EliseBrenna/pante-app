@@ -176,11 +176,6 @@ function createPantData(session) {
     const queryText = `
       UPDATE activity 
       SET id=$1 WHERE code=$2
-      
-      AND 
-      UPDATE users
-      SET sum=$1
-      
       RETURNING *
 
       `
@@ -206,8 +201,24 @@ function createPantData(session) {
   }
 
   getActivities = async () => {
-    const { rows } = pool.query(`
-    SELECT * FROM activity
+    const { rows } = await pool.query(`
+    SELECT 
+      *
+    FROM
+      activity
+    `)
+
+    return rows
+  }
+
+  getSaldoById = async () => {
+    const { rows } = await pool.query(`
+    SELECT 
+      id, 
+      SUM(amount)
+    FROM
+      activity
+    GROUP BY id;
     `)
 
     return rows
@@ -216,6 +227,12 @@ function createPantData(session) {
   api.get('/activity', async (req, res) => {
     const all = await getActivities();
     res.send(all)
+  })
+
+  api.get('/saldo', async (req, res) => {
+    const { id } = req.params;
+    const saldo = await getSaldoById();
+    res.send(saldo)
   })
   
   api.put('/pant', async function (req, res) {
