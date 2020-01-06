@@ -4,9 +4,12 @@ import React from 'react';
 class Authenticate extends React.Component {
     render() {
         return (
-            <div>
-                <img className="logo" src="./logo.svg" />
+            <div className="authenticate">
+                <div className="logo" >
+                    <img src="./logo.svg" />
+                </div>
             </div>
+                
         )
     }
 }

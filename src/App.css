@@ -1,10 +1,23 @@
 body {
     background-color: #FFE6ED;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: 50px;
-    color: #0008FF;
+    display: grid;
+    
+
 }
+
+.authenticate {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.logo {
+    display: grid;
+    grid-row: 2;
+    justify-content: center;
+    align-self: center;
+}
+
 
 
 
