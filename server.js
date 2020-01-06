@@ -112,7 +112,7 @@ function createPantData(session) {
     const queryText = `
       INSERT INTO activity(
           code,
-          sum,
+          amount,
           id
       )
   
@@ -127,7 +127,7 @@ function createPantData(session) {
   
     const queryValues = [
       session.code,
-      session.sum,
+      session.amount,
       session.id
     ]
 
@@ -140,7 +140,7 @@ function createPantData(session) {
         return rows.map((elem) => {
           return {
             code: elem.code,
-            sum: elem.sum,
+            amount: elem.amount,
             id: elem.id
           };
         });
@@ -153,14 +153,14 @@ function createPantData(session) {
 
     const {
       code,
-      sum,
+      amount,
       id,
     } = req.body;
   
     try {
       const newSession = await createPantData({
         code,
-        sum,
+        amount,
         id,
       })
   
@@ -192,7 +192,7 @@ function createPantData(session) {
         return rows.map((elem) => {
           return {
             code: elem.code,
-            sum: elem.sum,
+            amount: elem.amount,
             id: elem.id,
           };
         });
@@ -220,7 +220,7 @@ function createPantData(session) {
       activity
     GROUP BY id;
     `)
-
+    
     return rows
   }
 
