@@ -8,10 +8,10 @@ class Home extends React.Component {
                 Tast inn kode fra <br/>
                 panteautomaten:
                     <label className="pin-input">
-                        <input type="text"></input>
-                        <input type="text"></input>
-                        <input type="text"></input>
-                        <input type="text"></input>
+                        <input type="text" maxLength="1"></input>
+                        <input type="text" maxLength="1"></input>
+                        <input type="text" maxLength="1"></input>
+                        <input type="text" maxLength="1"></input>
                     </label>
                     <button>Pant</button>
                     
