@@ -8,6 +8,7 @@ import Logout from './components/Logout';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Support from './components/Support';
+import Pant from './components/Pant';
 
 import './App.css';
 
@@ -23,6 +24,7 @@ class App extends React.Component {
         <Route path="/profile" component={Profile} />
         <Route path="/signup" component={Signup} />
         <Route path="/support" component={Support} />
+        <Route path="/pant" exact component={Pant} />
       </Switch>
     </HashRouter>
     )
