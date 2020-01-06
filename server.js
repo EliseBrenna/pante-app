@@ -122,7 +122,7 @@ function createPantData(session) {
           $3
       )
   
-      RETURNING *
+      RETURNING * 
       `
   
     const queryValues = [
