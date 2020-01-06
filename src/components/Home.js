@@ -8,7 +8,7 @@ class Home extends React.Component {
                 Tast inn kode fra <br/>
                 panteautomaten:
                     <label className="pin-input">
-                        <input type="text"></input>
+                        <input type="text" max="1"></input>
                         <input type="text"></input>
                         <input type="text"></input>
                         <input type="text"></input>
