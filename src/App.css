@@ -1,11 +1,16 @@
 body {
     background-color: #FFE6ED;
     display: grid;
-    
-
+    margin: 0px;
 }
 
 .authenticate {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.home {
     display: grid;
     height: 100vh;
     grid-template-rows: 1fr 1fr 1fr;
