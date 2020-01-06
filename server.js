@@ -220,7 +220,7 @@ function createPantData(session) {
       activity
     GROUP BY id;
     `)
-
+    
     return rows
   }
 

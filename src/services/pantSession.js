@@ -28,7 +28,7 @@ export function activityData() {
   .then((res) => res.json())
 }
 
-export function saldoData() {
+export function saldoData(id) {
   return fetch(`${API_URL}/saldo`)
   .then((res) => res.json())
 }
