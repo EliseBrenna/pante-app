@@ -39,7 +39,7 @@ class Pant extends React.Component {
 
     let session = {
       code: this.state.code,
-      sum: this.state.sum,
+      amount: this.state.amount,
       id: this.state.id
     }
     addPantData(session);
@@ -59,7 +59,7 @@ class Pant extends React.Component {
        alert('Pant lagt til i din saldo!')
        this.setState({
         code: '',
-        sum: 0,
+        amount: 0,
         id: 0,
         userCode: '',
         userId: 0,
@@ -85,7 +85,7 @@ handleInputChange(field, event) {
           <h1>Pant</h1>
             <button onClick={this.handleClick.bind(this, 2)}>2kr</button>
             <button onClick={() => this.handleClick(3)}>3kr</button>
-            <p>Pantesum: {this.state.sum}kr</p>
+            <p>Pantesum: {this.state.amount}kr</p>
             <button onClick={() => this.createCode()}>Ferdig å pante, trykk her</button>
             <p>{this.state.code}</p>
         </div>
