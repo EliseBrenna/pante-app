@@ -15,8 +15,8 @@ class Home extends React.Component {
                     </label>
                     <button>Pant</button>
                 </div>
-                
                 <footer className="nav-bar">
+                    
                 </footer>
             </div>
         )
