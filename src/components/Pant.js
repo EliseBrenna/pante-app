@@ -31,7 +31,7 @@ class Pant extends React.Component {
       return result
    }
 
-   let resultCode = makeCode(5);
+   let resultCode = makeCode(4);
 
     await this.setState(({ code }) => ({
       code: resultCode
