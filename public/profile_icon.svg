@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="23" viewBox="0 0 24 23">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="16" height="16" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-Home_2">
+      <rect width="24" height="23"/>
+    </clipPath>
+  </defs>
+  <g id="Home_2" data-name="Home – 2" clip-path="url(#clip-Home_2)">
+    <rect width="24" height="23" fill="#ffe6ed"/>
+    <g id="Navigation">
+      <rect id="Rectangle_1547" data-name="Rectangle 1547" width="40" height="54" fill="#169142"/>
+      <g id="Profile" transform="translate(4 3.5)" clip-path="url(#clip-path)">
+        <path id="Union_1" data-name="Union 1" d="M0,16V14c0-2.2,3.6-4,8-4s8,1.8,8,4v2ZM4,4A4,4,0,1,1,8,8,4,4,0,0,1,4,4Z" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

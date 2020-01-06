@@ -3,7 +3,6 @@ body {
     display: grid;
     margin: 0px;
     font-family: 'Poppins', sans-serif;
-
 }
 
 .authenticate {
@@ -12,7 +11,12 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-
+.nav-bar {
+    background-color: #169142;
+    grid-row: 3;
+    height: 80px;
+    align-self: end;
+}
 
 .home {
     display: grid;
@@ -20,13 +24,122 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.logo {
-    display: grid;
+.home-content {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
     grid-row: 2;
-    justify-content: center;
-    align-self: center;
+    justify-self: center;
+}
+
+.pin-input {
+    justify-self: center;
+    display: flex;
+    margin: 20px;
+}
+
+.pin-input input {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-color: #169142;
+    border-radius: 8px;
+    border-style: solid;
+    font-size: 35px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.home-content button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background-color: #169142;
+    border-radius: 25px;
+    padding: 5px;
+    width: 80px;
+    border: none;
 }
 
 
+.logoLogin {
+    display: grid;
+    grid-row: 1;
+    grid-column: 2 / span 1;
+    justify-self: center;
+    align-self: end;
+    width: 12rem;
+    width: 12rem;
+}
 
+.login {
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 2fr 3fr 1fr;
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+}
 
+.subHeaderLogin {
+    grid-row: 2;
+    grid-column: 2 / span 1;
+    justify-self: center;
+    display: grid;
+}
+
+.inputField input {
+    border-radius: 25px;
+    border: 2px solid #169142;
+    padding: 20px; 
+    width: 200px;
+    height: 5px;
+    display: grid;
+    margin-bottom: 0.7rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loginForm {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    justify-self: center;
+    align-self: start;
+    margin-top: 5rem;
+}
+
+.loginBtn {
+    display: grid;
+    border-radius: 25px;
+    background-color: #169142;
+    color: white;
+    padding: 5px; 
+    width: 120px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    justify-self: center;
+    align-self: end;
+    margin-bottom: 9.5rem;
+    font-size: 15px;
+}
+
+.newUser {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    justify-self: center;
+    align-self: end;
+    margin-bottom: 6.8rem;
+    font-size: 0.8rem;
+}
+
+.newUser a {
+    text-decoration: none;
+    color: black;
+}
+
+.newUser a:hover {
+    text-decoration: underline;
+}
