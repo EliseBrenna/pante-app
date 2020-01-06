@@ -6,7 +6,7 @@ class Pant extends React.Component {
     super(props);
     this.state = {
         code: '',
-        sum: 0,
+        amount: 0,
         id: 0,
         userCode: '',
         userId: 0,
@@ -15,8 +15,8 @@ class Pant extends React.Component {
 
   // POSTING 
   handleClick = (amount) => {
-    this.setState((prevState, { sum }) => ({
-      sum: prevState.sum += amount
+    this.setState((prevState, { amount }) => ({
+      amount: prevState.amount += amount
     }));
   };
 
