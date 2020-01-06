@@ -9,7 +9,7 @@ class Pant extends React.Component {
         sum: 0,
         id: 0,
         userCode: '',
-        userId: 0
+        userId: 0,
     }
   } 
 
