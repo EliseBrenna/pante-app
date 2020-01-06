@@ -1,4 +1,4 @@
-const API_URL = '/api';
+  const API_URL = '/api';
 
 export function addPantData(data) {
   return fetch(`${API_URL}/pant`, {

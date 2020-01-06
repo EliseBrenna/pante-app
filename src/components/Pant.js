@@ -11,12 +11,12 @@ class Pant extends React.Component {
         userCode: '',
         userId: 0,
     }
-  } 
+  }
 
   // POSTING 
-  handleClick = (amount) => {
+  handleClick = (panteSum) => {
     this.setState((prevState, { amount }) => ({
-      amount: prevState.amount += amount
+      amount: prevState.amount += panteSum
     }));
   };
 
@@ -84,7 +84,7 @@ handleInputChange(field, event) {
         <div className='display'>
           <h1>Pant</h1>
             <button onClick={this.handleClick.bind(this, 2)}>2kr</button>
-            <button onClick={() => this.handleClick(3)}>3kr</button>
+            <button onClick={this.handleClick.bind(this, 3)}>3kr</button>
             <p>Pantesum: {this.state.amount}kr</p>
             <button onClick={() => this.createCode()}>Ferdig å pante, trykk her</button>
             <p>{this.state.code}</p>
