@@ -23,7 +23,7 @@ export function updatePantData(data) {
   .then((res) => res.json());
 }
 
-export function activityData(id) {
-  return fetch(`${API_URL}/activity:${id}`)
+export function activityData() {
+  return fetch(`${API_URL}/activity`)
   .then((res) => res.json())
 }

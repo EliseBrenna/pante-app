@@ -205,18 +205,16 @@ function createPantData(session) {
       .then((session) => session[0]);
   }
 
-  getActivities = async (id) => {
+  getActivities = async () => {
     const { rows } = pool.query(`
     SELECT * FROM activity
-    WHERE activity.id = ${id}
     `)
 
-    return rows.map()
+    return rows
   }
 
-  api.get('/activity:id', async (req, res) => {
-    const { id } = req.params;
-    const all = await getActivities(id);
+  api.get('/activity', async (req, res) => {
+    const all = await getActivities();
     res.send(all)
   })
   
