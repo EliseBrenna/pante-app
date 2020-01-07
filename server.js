@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcryptjs');
 const app = express();
 const api = express();
 app.use(express.static('build'));
@@ -18,9 +18,9 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
-// securing passwords
 
-var bcrypt = require('bcryptjs');
+
+
 // var salt = bcrypt.genSaltSync(10);
 // var hash = bcrypt.hashSync("B4c0/\/", salt);
   
@@ -37,33 +37,40 @@ app.use(bodyParser.urlencoded({
 
 //Functions:
 
-async function getUsers(){
-  const { rows } = await pool.query(`SELECT * FROM users ORDER BY users.id`);
-  return rows.map(camelCase)
+getUsers = async () => {
+  const { rows } = await pool.query(`
+    SELECT 
+      * 
+    FROM 
+      users 
+    ORDER BY 
+      users.id`);
+
+  return rows
 }
 
 // Creating new users
-async function createUser(name, email, phone, password) {
+createUser = async (name, email, phone, password) => {
     const { rows } = await pool.query(`
-        INSERT INTO users(
-          name,
-          email,
-          phone,
-          password
-        )
-        VALUES(
-          $1,
-          $2,
-          $3,
-          $4
-        )
+      INSERT INTO users(
+        name,
+        email,
+        phone,
+        password
+      )
+      VALUES(
+        $1,
+        $2,
+        $3,
+        $4
+      )
       RETURNING *
       `, [name, email, phone, password]);
 
     return rows[0]
 }
 
-async function getUserByEmail(email){
+getUserByEmail = async (email) => {
   const { rows } = await pool.query(`
     SELECT
       *
@@ -76,6 +83,43 @@ async function getUserByEmail(email){
   return rows[0]
 }
 
+emailValidation = async (email) => {
+  const { rows } = await pool.query(`
+    SELECT
+      COUNT(email)
+    FROM
+      users
+    WHERE
+      email = $1
+  `, [email])
+
+  return rows
+}
+
+getActivities = async () => {
+  const { rows } = await pool.query(`
+    SELECT 
+      *
+    FROM
+      activity
+  `)
+
+  return rows
+}
+
+getSaldoById = async () => {
+  const { rows } = await pool.query(`
+    SELECT 
+      id, 
+      SUM(amount)
+    FROM
+      activity
+    GROUP BY id
+  `)
+  
+  return rows
+}
+
 
 //   Creating activity
 
@@ -84,6 +128,15 @@ async function getUserByEmail(email){
 //     const users = await getUsers();
 //     res.send(users)
 // })
+
+//Developers routes
+
+api.get(`/users`, async (req, res) => {
+  const users = await getUsers();
+  res.send(users)
+})
+
+//Client routes
 
 api.get('/session', async (req, res) => {
   const { email, password } = req.body;
@@ -110,185 +163,111 @@ api.get('/session', async (req, res) => {
   }
 });
 
+api.get('/activity', async (req, res) => {
+  const all = await getActivities();
+  res.send(all)
+})
+
+api.get('/saldo', async (req, res) => {
+  const { id } = req.params;
+  const saldo = await getSaldoById();
+  res.send(saldo)
+})
+
 api.post(`/signup`, async (req, res) => {
-    const { name, email, phone, password } = req.body;
-    const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  const { name, email, phone, password } = req.body;
+  // securing passwords
+  const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  const validateEmail = emailValidation(email)
+
+  if(validateEmail) {
+    return res.status(403).send('Email already in use')
+  } else {
     const newUser = await createUser(name, email, phone, hashPassword);
     res.send(newUser);
+  } 
 })
 
-// api.get(`/user/:email`, async (req, res) => {
-//     const { email } = req.params;
-//     const profile = await getUserByName(email);
-//     if(!profile) {
-//         return res.status(404).send({ Error: `Unknown user with the email: ${email}` })
-//     }
-//     res.send(profile);
-// })
 
-// api.post(`/session`, async (req, res) => {
-//     const { email, password } = req.body;
-//     try {
-
-//         const user = await getUserByName(email)
-//         if(!user) {
-//             return res.status(401).send({ error: 'Unknown user' })
-//         }
-
-//         if(!password)
-//     } catch 
-// })
-
-api.get(`/users`, async (req, res) => {
-  const users = await getUsers();
-  res.send(users)
-})
 
 // PANTEMASKIN
 
-function createPantData(session) {
-    const queryText = `
-      INSERT INTO activity(
-          code,
-          amount,
-          id
-      )
-  
-      VALUES(
-          $1,
-          $2,
-          $3
-      )
-  
-      RETURNING * 
-      `
-  
-    const queryValues = [
-      session.code,
-      session.amount,
-      session.id
-    ]
+//Functions
 
-    
-  
-    return pool.query(queryText, queryValues)
-      .then(({
-        rows
-      }) => {
-        return rows.map((elem) => {
-          return {
-            code: elem.code,
-            amount: elem.amount,
-            id: elem.id
-          };
-        });
-      })
-      .then((session) => session[0]);
-  }
-  
-  api.post('/pant', async function (req, res) {
-    console.log('got request')
+createPantData = async (session) => {
+  const { rows } = await pool.query(
+  `
+    INSERT INTO activity(
+        code,
+        amount,
+        id
+    )
 
-    const {
+    VALUES(
+        $1,
+        $2,
+        $3
+    )
+
+    RETURNING * 
+    `, [session.code, session.amount, session.id]);
+
+    return rows[0]
+}
+
+updatePantData = async (session) => {
+  const { rows } = await pool.query(
+    `
+    UPDATE activity 
+    SET id=$1 WHERE code=$2
+    RETURNING *
+    `, [session.userId, session.userCode]
+  ) 
+
+  return rows[0]
+}
+
+  //Routes
+  
+api.post('/pant', async (req, res) => {
+  console.log('got request')
+
+  const {
+    code,
+    amount,
+    id,
+  } = req.body;
+
+  try {
+    const newSession = await createPantData({
       code,
       amount,
       id,
-    } = req.body;
-  
-    try {
-      const newSession = await createPantData({
-        code,
-        amount,
-        id,
-      })
-  
-      res.send(newSession);
-    } catch (err) {
-      console.log(err);
-    }
-  });
-  
-  
-  
-  function updatePantData(session) {
-    const queryText = `
-      UPDATE activity 
-      SET id=$1 WHERE code=$2
-      RETURNING *
+    })
 
-      `
-  
-    const queryValues = [
-      session.userId,
-      session.userCode,
-    ]
-  
-    return pool.query(queryText, queryValues)
-      .then(({
-        rows
-      }) => {
-        return rows.map((elem) => {
-          return {
-            code: elem.code,
-            amount: elem.amount,
-            id: elem.id,
-          };
-        });
-      })
-      .then((session) => session[0]);
+    res.send(newSession);
+  } catch (err) {
+    console.log(err);
   }
+});
 
-  getActivities = async () => {
-    const { rows } = await pool.query(`
-    SELECT 
-      *
-    FROM
-      activity
-    `)
 
-    return rows
-  }
 
-  getSaldoById = async () => {
-    const { rows } = await pool.query(`
-    SELECT 
-      id, 
-      SUM(amount)
-    FROM
-      activity
-    GROUP BY id;
-    `)
-    
-    return rows
-  }
 
-  api.get('/activity', async (req, res) => {
-    const all = await getActivities();
-    res.send(all)
-  })
+api.put('/pant', async (req, res) => {
+  const {
+    userCode,
+    userId,
+  } = req.body;
 
-  api.get('/saldo', async (req, res) => {
-    const { id } = req.params;
-    const saldo = await getSaldoById();
-    res.send(saldo)
-  })
-  
-  api.put('/pant', async function (req, res) {
-    const {
-      userCode,
-      userId,
-    } = req.body;
-  
-    updatePantData({
-      userCode,
-      userId,
-      })
-      .then((newSession) => {
-        res.send(newSession);
-      });
-  });
+  const result = await updatePantData({
+    userCode,
+    userId,
+    });
+    res.send(result)
+});
 
-//   SLUTT PANTEMASKIN
+
 app.use('/api', api)
 
 //Listens to port:
