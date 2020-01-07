@@ -68,7 +68,7 @@ class Login extends React.Component {
                         onChange={this.handleInputChange.bind(this, 'password')} />
                     </label>
                 </div>
-                <button className="loginBtn">Logg inn</button>
+                <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
                     <h4><a href="/#/signup">Ny bruker?</a></h4>
                 </div>
