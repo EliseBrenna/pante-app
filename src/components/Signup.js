@@ -56,11 +56,36 @@ class Signup extends React.Component {
                 <div className="subHeaderLogin"><h3>Opprett ny bruker</h3></div>
                 <div className="loginForm">
                     <label className="inputField">
-                        <input type="text" placeholder="Skriv inn ditt navn" />
-                        <input type="text" placeholder="Skriv inn e-postadresse" />
-                        <input type="text" placeholder="Skriv inn ditt telefonnummer" />
-                        <input type="password" placeholder="Skriv inn passord" />
-                        <input type="password" placeholder="Gjenta passord" />
+                        <input 
+                            type="text" 
+                            placeholder="Skriv inn ditt navn"
+                            value={this.state.signupForm.name}
+                            onChange={this.handleInputChange.bind(this, 'name')}
+                         />
+                        <input 
+                            type="text" 
+                            placeholder="Skriv inn e-postadresse"
+                            value={this.state.signupForm.email}
+                            onChange={this.handleInputChange.bind(this, 'email')}
+                         />
+                        <input 
+                            type="text" 
+                            placeholder="Skriv inn ditt telefonnummer"
+                            value={this.state.signupForm.phone}
+                            onChange={this.handleInputChange.bind(this, 'phone')}
+                             />
+                        <input 
+                            type="password" 
+                            placeholder="Skriv inn passord"
+                            value={this.state.signupForm.password}
+                            onChange={this.handleInputChange.bind(this, 'password')}
+                         />
+                        <input 
+                            type="password" 
+                            placeholder="Gjenta passord"
+                            value={this.state.signupForm.password}
+                            onChange={this.handleInputChange.bind(this, 'password')}
+                         />
                     </label>
                 </div>
                 <button className="signupBtn" onClick={this.handleSubmitAttempt.bind(this)}>Registrer</button>
