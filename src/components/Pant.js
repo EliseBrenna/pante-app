@@ -81,17 +81,28 @@ handleInputChange(field, event) {
   render() {
     return (
       <div className="panteContainer">
-        <div className="pantHer"><h1>Pant her</h1></div>
-        <div className="display">
-          
-            <button onClick={this.handleClick.bind(this, 2)}>2kr</button>
-            <button onClick={this.handleClick.bind(this, 3)}>3kr</button>
-            <p>Pantesum: {this.state.amount}kr</p>
-            <button onClick={() => this.createCode()}>Ferdig</button>
-            <p>{this.state.code}</p>
+        <div className="panteAutomat">
+          <div className="screen">
+          <p>Pantesum: {this.state.amount}kr</p>
+          <p>Pin-kode: {this.state.code}</p>
+          </div>
+          <div className="recycleButton">
+          <button className="greenButton" onClick={() => this.createCode()}></button>
+            
+          </div>
+          <button className="redCross">+</button>
+        
+          <img src="./pantomat.svg" alt="panteautomat"></img>
         </div>
+        <div className="display">
+        <h1>Pantesimulator</h1>
+          <img className="bottle" src="./soda_small.png" alt="liten flaske"></img>
+            <button className="buttonKr" onClick={this.handleClick.bind(this, 2)}>+</button>
+            <img className="bigBottle" src="./soda_big.png" alt="stor flaske"></img>
+            <button className="buttonKr"onClick={this.handleClick.bind(this, 3)}>+</button>
+  
 
-        <div className='mobileUser'>
+            <div className='mobileUser'>
         <form onSubmit={this.handleSubmit.bind(this)}>
             <label htmlFor='userCode'>
               Code:
@@ -114,7 +125,7 @@ handleInputChange(field, event) {
             <button>Trykk når felt er skrevet inn</button>
           </form>
         </div>
-
+        </div>
       </div>
     );
   }
