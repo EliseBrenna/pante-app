@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const app = express();
 const api = express();
-app.use(express.static('build'));
+const { authenticate } = require('./middleware')
 
 
 
@@ -34,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(express.static('build'));
 
 //Functions:
 
@@ -136,9 +137,20 @@ api.get(`/users`, async (req, res) => {
   res.send(users)
 })
 
+api.get('/activity', async (req, res) => {
+  const all = await getActivities();
+  res.send(all)
+})
+
+api.get('/saldo', async (req, res) => {
+  const { id } = req.params;
+  const saldo = await getSaldoById();
+  res.send(saldo)
+})
+
 //Client routes
 
-api.get('/session', async (req, res) => {
+api.get('/session', authenticate, async (req, res) => {
   const { email, password } = req.body;
   try{
     const user = await getUserByEmail(email)
@@ -163,16 +175,7 @@ api.get('/session', async (req, res) => {
   }
 });
 
-api.get('/activity', async (req, res) => {
-  const all = await getActivities();
-  res.send(all)
-})
 
-api.get('/saldo', async (req, res) => {
-  const { id } = req.params;
-  const saldo = await getSaldoById();
-  res.send(saldo)
-})
 
 api.post(`/signup`, async (req, res) => {
   const { name, email, phone, password } = req.body;
