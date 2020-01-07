@@ -43,6 +43,7 @@ class Pant extends React.Component {
       id: this.state.id
     }
     addPantData(session);
+    
   };
 
   
@@ -77,6 +78,7 @@ handleInputChange(field, event) {
   });
 }
 // 
+
 
   render() {
     return (

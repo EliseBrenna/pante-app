@@ -27,6 +27,7 @@ body {
     align-self: center;
     justify-self: center;
     display: grid;
+    outline: none;
 }
 
 .homeIcon a:active {
@@ -38,6 +39,7 @@ body {
     align-self: center;
     justify-self: center;
     display: grid;
+    outline: none;
 }
 
 .profileIcon a:active {
@@ -49,6 +51,7 @@ body {
     align-self: center;
     justify-self: center;
     display: grid;
+    outline: none;
 }
 
 .infoIcon a:active {
@@ -80,6 +83,7 @@ body {
     justify-self: center;
     display: flex;
     margin: 20px;
+    
 }
 
 .pin-input input {
@@ -91,6 +95,7 @@ body {
     font-size: 35px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
+    outline: none;
 }
 
 .home-content button {
@@ -103,6 +108,7 @@ body {
     padding: 5px;
     width: 80px;
     border: none;
+    outline: none;
 }
 
 .profile {
@@ -160,6 +166,7 @@ body {
     padding-right: 15px;
     margin-bottom: 20px;
     border: none;
+    outline: none;
 }
 
 
@@ -227,6 +234,7 @@ body {
     display: grid;
     margin-bottom: 0.7rem;
     font-family: 'Poppins', sans-serif;
+    outline: none;
 }
 
 .loginForm {
@@ -253,6 +261,7 @@ body {
     align-self: end;
     margin-bottom: 5.5rem;
     font-size: 15px;
+    outline: none;
 }
 
 .signupBtn {
@@ -269,6 +278,7 @@ body {
     justify-self: center;
     align-self: start;
     font-size: 15px;
+    outline: none;
 }
 
 .newUser {
@@ -348,6 +358,7 @@ svg path {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    height: 100vh;
 }
 
 .display {
