@@ -28,12 +28,20 @@ body {
     display: grid;
 }
 
+.homeIcon a:active {
+    border-bottom: solid white;
+  }
+
 .profileIcon {
     grid-column: 2;
     align-self: center;
     justify-self: center;
     display: grid;
 }
+
+.profileIcon a:active {
+    border-bottom: solid white;
+  }
 
 .infoIcon {
     grid-column: 3;
@@ -42,6 +50,9 @@ body {
     display: grid;
 }
 
+.infoIcon a:active {
+    border-bottom: solid white;
+  }
 
 .home {
     display: grid;
@@ -74,9 +85,8 @@ body {
     width: 50px;
     height: 50px;
     margin: 5px;
-    border-color: #127334;
     border-radius: 8px;
-    border-style: solid;
+    border: 1.5px solid #127334;
     font-size: 35px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -94,6 +104,64 @@ body {
     border: none;
 }
 
+.profile {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 30% 1fr;
+}
+
+.profile-barcode {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    grid-row: 1;
+    background-color: #127334;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.barcode {
+    justify-self: center;
+    align-self: center;
+    display:grid;
+
+}
+
+.profile-balance {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    grid-row: 2;
+}
+
+.balance {
+    background-color: white;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    display: grid;
+    margin-bottom: 50px;
+    border-radius: 25px;
+    border: 1.5px solid #127334;
+}
+
+.profile-balance button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background-color: #127334;
+    border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+    border: none;
+}
+
+
 .logoLogin {
     display: grid;
     grid-row: 1;
@@ -103,6 +171,7 @@ body {
     width: 12rem;
     width: 12rem;
 }
+
 
 .login {
     grid-template-columns: 1fr 5fr 1fr;
