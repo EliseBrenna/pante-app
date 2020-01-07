@@ -46,6 +46,15 @@ class Pant extends React.Component {
     
   };
 
+  lotteryPop = () => {
+    document.getElementsById("screen").style.display = "none";
+    document.getElementsById("redCrossLottery").style.display = "block";
+  }
+
+  // function lotteryExit() {
+  //   document.getElementsByClassName("screen").style.display = "block";
+  //   document.getElementsByClassName("redCrossLottery").style.display = "none";
+  // }
   
 // Handeling input from the user
   handleSubmit(event) {
@@ -84,16 +93,17 @@ handleInputChange(field, event) {
     return (
       <div className="panteContainer">
         <div className="panteAutomat">
-          <div className="screen">
+          <div className="screen" id="screen">
           <p>Pantesum: {this.state.amount}kr</p>
           <p>Pin-kode: {this.state.code}</p>
           </div>
+          <div className="redCrossLottery" id="redCrossLottery">
+            <p>Ingen premie denne gangen! :(</p>
+          </div>
           <div className="recycleButton">
           <button className="greenButton" onClick={() => this.createCode()}></button>
-            
           </div>
-          <button className="redCross">+</button>
-        
+          <button className="redCross" onclick={() => this.lotteryPop()}>+</button>
           <img src="./pantomat.svg" alt="panteautomat"></img>
         </div>
         <div className="display">
