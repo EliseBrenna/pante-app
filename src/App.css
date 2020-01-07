@@ -173,7 +173,7 @@ body {
     width: 12rem;
 }
 
-.login {
+.login, .signup {
     grid-template-columns: 1fr 5fr 1fr;
     grid-template-rows: 2fr 3fr 1fr;
     display: grid;
@@ -342,4 +342,24 @@ svg path {
 .activities {
     display: flex;
     justify-content: space-between;
+}
+
+.panteContainer {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr 2fr 2fr;
+}
+
+.display {
+    grid-row: 2;
+    grid-column: 2 / span 2;
+}
+
+.pantHer {
+    grid-row: 1;
+    grid-column: 2 / span 2;
+}
+
+.pantHer h1 {
+    font-size: 70px;
 }

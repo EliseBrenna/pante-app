@@ -80,13 +80,14 @@ handleInputChange(field, event) {
 
   render() {
     return (
-      <div >
-        <div className='display'>
-          <h1>Pant</h1>
+      <div className="panteContainer">
+        <div className="pantHer"><h1>Pant her</h1></div>
+        <div className="display">
+          
             <button onClick={this.handleClick.bind(this, 2)}>2kr</button>
             <button onClick={this.handleClick.bind(this, 3)}>3kr</button>
             <p>Pantesum: {this.state.amount}kr</p>
-            <button onClick={() => this.createCode()}>Ferdig å pante, trykk her</button>
+            <button onClick={() => this.createCode()}>Ferdig</button>
             <p>{this.state.code}</p>
         </div>
 

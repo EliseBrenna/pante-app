@@ -21,10 +21,10 @@ const pool = new Pool({
 // securing passwords
 
 var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
-var hash = bcrypt.hashSync("B4c0/\/", salt);
-
-bcrypt.compareSync("B4c0/\/", hash);
+// var salt = bcrypt.genSaltSync(10);
+// var hash = bcrypt.hashSync("B4c0/\/", salt);
+  
+// bcrypt.compareSync("B4c0/\/", hash);
 
 // 
 
