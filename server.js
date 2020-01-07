@@ -53,6 +53,19 @@ async function createUser(name, email, phone, password) {
     return rows[0]
 }
 
+async function getUserByEmail(email){
+  const { rows } = await pool.query(`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      email = $1`,
+      [email])
+
+  return rows[0]
+}
+
 //Get user profile
 // async function getUserByName(email) {
 //     const { rows } = await pool.query(`
@@ -74,6 +87,31 @@ async function createUser(name, email, phone, password) {
 //     const users = await getUsers();
 //     res.send(users)
 // })
+
+api.get('/session', async (req, res) => {
+  const { email, password } = req.body;
+  try{
+    const user = await getUserByEmail(email)
+
+    if(!user) {
+      return res.status(401).send({ error: 'Unknown email' })
+    }
+
+    if(user.password !== password) {
+      return res.status(401).send({ error: 'Wrong password' })
+    }
+
+    const token = jwt.sign({ 
+      id: user.id,
+    }, new Buffer(secret, 'base64'));
+
+    res.send({
+      token: token
+    })
+  } catch(error) {
+    console.log(error)
+  }
+});
 
 api.post(`/signup`, async (req, res) => {
     const { name, email, phone, password } = req.body;
