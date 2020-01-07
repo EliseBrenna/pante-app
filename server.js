@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
 
 async function getUsers(){
   const { rows } = await pool.query(`SELECT * FROM users ORDER BY users.id`);
-  return rows.map(camelCase)
+  return rows
 }
 
 // Creating new users
@@ -72,6 +72,19 @@ async function getUserByEmail(email){
     WHERE
       email = $1`,
       [email])
+
+  return rows[0]
+}
+
+async function emailValidation(email) {
+  const { rows } = await pool.query(`
+    SELECT
+      COUNT(email)
+    FROM
+      users
+    WHERE
+      email = $1
+  `, [email])
 
   return rows[0]
 }
@@ -113,8 +126,14 @@ api.get('/session', async (req, res) => {
 api.post(`/signup`, async (req, res) => {
     const { name, email, phone, password } = req.body;
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-    const newUser = await createUser(name, email, phone, hashPassword);
-    res.send(newUser);
+    const validateEmail = emailValidation(email)
+
+    if(!validateEmail) {
+      return res.status(403).send('Email already in use')
+    } else {
+      const newUser = await createUser(name, email, phone, hashPassword);
+      res.send(newUser);
+    } 
 })
 
 // api.get(`/user/:email`, async (req, res) => {
