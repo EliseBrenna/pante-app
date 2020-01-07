@@ -21,3 +21,14 @@ export function checkSession() {
     })
     .then((res) => res.status === 200);
 }
+
+export async function createUser({name, email, phone, password}){
+    const response = await fetch(`${API_URL}/signup`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, phone, password })
+    })
+    return response.json();
+}
