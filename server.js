@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcryptjs');
 const app = express();
 const api = express();
 app.use(express.static('build'));
@@ -18,9 +18,9 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
-// securing passwords
 
-var bcrypt = require('bcryptjs');
+
+
 // var salt = bcrypt.genSaltSync(10);
 // var hash = bcrypt.hashSync("B4c0/\/", salt);
   
@@ -86,7 +86,7 @@ async function emailValidation(email) {
       email = $1
   `, [email])
 
-  return rows[0]
+  return rows
 }
 
 
@@ -97,6 +97,15 @@ async function emailValidation(email) {
 //     const users = await getUsers();
 //     res.send(users)
 // })
+
+//Developers routes
+
+api.get(`/users`, async (req, res) => {
+  const users = await getUsers();
+  res.send(users)
+})
+
+//Client routes
 
 api.get('/session', async (req, res) => {
   const { email, password } = req.body;
@@ -125,10 +134,11 @@ api.get('/session', async (req, res) => {
 
 api.post(`/signup`, async (req, res) => {
     const { name, email, phone, password } = req.body;
+    // securing passwords
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     const validateEmail = emailValidation(email)
 
-    if(!validateEmail) {
+    if(validateEmail) {
       return res.status(403).send('Email already in use')
     } else {
       const newUser = await createUser(name, email, phone, hashPassword);
@@ -136,32 +146,8 @@ api.post(`/signup`, async (req, res) => {
     } 
 })
 
-// api.get(`/user/:email`, async (req, res) => {
-//     const { email } = req.params;
-//     const profile = await getUserByName(email);
-//     if(!profile) {
-//         return res.status(404).send({ Error: `Unknown user with the email: ${email}` })
-//     }
-//     res.send(profile);
-// })
 
-// api.post(`/session`, async (req, res) => {
-//     const { email, password } = req.body;
-//     try {
 
-//         const user = await getUserByName(email)
-//         if(!user) {
-//             return res.status(401).send({ error: 'Unknown user' })
-//         }
-
-//         if(!password)
-//     } catch 
-// })
-
-api.get(`/users`, async (req, res) => {
-  const users = await getUsers();
-  res.send(users)
-})
 
 // PANTEMASKIN
 
