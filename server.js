@@ -33,36 +33,38 @@ async function getUsers(){
 }
 
 // Creating new users
-// async function createUser(name, email, password) {
-//     const { rows } = await pool.query(`
-//         INSERT INTO users(
-//           name,
-//           email,
-//           password
-//         )
-//         VALUES(
-//           $1,
-//           $2,
-//           $3
-//         )
-//       RETURNING *
-//       `, [name, email, password]);
+async function createUser(name, email, phone, password) {
+    const { rows } = await pool.query(`
+        INSERT INTO users(
+          name,
+          email,
+          phone,
+          password
+        )
+        VALUES(
+          $1,
+          $2,
+          $3,
+          $4
+        )
+      RETURNING *
+      `, [name, email, phone, password]);
 
-//     return rows[0]
-// }
+    return rows[0]
+}
 
-//Get user profile
-// async function getUserByName(email) {
-//     const { rows } = await pool.query(`
-//         SELECT * FROM 
-//             users
-//         WHERE
-//             email = $1 
-//     `, [email]);
+async function getUserByEmail(email){
+  const { rows } = await pool.query(`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      email = $1`,
+      [email])
 
-//     return rows[0];
-// }
-
+  return rows[0]
+}
 
 
 //   Creating activity
@@ -73,11 +75,36 @@ async function getUsers(){
 //     res.send(users)
 // })
 
-// api.get(`/signup`, async (req, res) => {
-//     const { name, email, password } = req.body;
-//     const newUser = await createUser(name, email, password);
-//     res.send(newUser);
-// })
+api.get('/session', async (req, res) => {
+  const { email, password } = req.body;
+  try{
+    const user = await getUserByEmail(email)
+
+    if(!user) {
+      return res.status(401).send({ error: 'Unknown email' })
+    }
+
+    if(user.password !== password) {
+      return res.status(401).send({ error: 'Wrong password' })
+    }
+
+    const token = jwt.sign({ 
+      id: user.id,
+    }, new Buffer(secret, 'base64'));
+
+    res.send({
+      token: token
+    })
+  } catch(error) {
+    console.log(error)
+  }
+});
+
+api.post(`/signup`, async (req, res) => {
+    const { name, email, phone, password } = req.body;
+    const newUser = await createUser(name, email, phone, password);
+    res.send(newUser);
+})
 
 // api.get(`/user/:email`, async (req, res) => {
 //     const { email } = req.params;
