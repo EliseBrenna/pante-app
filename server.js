@@ -151,8 +151,9 @@ api.post(`/signup`, async (req, res) => {
 
 // PANTEMASKIN
 
-function createPantData(session) {
-    const queryText = `
+async function createPantData(session) {
+    const { rows } = await pool.query(
+    `
       INSERT INTO activity(
           code,
           amount,
@@ -166,32 +167,12 @@ function createPantData(session) {
       )
   
       RETURNING * 
-      `
-  
-    const queryValues = [
-      session.code,
-      session.amount,
-      session.id
-    ]
+      `, [session.code, session.amount, session.id]);
 
-    
-  
-    return pool.query(queryText, queryValues)
-      .then(({
-        rows
-      }) => {
-        return rows.map((elem) => {
-          return {
-            code: elem.code,
-            amount: elem.amount,
-            id: elem.id
-          };
-        });
-      })
-      .then((session) => session[0]);
+      return rows[0]
   }
   
-  api.post('/pant', async function (req, res) {
+  api.post('/pant', async (req, res) => {
     console.log('got request')
 
     const {
@@ -215,32 +196,16 @@ function createPantData(session) {
   
   
   
-  function updatePantData(session) {
-    const queryText = `
+  async function updatePantData(session) {
+    const { rows } = await pool.query(
+      `
       UPDATE activity 
       SET id=$1 WHERE code=$2
       RETURNING *
-
-      `
+      `, [session.userId, session.userCode]
+    ) 
   
-    const queryValues = [
-      session.userId,
-      session.userCode,
-    ]
-  
-    return pool.query(queryText, queryValues)
-      .then(({
-        rows
-      }) => {
-        return rows.map((elem) => {
-          return {
-            code: elem.code,
-            amount: elem.amount,
-            id: elem.id,
-          };
-        });
-      })
-      .then((session) => session[0]);
+    return rows[0]
   }
 
   getActivities = async () => {
@@ -278,22 +243,20 @@ function createPantData(session) {
     res.send(saldo)
   })
   
-  api.put('/pant', async function (req, res) {
+  api.put('/pant', async (req, res) => {
     const {
       userCode,
       userId,
     } = req.body;
   
-    updatePantData({
+    const result = await updatePantData({
       userCode,
       userId,
-      })
-      .then((newSession) => {
-        res.send(newSession);
       });
+      res.send(result)
   });
 
-//   SLUTT PANTEMASKIN
+
 app.use('/api', api)
 
 //Listens to port:
