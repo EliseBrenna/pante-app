@@ -37,8 +37,13 @@ class Signup extends React.Component {
         } else {
             try{
                 this.setState({ isLoading: true });
-                await createUser({ name, email, phone, password });
+                const newUser = await createUser({ name, email, phone, password });
+                console.log(newUser)
+                if(newUser.status === 403) {
+                    this.setState({ error: newUser.message })
+                } else {
                 history.replace('/home')
+                }
             } catch (error) {
                 this.setState({ error })
             }
