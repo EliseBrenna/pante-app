@@ -10,7 +10,8 @@ class Signup extends React.Component {
                 name: '',
                 email: '',
                 phone: '',
-                password: ''
+                password: '',
+                confirmPassword: ''
             },
             isLoading: false,
             error: null,
@@ -29,19 +30,26 @@ class Signup extends React.Component {
     async handleSubmitAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
-        const { name, email, phone, password } = this.state.signupForm;
+        const { name, email, phone, password, confirmPassword } = this.state.signupForm;
 
-        try{
-            this.setState({ isLoading: true });
-            await createUser({ name, email, phone, password });
-            history.replace('/home')
-        } catch (error) {
-            this.setState({ error })
+        if(confirmPassword !== password) {
+            this.setState({ error: "Passwords don't match!" })
+        } else {
+            try{
+                this.setState({ isLoading: true });
+                await createUser({ name, email, phone, password });
+                history.replace('/home')
+            } catch (error) {
+                this.setState({ error })
+            }
         }
+       
     }
 
 
     render() {
+
+        const { error } = this.state;
         return (
             <div className="signup">
             <div className="arrowLeft">
@@ -83,12 +91,16 @@ class Signup extends React.Component {
                         <input 
                             type="password" 
                             placeholder="Gjenta passord"
-                            value={this.state.signupForm.password}
-                            onChange={this.handleInputChange.bind(this, 'password')}
+                            value={this.state.signupForm.confirmPassword}
+                            onChange={this.handleInputChange.bind(this, 'confirmPassword')}
                          />
+                         <div>
+                    {error && <p>{error}</p>}
+                </div>
                     </label>
                 </div>
                 <button className="signupBtn" onClick={this.handleSubmitAttempt.bind(this)}>Registrer</button>
+                
             </div>
         )
     }

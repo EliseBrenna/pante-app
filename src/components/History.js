@@ -3,10 +3,39 @@ import React from 'react';
 class History extends React.Component {
     render() {
         return (
-            <div>
-            <div>
-                History
+            <div className="historyContainer">
+            <div className="history">
+            <div className="arrowLeftHistory">
+            <svg version="1.1"
+	 viewBox="0 0 31.494 31.494">
+<path style={{fill: "#127334"}} d="M10.273,5.009c0.444-0.444,1.143-0.444,1.587,0c0.429,0.429,0.429,1.143,0,1.571l-8.047,8.047h26.554
+	c0.619,0,1.127,0.492,1.127,1.111c0,0.619-0.508,1.127-1.127,1.127H3.813l8.047,8.032c0.429,0.444,0.429,1.159,0,1.587
+	c-0.444,0.444-1.143,0.444-1.587,0l-9.952-9.952c-0.429-0.429-0.429-1.143,0-1.571L10.273,5.009z"/>
+</svg>
             </div>
+                <h3>Din historikk</h3>
+                <div className="activity">
+                    <div className="activities">
+                    <p>Coop Mega Torgbygget <br/>28/12-19, 11:45</p>
+                <p style={{fontWeight: "bold"}}>12,50 kr</p>  
+                    </div>
+                    <div className="activities">
+                    <p>Coop Mega Torgbygget <br/>28/12-19, 11:45</p>
+                <p style={{fontWeight: "bold"}}>12,50 kr</p>  
+                    </div>
+                    <div className="activities">
+                    <p>Coop Mega Torgbygget <br/>28/12-19, 11:45</p>
+                <p style={{fontWeight: "bold"}}>12,50 kr</p>  
+                    </div>
+                    <div className="activities">
+                    <p>Coop Mega Torgbygget <br/>28/12-19, 11:45</p>
+                <p style={{fontWeight: "bold"}}>12,50 kr</p>  
+                    </div>
+                
+                  
+            </div>
+            </div>
+            
             <footer className="nav-bar">
                     <div className="homeIcon">
                         <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"/></svg>
