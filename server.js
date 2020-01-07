@@ -66,19 +66,6 @@ async function getUserByEmail(email){
   return rows[0]
 }
 
-//Get user profile
-// async function getUserByName(email) {
-//     const { rows } = await pool.query(`
-//         SELECT * FROM 
-//             users
-//         WHERE
-//             email = $1 
-//     `, [email]);
-
-//     return rows[0];
-// }
-
-
 
 //   Creating activity
 
