@@ -4,12 +4,30 @@ import Barcode from 'react-barcode'
 class Profile extends React.Component {
     render() {
         return (
-            <div>
-            <Barcode value="Aske" />
-            <div>
-                Profile
-            </div>
-            <footer className="nav-bar">
+            <div className="profile">
+                <div className="profile-barcode">
+                    <div className="barcode">
+                        <Barcode value="Aske" />
+                    </div>
+                </div>
+                <div className="profile-balance">
+                    <div>
+                        <h3>Saldo</h3>
+                    </div>
+                    <div className="balance">
+                        <h1>237 kr</h1>
+                    </div>
+                    <div>
+                        <button>Historikk</button>
+                    </div>
+                    <div>
+                        <button>Endre profil</button>
+                    </div>
+                    <div>
+                        <button>Overfør til konto</button>
+                    </div> 
+                </div>
+                <footer className="nav-bar">
                     <div className="homeIcon">
                         <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"/></svg>
                     </div>
