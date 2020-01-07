@@ -5,7 +5,7 @@ class Profile extends React.Component {
     render() {
         return (
             <div>
-            <Barcode value="Aske" />
+            <Barcode value="Aske" option="width: 3" />
             <div>
                 Profile
             </div>
