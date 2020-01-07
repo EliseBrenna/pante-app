@@ -233,6 +233,22 @@ body {
     font-size: 15px;
 }
 
+.signupBtn {
+    display: grid;
+    border-radius: 25px;
+    background-color: #127334;
+    color: white;
+    padding: 5px; 
+    width: 120px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 1;
+    justify-self: center;
+    align-self: start;
+    font-size: 15px;
+}
+
 .newUser {
     display: grid;
     grid-column: 2 / span 1;
@@ -254,4 +270,10 @@ body {
 
 svg path {
     fill: white;
+}
+
+.arrowLeft {
+    width: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
