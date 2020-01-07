@@ -173,7 +173,7 @@ body {
     width: 12rem;
 }
 
-.login {
+.login, .signup {
     grid-template-columns: 1fr 5fr 1fr;
     grid-template-rows: 2fr 3fr 1fr;
     display: grid;
