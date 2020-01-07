@@ -164,6 +164,22 @@ body {
     font-size: 15px;
 }
 
+.loginBtn {
+    display: grid;
+    border-radius: 25px;
+    background-color: #169142;
+    color: white;
+    padding: 5px; 
+    width: 120px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    justify-self: center;
+    align-self: end;
+    font-size: 15px;
+}
+
 .newUser {
     display: grid;
     grid-column: 2 / span 1;

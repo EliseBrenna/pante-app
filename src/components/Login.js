@@ -9,7 +9,7 @@ class Login extends React.Component {
                 <div className="loginForm">
                     <label className="inputField">
                         <input type="text" placeholder="Skriv inn e-postadresse" />
-                        <input type="text" placeholder="Skriv inn passord" />
+                        <input type="password" placeholder="Skriv inn passord" />
                     </label>
                 </div>
                 <button className="loginBtn">Logg inn</button>

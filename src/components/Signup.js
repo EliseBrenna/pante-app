@@ -55,7 +55,7 @@ class Signup extends React.Component {
                         <input type="password" placeholder="Gjenta passord" />
                     </label>
                 </div>
-                <button className="loginBtn">Logg inn</button>
+                <button className="signupBtn">Logg inn</button>
                 <div className="newUser">
                     <h4><a href="/#/signup">Ny bruker?</a></h4>
                 </div>
