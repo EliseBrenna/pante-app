@@ -18,6 +18,17 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
+// securing passwords
+
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+var hash = bcrypt.hashSync("B4c0/\/", salt);
+
+bcrypt.compareSync("B4c0/\/", hash);
+
+// 
+
+// securing passwords
 //Defining middlewares: 
 app.use(cors());
 app.use(bodyParser.json());
@@ -77,7 +88,8 @@ async function createUser(name, email, phone, password) {
 
 api.post(`/signup`, async (req, res) => {
     const { name, email, phone, password } = req.body;
-    const newUser = await createUser(name, email, phone, password);
+    const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    const newUser = await createUser(name, email, phone, hashPassword);
     res.send(newUser);
 })
 
