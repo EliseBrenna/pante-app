@@ -94,7 +94,20 @@ emailValidation = async (email) => {
       email = $1
   `, [email])
 
-  return rows
+  return rows[0]
+}
+
+phoneValidation = async (phone) => {
+  const { rows } = await pool.query(`
+    SELECT
+      COUNT(phone)
+    FROM
+      users
+    WHERE
+      phone = $1
+  `, [phone])
+
+  return rows[0]
 }
 
 getActivities = async () => {
@@ -108,14 +121,15 @@ getActivities = async () => {
   return rows
 }
 
-getSaldoById = async () => {
+getSaldoById = async (id) => {
   const { rows } = await pool.query(`
     SELECT 
       id, 
       SUM(amount)
     FROM
       activity
-    GROUP BY id
+    GROUP BY 
+      id
   `)
   
   return rows
@@ -181,10 +195,15 @@ api.post(`/signup`, async (req, res) => {
   const { name, email, phone, password } = req.body;
   // securing passwords
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-  const validateEmail = emailValidation(email)
+  const validateEmail = await emailValidation(email);
+  const validatePhone = await phoneValidation(phone);
 
-  if(validateEmail) {
-    return res.status(403).send('Email already in use')
+  if(+validateEmail.count && +validatePhone.count){
+    return res.status(403).json({ status: 403, message: 'Email and phonenumber is already in use'})
+  }else if(+validateEmail.count) {
+    return res.status(403).json({ status: 403, message: 'Email is already in use'})
+  } else if (+validatePhone.count) {
+    return res.status(403).json({ status: 403, message: 'Phonenumber is already in use'})
   } else {
     const newUser = await createUser(name, email, phone, hashPassword);
     res.send(newUser);
