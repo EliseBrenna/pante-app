@@ -28,7 +28,6 @@ bcrypt.compareSync("B4c0/\/", hash);
 
 // 
 
-// securing passwords
 //Defining middlewares: 
 app.use(cors());
 app.use(bodyParser.json());
