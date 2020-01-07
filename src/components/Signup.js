@@ -44,8 +44,16 @@ class Signup extends React.Component {
     render() {
         return (
             <div className="signup">
+            <div className="arrowLeft">
+            <svg version="1.1"
+	 viewBox="0 0 31.494 31.494">
+<path style={{fill: "#127334"}} d="M10.273,5.009c0.444-0.444,1.143-0.444,1.587,0c0.429,0.429,0.429,1.143,0,1.571l-8.047,8.047h26.554
+	c0.619,0,1.127,0.492,1.127,1.111c0,0.619-0.508,1.127-1.127,1.127H3.813l8.047,8.032c0.429,0.444,0.429,1.159,0,1.587
+	c-0.444,0.444-1.143,0.444-1.587,0l-9.952-9.952c-0.429-0.429-0.429-1.143,0-1.571L10.273,5.009z"/>
+</svg>
+            </div>
                 <img src="./logo.png" alt="logo" className="logoLogin" />
-                <div className="subHeaderLogin"><h3>Logg inn for å pante</h3></div>
+                <div className="subHeaderLogin"><h3>Opprett ny bruker</h3></div>
                 <div className="loginForm">
                     <label className="inputField">
                         <input type="text" placeholder="Skriv inn ditt navn" />
@@ -55,10 +63,7 @@ class Signup extends React.Component {
                         <input type="password" placeholder="Gjenta passord" />
                     </label>
                 </div>
-                <button className="signupBtn">Logg inn</button>
-                <div className="newUser">
-                    <h4><a href="/#/signup">Ny bruker?</a></h4>
-                </div>
+                <button className="signupBtn">Registrer</button>
             </div>
         )
     }
