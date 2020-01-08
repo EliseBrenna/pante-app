@@ -250,11 +250,13 @@ api.post('/session', async (req, res) => {
       return res.status(401).json({status: 401, message: 'Unknown email' })
     }
 
+    const match = bcrypt.compareSync(password, user.password);
+
     if(!match) {
       return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
 
-    const match = bcrypt.compareSync(password, user.password);
+    
 
     const token = jwt.sign({ 
       id: user.id,
