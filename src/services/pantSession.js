@@ -23,6 +23,18 @@ export function updatePantData(data) {
   .then((res) => res.json());
 }
 
+export function updatePantData2 (data) {
+  return fetch (`${API_URL}/home`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': localStorage.getItem('pante_app_token')
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => res.json());
+}
+
 export function activityData() {
   return fetch(`${API_URL}/activity`)
   .then((res) => res.json())

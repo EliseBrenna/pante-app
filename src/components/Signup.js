@@ -71,7 +71,7 @@ class Signup extends React.Component {
                     <label className="inputField">
                         <input 
                             type="text" 
-                            placeholder="Skriv inn ditt navn"
+                            placeholder="Skriv inn fult navn" required
                             value={this.state.signupForm.name}
                             onChange={this.handleInputChange.bind(this, 'name')}
                          />

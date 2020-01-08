@@ -108,7 +108,7 @@ emailValidation = async (email) => {
       email = $1
   `, [email])
 
-  return rows[0]
+  return rows[0];
 }
 
 phoneValidation = async (phone) => {
@@ -185,9 +185,21 @@ api.get('/saldo', authenticate, async (req, res) => {
   res.send(saldo)
 })
 
+api.put('/home', authenticate, async (req, res) => {
+  const userId = req.user.id;
+  const { userCode } = req.body;
+
+  const result = await updatePantData({
+    userCode,
+    userId,
+    });
+    res.send(result)
+});
+
 //Client routes
 
 api.get(`/session`, authenticate,  (req, res) => {
+  console.log(req.user.id)
   res.send({
       message: 'You are authenticated'
   });
@@ -240,8 +252,6 @@ api.post(`/signup`, async (req, res) => {
     res.send(newUser);
   } 
 })
-
-
 
 // PANTEMASKIN
 
@@ -312,13 +322,14 @@ api.put('/pant', async (req, res) => {
     userCode,
     userId,
   } = req.body;
+  console.log(userId, userCode)
 
   const result = await updatePantData({
     userCode,
     userId,
     });
     res.send(result)
-});
+}); 
 
 
 app.use('/api', api)
