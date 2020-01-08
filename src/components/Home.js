@@ -80,7 +80,7 @@ class Home extends React.Component {
                                 onChange={this.handleInputChange.bind(this, 'userCode')}
                             />
                             </label>
-                            <button>Pant</button>
+                            <div><button>Pant</button></div>
                         </form>
                     </div>
                     ) : (
