@@ -213,7 +213,7 @@ body {
 
 .login, .signup {
     grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 2fr 3fr 1fr;
+    grid-template-rows: 2fr 2fr 2fr;
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -254,6 +254,7 @@ body {
     grid-column: 2 / span 1;
     justify-self: center;
     display: grid;
+ 
 }
 
 .inputField input {
@@ -287,9 +288,9 @@ body {
     border: none;
     font-family: 'Poppins', sans-serif;
     grid-column: 2 / span 1;
-    grid-row: 2 / span 1;
+    grid-row: 3 / span 1;
     justify-self: center;
-    align-self: end;
+    align-self: start;
     margin-bottom: 5.5rem;
     font-size: 15px;
     outline: none;
@@ -315,9 +316,10 @@ body {
 .newUser {
     display: grid;
     grid-column: 2 / span 1;
-    grid-row: 2 / span 1;
+    grid-row: 3 / span 1;
     justify-self: center;
-    align-self: end;
+    align-self: start;
+    margin-top: 2rem;
     margin-bottom: 2.5rem;
     font-size: 0.8rem;
 }
