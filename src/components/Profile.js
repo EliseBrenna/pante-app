@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
-import { saldoData } from '../services/pantSession';
 import { getUserById } from '../services/session';
 
 
@@ -65,11 +64,14 @@ class Profile extends React.Component {
         history.push(`/support`);
     }
 
+    handleEditProfileClicked() {
+        const { history } = this.props;
+        history.push(`/editprofile`);
+    }
+
     render() {
         const { 
             saldo,
-            error,
-            isLoading,
             session: {
                 id,
                 name
@@ -97,7 +99,7 @@ class Profile extends React.Component {
                         <button onClick={this.handleHistory.bind(this)}>Historikk</button>
                     </div>
                     <div>
-                        <button>Endre profil</button>
+                        <button onClick={this.handleEditProfileClicked.bind(this)}>Endre profil</button>
                     </div>
                     <div>
                         <button>Overfør til konto</button>

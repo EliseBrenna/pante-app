@@ -230,21 +230,27 @@ api.post('/session', async (req, res) => {
     const match = bcrypt.compareSync(password, user.password);
 
     if(!user) {
-      return res.status(401).send({ error: 'Unknown email' })
+      return res.status(401).json({status: 401, message: 'Unknown email' })
     }
 
     if(!match) {
-      return res.status(401).send({ error: 'Wrong password' })
+      return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
+
+    
 
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
     }, new Buffer(secret, 'base64'));
 
-    res.send({
-      token: token
-    })
+      res.send({
+        token: token
+      })
+
+    console.log(token)
+
+    
   } catch(error) {
     console.log(error)
   }
