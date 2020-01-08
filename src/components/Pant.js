@@ -10,6 +10,7 @@ class Pant extends React.Component {
         id: 0,
         userCode: '',
         userId: 0,
+        lotteryPop: false
     }
   }
 
@@ -28,13 +29,14 @@ class Pant extends React.Component {
       for ( var i = 0; i < length; i++ ) {
          result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
-      return result
+      return result;
    }
 
    let resultCode = makeCode(4);
 
     await this.setState(({ code }) => ({
-      code: resultCode
+      code: resultCode,
+      lotteryPop: false
     }));
 
     let session = {
@@ -46,16 +48,13 @@ class Pant extends React.Component {
     
   };
 
-  lotteryPop = () => {
-    document.getElementsById("screen").style.display = "none";
-    document.getElementsById("redCrossLottery").style.display = "block";
+  lotteryPop() {
+    this.setState({
+      lotteryPop: true
+    })
+    console.log(this.state.lotteryPop);
   }
 
-  // function lotteryExit() {
-  //   document.getElementsByClassName("screen").style.display = "block";
-  //   document.getElementsByClassName("redCrossLottery").style.display = "none";
-  // }
-  
 // Handeling input from the user
   handleSubmit(event) {
       let session = {
@@ -93,18 +92,23 @@ handleInputChange(field, event) {
     return (
       <div className="panteContainer">
         <div className="panteAutomat">
-          <div className="screen" id="screen">
-          <p>Pantesum: {this.state.amount}kr</p>
-          <p>Pin-kode: {this.state.code}</p>
-          </div>
-          <div className="redCrossLottery" id="redCrossLottery">
-            <p>Ingen premie denne gangen! :(</p>
-          </div>
+
+          {!this.state.lotteryPop ? (
+            <div className="screen">
+              <p>Pantesum: {this.state.amount}kr</p>
+              <p>Pin-kode: {this.state.code}</p>
+            </div>
+          ) : (
+            <div className="screen">
+              <p>Ingen premie <br />denne gangen! :(</p>
+            </div>
+          )}
+
           <div className="recycleButton">
           <button className="greenButton" onClick={() => this.createCode()}></button>
           </div>
-          <button className="redCross" onclick={() => this.lotteryPop()}>+</button>
-          <img src="./pantomat.svg" alt="panteautomat"></img>
+          <button className="redCross" onClick={() => this.lotteryPop()}>+</button>
+          <img src="./pantomat.svg" alt="panteautomat"></img>  
         </div>
         <div className="display">
         <h1>Pantesimulator</h1>
