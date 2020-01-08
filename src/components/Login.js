@@ -43,6 +43,10 @@ class Login extends React.Component {
                 this.setState({ error: loginAttempt.message})
             } else if(loginAttempt.status === 401) {
                 this.setState({ error: loginAttempt.message })
+            } else if (this.state.email === '') {
+                this.setState({ error: 'Please put in an valid email' })
+            } else if (this.state.password === '') {
+                this.setState({ error: 'Please put in a valid password' })
             } else {
                 localStorage.setItem('pante_app_token', token);
                 history.push('/')
