@@ -2,6 +2,18 @@ import React from 'react';
 import Barcode from 'react-barcode'
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+        }
+      }
+    
+      handleHistory() {
+        const { history } = this.props;
+        history.push('/history');
+      }
+
     render() {
         return (
             <div className="profile">
@@ -18,7 +30,7 @@ class Profile extends React.Component {
                         <h1>237 kr</h1>
                     </div>
                     <div>
-                        <button>Historikk</button>
+                        <button onClick={this.handleHistory.bind(this)}>Historikk</button>
                     </div>
                     <div>
                         <button>Endre profil</button>

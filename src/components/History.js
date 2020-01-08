@@ -1,12 +1,25 @@
 import React from 'react';
 
 class History extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+        }
+    }
+    
+    handleBackProfile() {
+        const { history } = this.props;
+        history.push('/profile');
+    }
+
+
     render() {
         return (
             <div className="historyContainer">
             <div className="history">
             <div className="arrowLeftHistory">
-            <svg version="1.1"
+            <svg onClick={this.handleBackProfile.bind(this)} version="1.1"
 	 viewBox="0 0 31.494 31.494">
 <path style={{fill: "#127334"}} d="M10.273,5.009c0.444-0.444,1.143-0.444,1.587,0c0.429,0.429,0.429,1.143,0,1.571l-8.047,8.047h26.554
 	c0.619,0,1.127,0.492,1.127,1.111c0,0.619-0.508,1.127-1.127,1.127H3.813l8.047,8.032c0.429,0.444,0.429,1.159,0,1.587

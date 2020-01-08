@@ -24,6 +24,11 @@ class Login extends React.Component {
         })
     }
 
+    handleSignup() {
+        const { history } = this.props;
+        history.push('/signup');
+    }
+
     async handleLoginAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
@@ -70,7 +75,7 @@ class Login extends React.Component {
                 </div>
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
-                    <h4><a href="/#/signup">Ny bruker?</a></h4>
+                    <h4 onClick={this.handleSignup.bind(this)}>Ny bruker?</h4>
                 </div>
             </div>
         )

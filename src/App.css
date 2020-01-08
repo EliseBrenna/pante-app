@@ -455,3 +455,7 @@ svg path {
 .redCrossLottery {
     display: none;
 }
+
+.newUser h4, button, .arrowLeftHistory svg {
+    cursor: pointer;
+}
