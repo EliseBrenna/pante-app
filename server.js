@@ -108,7 +108,7 @@ emailValidation = async (email) => {
       email = $1
   `, [email])
 
-  return rows[0]
+  return rows[0];
 }
 
 phoneValidation = async (phone) => {
