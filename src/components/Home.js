@@ -1,6 +1,36 @@
 import React from 'react';
+import { updatePantData2 } from '../services/pantSession';
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userCode: "",
+        }
+    }
+
+    // Handeling input from the user
+    handleSubmit(event) {
+        let session = {
+            userCode: this.state.userCode,
+        }
+        event.preventDefault();
+
+        updatePantData2(session);
+        alert('Pant lagt til i din saldo!')
+        this.setState({
+            userCode: ''
+        })
+    }
+
+    handleInputChange(field, event) {
+        this.setState({
+            ...this.state,
+            [field]: event.target.value
+        });
+    }
+
+
     render() {
         return (
             <div className="home">
@@ -8,13 +38,21 @@ class Home extends React.Component {
                 <div className="home-content">
                 Tast inn kode fra <br/>
                 panteautomaten:
-                    <label className="pin-input">
-                        <input type="text" maxLength="1"></input>
-                        <input type="text" maxLength="1"></input>
-                        <input type="text" maxLength="1"></input>
-                        <input type="text" maxLength="1"></input>
+                
+                {/* Form to sumbit code */}
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <label htmlFor='userCode'>
+                    Code:
+                    <input 
+                        type='text'
+                        name='userCode'
+                        value={this.state.userCode}
+                        onChange={this.handleInputChange.bind(this, 'userCode')}
+                    />
                     </label>
                     <button>Pant</button> 
+                </form>
+
                 </div>
                 <footer className="nav-bar">
                     <div className="homeIcon">
