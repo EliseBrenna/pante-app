@@ -43,7 +43,9 @@ class Home extends React.Component {
                         <input type="text" maxLength="1"></input>
                         <input type="text" maxLength="1"></input>
                     </label>
+                    <div>
                     <button>Pant</button> 
+                    </div>
                 </div>
                 <footer className="nav-bar">
                     <div className="homeIcon" >
