@@ -73,13 +73,12 @@ class Home extends React.Component {
                         {/* Form to sumbit code */}
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <label htmlFor='userCode'>
-                            Code:
-                                <input 
-                                    type='text'
-                                    name='userCode'
-                                    value={this.state.userCode}
-                                    onChange={this.handleInputChange.bind(this, 'userCode')}
-                                />
+                            <input 
+                                type='text'
+                                name='userCode'
+                                value={this.state.userCode}
+                                onChange={this.handleInputChange.bind(this, 'userCode')}
+                            />
                             </label>
                             <button>Pant</button>
                         </form>
