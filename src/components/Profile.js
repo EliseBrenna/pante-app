@@ -2,6 +2,7 @@ import React from 'react';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
 import { saldoData } from '../services/pantSession';
+import { getUserById } from '../services/session';
 
 
 class Profile extends React.Component {
@@ -29,9 +30,10 @@ class Profile extends React.Component {
         try {
             this.setState({ isLoading: true })
             const { id } = this.state.session;
-            const saldo = await saldoData();
-            console.log(saldo)
-            this.setState({ saldo: saldo.sum, isLoading: false })
+            console.log(id)
+            const saldo = await getUserById();
+            const saldoSum = saldo[0].sum;
+            this.setState({ saldo: saldoSum, isLoading: false })
         } catch (error) {
             this.setState({ error });
         }
@@ -67,7 +69,8 @@ class Profile extends React.Component {
             error,
             isLoading,
             session: {
-                id
+                id,
+                name
             } = {}
          } = this.state;
 
@@ -76,16 +79,21 @@ class Profile extends React.Component {
             <div className="profile">
                 <div className="profile-barcode">
                     <div className="barcode">
-                        <Barcode value={id + saldo} />
+                        <Barcode value={id+''+saldo}/>
+                        
                     </div>
                 </div>
                 <div className="profile-balance">
                     <div>
+                    <h2>{name}</h2>
+                    </div>
+                    <div>
+                        
                         <h3>Saldo</h3>
                         
                     </div>
                     <div className="balance">
-                        <p>Saldo</p>
+                        <p>{saldo} kr</p>
                     </div>
                     <div>
                         <button onClick={this.handleHistory.bind(this)}>Historikk</button>

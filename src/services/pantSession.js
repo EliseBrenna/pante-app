@@ -29,6 +29,12 @@ export function activityData() {
 }
 
 export async function saldoData(id) {
-  const res = await fetch(`${API_URL}/saldo/${id}`);
+  const res = await fetch(`${API_URL}/saldo`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(id)
+  });
   return await res.json();
 }
