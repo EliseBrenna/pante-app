@@ -47,7 +47,7 @@ class Signup extends React.Component {
                 if(newUser.status === 403) {
                     this.setState({ error: newUser.message })
                 } else {
-                history.replace('/home')
+                history.replace('/')
                 }
             } catch (error) {
                 this.setState({ error })
