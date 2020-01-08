@@ -16,7 +16,7 @@ export function checkSession() {
         method: 'GET',
         headers: {
             'Content-type': 'application/json',
-            'X-Auth-Token': localStorage.getItem('panteapp_token')
+            'X-Auth-Token': localStorage.getItem('pante_app_token')
         }
     })
     .then((res) => res.status === 200);
