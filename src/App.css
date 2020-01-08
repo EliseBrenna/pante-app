@@ -205,7 +205,6 @@ body {
 .profile-balance button {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    font-weight: bold;
     color: white;
     background-color: #127334;
     border-radius: 25px;
@@ -581,7 +580,7 @@ svg path {
 }
 
 .loader {
-    border: 16px solid darkgrey;
+    border: 16px solid white;
     border-top: 16px solid #127334;
     border-radius: 50%;
     width: 50px;
@@ -596,4 +595,13 @@ svg path {
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+  .appVersion {
+      color: grey;
+      font-size: 12px;
+      grid-column: 2;
+      grid-row: 3;
+      align-self: end;
+      justify-self: center;
   }

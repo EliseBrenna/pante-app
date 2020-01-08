@@ -36,12 +36,13 @@ class Login extends React.Component {
 
         try{
             this.setState({ isLoggingIn: true, error: null })
-            const loginAttemt = await createSession({ email, password })
+            const loginAttempt = await createSession({ email, password })
+            console.log(loginAttempt)
             const { token, error } = await createSession({ email, password })
             if(error) {
-                this.setState({ error: loginAttemt.message})
-            } else if(loginAttemt.status === 401) {
-                this.setState({ error: loginAttemt.message })
+                this.setState({ error: loginAttempt.message})
+            } else if(loginAttempt.status === 401) {
+                this.setState({ error: loginAttempt.message })
             } else {
                 localStorage.setItem('pante_app_token', token);
                 history.push('/')
@@ -83,6 +84,10 @@ class Login extends React.Component {
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
                     <h4 onClick={this.handleSignup.bind(this)}>Ny bruker?</h4>
+                </div>
+
+                <div className="appVersion">
+                    <p>Beta v. 1.1</p>
                 </div>
             </div>
         )

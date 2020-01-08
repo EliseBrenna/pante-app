@@ -1,5 +1,5 @@
 import React from 'react';
-import { createUser } from '../services/session';
+import { createUser, createSession } from '../services/session';
 
 class Signup extends React.Component {
     constructor(props){
@@ -40,22 +40,22 @@ class Signup extends React.Component {
         if(confirmPassword !== password) {
             this.setState({ error: "Passwords don't match!" })
         } else {
-            try{
+            try {
                 this.setState({ isLoading: true });
                 const newUser = await createUser({ name, email, phone, password });
                 console.log(newUser)
                 if(newUser.status === 403) {
                     this.setState({ error: newUser.message })
                 } else {
-                history.replace('/home')
+                    const { token } = await createSession({ email, password });
+                    localStorage.setItem('pante_app_token', token);
+                    history.replace('/');
                 }
             } catch (error) {
                 this.setState({ error })
             }
         }
-       
     }
-
 
     render() {
 
@@ -115,6 +115,5 @@ class Signup extends React.Component {
         )
     }
 }
-
 
 export default Signup;
