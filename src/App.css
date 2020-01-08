@@ -596,3 +596,12 @@ svg path {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .appVersion {
+      color: grey;
+      font-size: 12px;
+      grid-column: 2;
+      grid-row: 3;
+      align-self: end;
+      justify-self: center;
+  }

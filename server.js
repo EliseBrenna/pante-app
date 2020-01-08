@@ -91,6 +91,19 @@ getUserById = async (id) => {
   return rows[0]
 }
 
+codeValidation = async (code) => {
+  const { rows } = await pool.query(`
+    SELECT
+      id
+    FROM
+      activity
+    WHERE
+      code = $1
+  `, [code])
+
+  return rows[0];
+}
+
 emailValidation = async (email) => {
   const { rows } = await pool.query(`
     SELECT
@@ -182,11 +195,21 @@ api.put('/home', authenticate, async (req, res) => {
   const userId = req.user.id;
   const { userCode } = req.body;
 
-  const result = await updatePantData({
-    userCode,
-    userId,
-    });
-    res.send(result)
+  const checkCode = await codeValidation(
+    userCode
+  )
+
+  if (!checkCode.id) {
+    const result = await updatePantData({
+      userCode,
+      userId,
+      });
+      res.send(result)
+  } else {
+    console.log('invalid, already in use')
+  }
+
+  
 });
 
 //Client routes
