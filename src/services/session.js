@@ -34,7 +34,7 @@ export async function createUser({name, email, phone, password}){
 }
 
 export async function getUserById() {
-    const response = await fetch(`${API_URL}/users`, {
+    const response = await fetch(`${API_URL}/user`, {
         method: 'GET',
         headers : {
             'Content-type': 'application/json',

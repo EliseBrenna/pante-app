@@ -10,6 +10,7 @@ import Signup from './components/Signup';
 import Support from './components/Support';
 import Pant from './components/Pant';
 import History from './components/History';
+import EditProfile from './components/EditProfile';
 
 import './App.css';
 
@@ -28,6 +29,7 @@ class App extends React.Component {
         <Route path="/support" component={Support} />
         <Route path="/pant" exact component={Pant} />
         <Route path="/history" component={History} />
+        <Route path="/editprofile" component={EditProfile} />
       </Switch>
     </HashRouter>
     )

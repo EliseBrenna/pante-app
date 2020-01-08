@@ -57,23 +57,24 @@ class Home extends React.Component {
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
                 <div className="home-content">
-                Tast inn kode fra <br/>
-                panteautomaten:
-                
-                {/* Form to sumbit code */}
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <label htmlFor='userCode'>
-                    Code:
-                    <input 
-                        type='text'
-                        name='userCode'
-                        value={this.state.userCode}
-                        onChange={this.handleInputChange.bind(this, 'userCode')}
-                    />
-                    </label>
-                    <button>Pant</button> 
-                </form>
-
+                    Tast inn kode fra <br/>
+                    panteautomaten:
+                    
+                    {/* Form to sumbit code */}
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <label htmlFor='userCode'>
+                        Code:
+                        <input 
+                            type='text'
+                            name='userCode'
+                            value={this.state.userCode}
+                            onChange={this.handleInputChange.bind(this, 'userCode')}
+                        />
+                        </label>
+                        <div>
+                        <button>Pant</button>
+                        </div> 
+                    </form>
                 </div>
                 <footer className="nav-bar">
                     <div className="homeIcon" >
