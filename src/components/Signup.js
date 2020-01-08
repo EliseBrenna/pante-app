@@ -99,7 +99,7 @@ class Signup extends React.Component {
                             value={this.state.signupForm.confirmPassword}
                             onChange={this.handleInputChange.bind(this, 'confirmPassword')}
                          />
-                         <div>
+                         <div className="errorMessage">
                     {error && <p>{error}</p>}
                 </div>
                     </label>

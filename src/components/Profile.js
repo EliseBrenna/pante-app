@@ -1,7 +1,6 @@
 import React from 'react';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
-import { saldoData } from '../services/pantSession';
 import { getUserById } from '../services/session';
 
 
@@ -67,8 +66,6 @@ class Profile extends React.Component {
     render() {
         const { 
             saldo,
-            error,
-            isLoading,
             session: {
                 id,
                 name

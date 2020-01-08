@@ -36,18 +36,21 @@ class Login extends React.Component {
 
         try{
             this.setState({ isLoggingIn: true, error: null })
+            const loginAttemt = await createSession({ email, password })
             const { token, error } = await createSession({ email, password })
             console.log(token)
             if(error) {
-                throw new Error(error)
+                this.setState({ error: loginAttemt.message})
+            } else if(loginAttemt.status === 401) {
+                this.setState({ error: loginAttemt.message })
+            } else {
+                localStorage.setItem('pante_app_token', token);
+                history.push('/')
             }
 
-            if(!token) {
-                throw new Error('No token recieved - try again');
-            }
+            
 
-            localStorage.setItem('pante_app_token', token);
-            history.push('/')
+            
         } catch(error) {
             this.setState({ error, isLoggingIn: false })
         }
@@ -55,6 +58,7 @@ class Login extends React.Component {
 
     }
     render() {
+        const { error } = this.state;
         return (
             <div className="login">
                 <img src="./logo.png" alt="logo" className="logoLogin" />
@@ -71,7 +75,11 @@ class Login extends React.Component {
                         placeholder="Skriv inn passord"
                         value={this.state.loginForm.password}
                         onChange={this.handleInputChange.bind(this, 'password')} />
+                        <div className="errorMessage">
+                        {error && <p>{error}</p>}
+                    </div>
                     </label>
+                    
                 </div>
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
