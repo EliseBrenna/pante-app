@@ -84,6 +84,10 @@ class Login extends React.Component {
                 <div className="newUser">
                     <h4 onClick={this.handleSignup.bind(this)}>Ny bruker?</h4>
                 </div>
+
+                <div className="appVersion">
+                    <p>Beta v. 1.1</p>
+                </div>
             </div>
         )
     }
