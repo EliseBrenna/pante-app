@@ -204,8 +204,6 @@ api.post('/session', async (req, res) => {
   try{
     const user = await getUserByEmail(email)
 
-    const match = bcrypt.compareSync(password, user.password);
-
     if(!user) {
       return res.status(401).json({status: 401, message: 'Unknown email' })
     }
@@ -214,7 +212,7 @@ api.post('/session', async (req, res) => {
       return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
 
-    
+    const match = bcrypt.compareSync(password, user.password);
 
     const token = jwt.sign({ 
       id: user.id,
@@ -229,7 +227,7 @@ api.post('/session', async (req, res) => {
 
     
   } catch(error) {
-    console.log(error)
+    return res.status(401).json({status: 401, message: 'Oops something went wrong'})
   }
 });
 
