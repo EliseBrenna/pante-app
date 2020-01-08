@@ -212,6 +212,25 @@ api.put('/home', authenticate, async (req, res) => {
   
 });
 
+api.put('/profile', function (req, res) {
+  const userId = req.user.id;
+  console.log(userId)
+  const {
+    name,
+    email,
+    phone
+  } = req.body;
+
+  const updateUser = editUserProfile({
+    name,
+    email,
+    phone,
+    userId
+  });
+
+  res.send(updateUser);
+})
+
 //Client routes
 
 api.get(`/session`, authenticate,  (req, res) => {
@@ -278,6 +297,28 @@ api.post(`/signup`, async (req, res) => {
 // PANTEMASKIN
 
 //Functions
+
+editUserProfile = async (userData) => {
+  const { rows } = await pool.query(
+    `
+      UPDATE users(
+          name,
+          email,
+          phone
+      )
+  
+      VALUES(
+          $1,
+          $2,
+          $3
+      )
+      WHERE
+        id = $4
+      RETURNING * 
+      `, [userData.name, userData.email, userData.phone]);
+  
+      return rows[0]
+}
 
 createPantData = async (session) => {
   const { rows } = await pool.query(

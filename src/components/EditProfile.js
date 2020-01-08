@@ -1,11 +1,38 @@
 import React from 'react';
+import { updateUser, getUserById } from '../services/session';
 
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            user: {},
+            isLoading: false,
+            error: null,
         }
+    }
+
+    async componentDidMount() {
+        try {
+            this.setState({ isLoading: true });
+            const user = await getUserById(this.props.id);
+            this.setState({ user, isLoading: false });
+        } catch(error) {
+            this.setState({ error });
+        }
+    }
+
+    async handleEditUser() {
+        const { user } = this.state;
+        await updateUser(user);
+        const { history } = this.props;
+        history.push(`/profile`);
+    }
+
+    handleChange(field, event) {
+        const { user } = this.state;
+        user[field] = event.target.value;
+        this.setState({ user });
     }
 
     handleBackProfile() {
@@ -14,6 +41,25 @@ class EditProfile extends React.Component {
     }
 
     render() {
+        const { user, isLoading, error } = this.state;
+
+        if (error) {
+            return (
+                <div>
+                    <p>Oops! Something went wrong!</p>
+                    <pre>{error.message}</pre>
+                    <button>Retry</button>
+                </div>
+            )
+        }
+
+        if (isLoading) {
+            return (
+                <div>
+                    <p>Loading profile...</p>
+                </div>
+            );
+        }
 
         return (
             <div className="edit-profile">
@@ -32,33 +78,33 @@ class EditProfile extends React.Component {
                 <div className="edit-form">
                     <label className="inputField">
                         <input 
-                            // value={user.name}
-                            // onChange={this.handleChange.bind(this, 'name')}
+                            value={user.name}
+                            onChange={this.handleChange.bind(this, 'name')}
                             type="text" 
                          />
                         <input 
-                            // value={user.email}
-                            // onChange={this.handleChange.bind(this, 'email')}
+                            value={user.email}
+                            onChange={this.handleChange.bind(this, 'email')}
                             type="text" 
                          />
                         <input 
-                            // value={user.phone}
-                            // onChange={this.handleChange.bind(this, 'phone')}
+                            value={user.phone}
+                            onChange={this.handleChange.bind(this, 'phone')}
                             type="text" 
                              />
                         <input 
-                            // value={user.password}
-                            // onChange={this.handleChange.bind(this, 'password')}
+                            value={user.password}
+                            onChange={this.handleChange.bind(this, 'password')}
                             type="password" 
                          />
                         <input 
-                            // value={user.password}
-                            // onChange={this.handleChange.bind(this, 'password')}
+                            value={user.password}
+                            onChange={this.handleChange.bind(this, 'password')}
                             type="password" 
                          /> 
                     </label>
                 </div>
-                <div className="submit-button"><button>Lagre</button></div>
+                <div className="submit-button" onClick={this.handleEditUser.bind(this)}><button>Lagre</button></div>
                 <footer className="nav-bar-edit">
                     <div className="homeIcon" >
                         <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" height="30px" style={{borderBottom: "2px solid white", paddingBottom: "2px"}}>

@@ -44,3 +44,14 @@ export async function getUserById() {
     return response.json();
 }
 
+export function updateUser(user) {
+    return fetch(`${API_URL}/editprofile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('pante_app_token')
+      },
+      body: JSON.stringify(user)
+    })
+    .then((res) => res.json());
+  }
