@@ -164,6 +164,13 @@ api.get('/saldo', async (req, res) => {
 
 //Client routes
 
+api.get(`/session`, authenticate,  (req, res) => {
+  res.send({
+      message: 'You are authenticated'
+  });
+  
+})
+
 api.post('/session', async (req, res) => {
   const { email, password } = req.body;
   try{

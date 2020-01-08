@@ -2,6 +2,7 @@ import React from 'react';
 import Barcode from 'react-barcode'
 
 class Profile extends React.Component {
+    constr
     render() {
         return (
             <div className="profile">
