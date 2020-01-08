@@ -52,7 +52,6 @@ class Pant extends React.Component {
     this.setState({
       lotteryPop: true
     })
-    console.log(this.state.lotteryPop);
   }
 
 // Handeling input from the user

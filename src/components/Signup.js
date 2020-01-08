@@ -7,7 +7,8 @@ class Signup extends React.Component {
 
         this.state = {
             signupForm: {
-                name: '',
+                firstName: '',
+                lastName: '',
                 email: '',
                 phone: '',
                 password: '',
@@ -30,14 +31,14 @@ class Signup extends React.Component {
     async handleSubmitAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
-        const { name, email, phone, password, confirmPassword } = this.state.signupForm;
+        const { firstName, lastName, email, phone, password, confirmPassword } = this.state.signupForm;
 
         if(confirmPassword !== password) {
             this.setState({ error: "Passwords don't match!" })
         } else {
             try{
                 this.setState({ isLoading: true });
-                const newUser = await createUser({ name, email, phone, password });
+                const newUser = await createUser({ firstName, lastName, email, phone, password });
                 console.log(newUser)
                 if(newUser.status === 403) {
                     this.setState({ error: newUser.message })
@@ -71,9 +72,15 @@ class Signup extends React.Component {
                     <label className="inputField">
                         <input 
                             type="text" 
-                            placeholder="Skriv inn ditt navn"
+                            placeholder="Skriv inn fornavn" required
                             value={this.state.signupForm.name}
-                            onChange={this.handleInputChange.bind(this, 'name')}
+                            onChange={this.handleInputChange.bind(this, 'firstName')}
+                         />
+                         <input 
+                            type="text" 
+                            placeholder="Skriv inn etternavn" required
+                            value={this.state.signupForm.name}
+                            onChange={this.handleInputChange.bind(this, 'lastName')}
                          />
                         <input 
                             type="text" 

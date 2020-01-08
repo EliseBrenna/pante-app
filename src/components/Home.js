@@ -7,7 +7,8 @@ class Home extends React.Component {
         this.state = {
             userCode: "",
             view: '',
-            params: {}
+            params: {},
+            pantPop: false
         }
     }
 
@@ -51,31 +52,54 @@ class Home extends React.Component {
         history.push(`/support`);
     }
 
+    handlePantPop() {
+        this.setState({
+            pantPop: true
+          })
+    }
+
+    handlePantExit() {
+        this.setState({
+            pantPop: false
+          })
+    }
+
     render() {
 
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
-                <div className="home-content">
-                    Tast inn kode fra <br/>
-                    panteautomaten:
-                    
-                    {/* Form to sumbit code */}
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <label htmlFor='userCode'>
-                        Code:
-                        <input 
-                            type='text'
-                            name='userCode'
-                            value={this.state.userCode}
-                            onChange={this.handleInputChange.bind(this, 'userCode')}
-                        />
-                        </label>
-                        <div>
-                        <button>Pant</button>
-                        </div> 
-                    </form>
-                </div>
+
+                {
+                    !this.state.pantPop? (
+                        <div className="home-content">
+                        Tast inn kode fra <br/>
+                        panteautomaten:
+                        
+                        {/* Form to sumbit code */}
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <label htmlFor='userCode'>
+                            Code:
+                            <input 
+                                type='text'
+                                name='userCode'
+                                value={this.state.userCode}
+                                onChange={this.handleInputChange.bind(this, 'userCode')}
+                            />
+                            </label>
+                            <div>
+                            <button onClick={() => this.handlePantPop()}>Pant</button>
+                            </div> 
+                        </form>
+                    </div>
+                    ) : (
+                        <div className="pantePop">
+                            <div className="pantBtnContainer"><button className="exitBtn" onClick={() => this.handlePantExit()}>x</button></div>
+                            <h4>Din pant er registrert. <br />Du pantet for xx kroner.</h4>
+                        </div>
+                    )
+                }
+                
                 <footer className="nav-bar">
                     <div className="homeIcon" >
                         <svg onClick={this.handleHomeClicked.bind(this)} fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" height="30px" style={{borderBottom: "2px solid white", paddingBottom: "2px"}}>
