@@ -1,9 +1,30 @@
 import React from 'react';
 
 class EditProfile extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+        }
+    }
+
+    handleBackProfile() {
+        const { history } = this.props;
+        history.push('/profile');
+    }
+
     render() {
+
         return (
             <div className="edit-profile">
+                <div className="arrowLeftHistory">
+            <svg onClick={this.handleBackProfile.bind(this)} version="1.1"
+	 viewBox="0 0 31.494 31.494">
+<path style={{fill: "#127334"}} d="M10.273,5.009c0.444-0.444,1.143-0.444,1.587,0c0.429,0.429,0.429,1.143,0,1.571l-8.047,8.047h26.554
+	c0.619,0,1.127,0.492,1.127,1.111c0,0.619-0.508,1.127-1.127,1.127H3.813l8.047,8.032c0.429,0.444,0.429,1.159,0,1.587
+	c-0.444,0.444-1.143,0.444-1.587,0l-9.952-9.952c-0.429-0.429-0.429-1.143,0-1.571L10.273,5.009z"/>
+</svg>
+            </div>
                <div className="sub-header-edit"><h3>Endre Profil</h3>
     
                </div>
@@ -11,39 +32,34 @@ class EditProfile extends React.Component {
                 <div className="edit-form">
                     <label className="inputField">
                         <input 
+                            // value={user.name}
+                            // onChange={this.handleChange.bind(this, 'name')}
                             type="text" 
-                            placeholder="Skriv inn ditt navn"
-                         />
-                         <input 
-                            type="text" 
-                            placeholder="Skriv inn ditt navn"
                          />
                         <input 
+                            // value={user.email}
+                            // onChange={this.handleChange.bind(this, 'email')}
                             type="text" 
-                            placeholder="Skriv inn e-postadresse"
                          />
                         <input 
+                            // value={user.phone}
+                            // onChange={this.handleChange.bind(this, 'phone')}
                             type="text" 
-                            placeholder="Skriv inn ditt telefonnummer"
                              />
                         <input 
+                            // value={user.password}
+                            // onChange={this.handleChange.bind(this, 'password')}
                             type="password" 
-                            placeholder="Skriv inn passord"
                          />
                         <input 
+                            // value={user.password}
+                            // onChange={this.handleChange.bind(this, 'password')}
                             type="password" 
-                            placeholder="Gjenta passord"
-                         />
-                            
+                         /> 
                     </label>
-                    <div>
-                <button className="submit-button">Lagre</button>
                 </div>
-                </div>
-
-                
-                <footer className="nav-bar">
-                
+                <div className="submit-button"><button>Lagre</button></div>
+                <footer className="nav-bar-edit">
                     <div className="homeIcon" >
                         <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" height="30px" style={{borderBottom: "2px solid white", paddingBottom: "2px"}}>
                             <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 
