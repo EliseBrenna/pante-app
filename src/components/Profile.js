@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
-import { saldoData } from '../services/pantSession';
 import { getUserById } from '../services/session';
 
 
@@ -72,8 +72,6 @@ class Profile extends React.Component {
     render() {
         const { 
             saldo,
-            error,
-            isLoading,
             session: {
                 id,
                 name
@@ -93,12 +91,8 @@ class Profile extends React.Component {
                     <div>
                     <h2>{name}</h2>
                     </div>
-                    <div>
-                        
-                        <h3>Saldo</h3>
-                        
-                    </div>
                     <div className="balance">
+                        <h4>Saldo</h4>
                         <h1>{saldo} kr</h1>
                     </div>
                     <div>
@@ -109,7 +103,10 @@ class Profile extends React.Component {
                     </div>
                     <div>
                         <button>Overfør til konto</button>
-                    </div> 
+                    </div>
+                    <div>
+                        <button className="logoutBtn"><Link to="/logout">Logg ut</Link></button>
+                    </div>
                 </div>
                 <footer className="nav-bar">
                     <div className="homeIcon">

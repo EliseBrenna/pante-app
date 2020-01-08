@@ -55,7 +55,7 @@ class Home extends React.Component {
     handlePantExit() {
         this.setState({
             pantPop: false
-          })
+        })
     }
 
     render() {
@@ -76,6 +76,7 @@ class Home extends React.Component {
                             <input 
                                 type='text'
                                 name='userCode'
+                                maxLength="4"
                                 value={this.state.userCode}
                                 onChange={this.handleInputChange.bind(this, 'userCode')}
                             />

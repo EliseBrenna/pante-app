@@ -20,13 +20,6 @@ const pool = new Pool({
 });
 
 
-
-
-// var salt = bcrypt.genSaltSync(10);
-// var hash = bcrypt.hashSync("B4c0/\/", salt);
-  
-// bcrypt.compareSync("B4c0/\/", hash);
-
 // 
 
 //Defining middlewares: 
@@ -211,22 +204,30 @@ api.post('/session', async (req, res) => {
   try{
     const user = await getUserByEmail(email)
 
+    const match = bcrypt.compareSync(password, user.password);
+
     if(!user) {
-      return res.status(401).send({ error: 'Unknown email' })
+      return res.status(401).json({status: 401, message: 'Unknown email' })
     }
 
-    if(user.password !== password) {
-      return res.status(401).send({ error: 'Wrong password' })
+    if(!match) {
+      return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
+
+    
 
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
     }, new Buffer(secret, 'base64'));
 
-    res.send({
-      token: token
-    })
+      res.send({
+        token: token
+      })
+
+    console.log(token)
+
+    
   } catch(error) {
     console.log(error)
   }

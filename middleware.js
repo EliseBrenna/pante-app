@@ -8,7 +8,7 @@ authenticate = (req, res, next) => {
         req.user = { id, name };
         next();
     } catch(error) {
-        res.status(401).send({ error: 'Unable to authenticate - please use a valid token' })
+        res.status(401).send({status: 401, message: 'Unable to authenticate - please use a valid token' })
     }
 };
 
