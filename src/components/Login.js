@@ -38,7 +38,6 @@ class Login extends React.Component {
             this.setState({ isLoggingIn: true, error: null })
             const loginAttemt = await createSession({ email, password })
             const { token, error } = await createSession({ email, password })
-            console.log(token)
             if(error) {
                 this.setState({ error: loginAttemt.message})
             } else if(loginAttemt.status === 401) {

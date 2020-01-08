@@ -16,8 +16,11 @@ class Authenticate extends React.Component {
     render() {
         return (
             <div className="authenticate">
-                Authenticating...
+                <div className="loader">
+                </div>
             </div>
+
+
                 
         )
     }
