@@ -37,7 +37,6 @@ class Login extends React.Component {
         try{
             this.setState({ isLoggingIn: true, error: null })
             const { token, error } = await createSession({ email, password })
-            console.log(token)
             if(error) {
                 throw new Error(error)
             }

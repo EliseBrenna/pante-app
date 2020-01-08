@@ -20,13 +20,6 @@ const pool = new Pool({
 });
 
 
-
-
-// var salt = bcrypt.genSaltSync(10);
-// var hash = bcrypt.hashSync("B4c0/\/", salt);
-  
-// bcrypt.compareSync("B4c0/\/", hash);
-
 // 
 
 //Defining middlewares: 
@@ -211,11 +204,13 @@ api.post('/session', async (req, res) => {
   try{
     const user = await getUserByEmail(email)
 
+    const match = bcrypt.compareSync(password, user.password);
+
     if(!user) {
       return res.status(401).send({ error: 'Unknown email' })
     }
 
-    if(user.password !== password) {
+    if(!match) {
       return res.status(401).send({ error: 'Wrong password' })
     }
 
