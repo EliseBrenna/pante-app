@@ -446,7 +446,7 @@ svg path {
 }
 
 .redCrossLottery {
-    display: none;
+    position: absolute;
 }
 
 .newUser h4, button, .arrowLeftHistory svg {

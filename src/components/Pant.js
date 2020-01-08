@@ -35,7 +35,8 @@ class Pant extends React.Component {
    let resultCode = makeCode(4);
 
     await this.setState(({ code }) => ({
-      code: resultCode
+      code: resultCode,
+      lotteryPop: false
     }));
 
     let session = {
@@ -92,23 +93,21 @@ handleInputChange(field, event) {
       <div className="panteContainer">
         <div className="panteAutomat">
 
-          {
-            !this.state.lotteryPop?
+          {!this.state.lotteryPop ? (
             <div className="screen">
-            <p>Pantesum: {this.state.amount}kr</p>
-            <p>Pin-kode: {this.state.code}</p>
+              <p>Pantesum: {this.state.amount}kr</p>
+              <p>Pin-kode: {this.state.code}</p>
             </div>
-            :null
-          }
+          ) : (
+            <div className="screen">
+              <p>Ingen premie <br />denne gangen! :(</p>
+            </div>
+          )}
 
-          
-          <div className="redCrossLottery">
-            <p>Ingen premie denne gangen! :(</p>
-          </div>
           <div className="recycleButton">
           <button className="greenButton" onClick={() => this.createCode()}></button>
           </div>
-          <button className="redCross" onclick={() => this.lotteryPop()}>+</button>
+          <button className="redCross" onClick={() => this.lotteryPop()}>+</button>
           <img src="./pantomat.svg" alt="panteautomat"></img>  
         </div>
         <div className="display">
