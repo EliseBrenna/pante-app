@@ -12,7 +12,7 @@ body {
 }
 
 .nav-bar {
-    background-color: #127334;
+    background-color: #0d5526;
     grid-row: 3;
     height: 70px;
     align-self: end;
@@ -230,7 +230,7 @@ body {
 
 .login, .signup {
     grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 2fr 2fr 2fr;
+    grid-template-rows: 2fr 1fr 2fr;
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -271,6 +271,7 @@ body {
     grid-column: 2 / span 1;
     justify-self: center;
     display: grid;
+    margin-top: 20px;
  
 }
 
