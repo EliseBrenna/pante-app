@@ -14,6 +14,7 @@ import History from './components/History';
 import './App.css';
 
 class App extends React.Component {
+
   render() {
     return (
       <HashRouter>

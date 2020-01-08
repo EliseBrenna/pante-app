@@ -28,11 +28,9 @@ body {
     justify-self: center;
     display: grid;
     outline: none;
+
 }
 
-.homeIcon a:active {
-    border-bottom: solid white;
-  }
 
 .profileIcon {
     grid-column: 2;
@@ -40,11 +38,9 @@ body {
     justify-self: center;
     display: grid;
     outline: none;
+    
 }
 
-.profileIcon a:active {
-    border-bottom: solid white;
-  }
 
 .infoIcon {
     grid-column: 3;
@@ -54,9 +50,6 @@ body {
     outline: none;
 }
 
-.infoIcon a:active {
-    border-bottom: solid white;
-  }
 
 .home {
     display: grid;
@@ -453,5 +446,9 @@ svg path {
 }
 
 .redCrossLottery {
-    display: none;
+    position: absolute;
+}
+
+.newUser h4, button, .arrowLeftHistory svg {
+    cursor: pointer;
 }

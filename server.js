@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 const bcrypt = require('bcryptjs');
 const app = express();
 const api = express();
@@ -38,7 +39,7 @@ app.use(express.static('build'));
 
 //Functions:
 
-getUsers = async () => {
+getUsers = async (id) => {
   const { rows } = await pool.query(`
     SELECT 
       * 
@@ -80,6 +81,19 @@ getUserByEmail = async (email) => {
     WHERE
       email = $1`,
       [email])
+
+  return rows[0]
+}
+
+getUserById = async (id) => {
+  const { rows } = await pool.query(`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = $1`,
+      [id])
 
   return rows[0]
 }
@@ -128,9 +142,11 @@ getSaldoById = async (id) => {
       SUM(amount)
     FROM
       activity
+    WHERE
+      id = $1
     GROUP BY 
       id
-  `)
+  `, [id])
   
   return rows
 }
@@ -151,14 +167,21 @@ api.get(`/users`, async (req, res) => {
   res.send(users)
 })
 
+api.get(`/users`, authenticate, async (req, res) => {
+  const { id } = req.user;
+  const user = await getUserById(id);
+  res.send(user)
+})
+
 api.get('/activity', async (req, res) => {
   const all = await getActivities();
   res.send(all)
 })
 
-api.get('/saldo', async (req, res) => {
-  const { id } = req.params;
-  const saldo = await getSaldoById();
+api.get('/saldo', authenticate, async (req, res) => {
+  const { id } = req.user;
+  const saldo = await getSaldoById(id);
+  console.log(saldo)
   res.send(saldo)
 })
 
@@ -198,6 +221,7 @@ api.post('/session', async (req, res) => {
 
     const token = jwt.sign({ 
       id: user.id,
+      name: user.name
     }, new Buffer(secret, 'base64'));
 
     res.send({
