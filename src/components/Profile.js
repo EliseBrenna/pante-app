@@ -15,7 +15,9 @@ class Profile extends React.Component {
             isLoading: false,
             error: null,
             session: payload,
-            saldo: ''
+            saldo: '',
+            view: '',
+            params: {}
         }
     }
 
@@ -34,14 +36,6 @@ class Profile extends React.Component {
             this.setState({ error });
         }
     }
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-            view: '',
-            params: {}
-        }
-      }
     
       handleHistory() {
         const { history } = this.props;
@@ -82,7 +76,7 @@ class Profile extends React.Component {
             <div className="profile">
                 <div className="profile-barcode">
                     <div className="barcode">
-                        <Barcode value="Aske" />
+                        <Barcode value={id + saldo} />
                     </div>
                 </div>
                 <div className="profile-balance">
@@ -91,7 +85,7 @@ class Profile extends React.Component {
                         
                     </div>
                     <div className="balance">
-                        {error || <p>{saldo}kr</p>}
+                        <p>Saldo</p>
                     </div>
                     <div>
                         <button onClick={this.handleHistory.bind(this)}>Historikk</button>
