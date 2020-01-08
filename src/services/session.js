@@ -32,3 +32,14 @@ export async function createUser({name, email, phone, password}){
     })
     return response.json();
 }
+
+export async function getUserById() {
+    const response = await fetch(`${API_URL}/users`, {
+        method: 'GET',
+        headers : {
+            'Content-type': 'application/json',
+            'X-Auth-Token': localStorage.getItem('pante_app_token')
+        }
+    })
+    return response.json();
+}

@@ -1,15 +1,43 @@
 import React from 'react';
 import Barcode from 'react-barcode'
+import jwtDecode from 'jwt-decode';
+import { saldoData } from '../services/pantSession';
+import { getUserById } from '../services/session';
+
 
 class Profile extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props);
-    
+
+        const token = localStorage.getItem('pante_app_token');
+        const payload = jwtDecode(token);
+
         this.state = {
+            isLoading: false,
+            error: null,
+            session: payload,
+            saldo: '',
             view: '',
             params: {}
         }
-      }
+    }
+
+    async componentDidMount() {
+        await this.currentSaldo();
+    }
+
+    async currentSaldo() {
+        try {
+            this.setState({ isLoading: true })
+            const { id } = this.state.session;
+            console.log(id)
+            const saldo = await getUserById();
+            const saldoSum = saldo[0].sum;
+            this.setState({ saldo: saldoSum, isLoading: false })
+        } catch (error) {
+            this.setState({ error });
+        }
+    }
     
       handleHistory() {
         const { history } = this.props;
@@ -36,19 +64,36 @@ class Profile extends React.Component {
     }
 
     render() {
+        const { 
+            saldo,
+            error,
+            isLoading,
+            session: {
+                id,
+                name
+            } = {}
+         } = this.state;
+
+
         return (
             <div className="profile">
                 <div className="profile-barcode">
                     <div className="barcode">
-                        <Barcode value="Aske" />
+                        <Barcode value={id}/>
+                        
                     </div>
                 </div>
                 <div className="profile-balance">
                     <div>
+                    <h2>{name}</h2>
+                    </div>
+                    <div>
+                        
                         <h3>Saldo</h3>
+                        
                     </div>
                     <div className="balance">
-                        <h1>237 kr</h1>
+                        <p>{saldo} kr</p>
                     </div>
                     <div>
                         <button onClick={this.handleHistory.bind(this)}>Historikk</button>
