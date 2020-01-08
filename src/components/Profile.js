@@ -1,9 +1,50 @@
 import React from 'react';
 import Barcode from 'react-barcode'
+import jwtDecode from 'jwt-decode';
+import { saldoData } from '../services/pantSession';
+
 
 class Profile extends React.Component {
-    constr
+    constructor(props){
+        super(props);
+
+        const token = localStorage.getItem('pante_app_token');
+        const payload = jwtDecode(token);
+
+        this.state = {
+            isLoading: false,
+            error: null,
+            session: payload,
+            saldo: ''
+        }
+    }
+
+    async componentDidMount() {
+        await this.currentSaldo();
+    }
+
+    async currentSaldo() {
+        try {
+            this.setState({ isLoading: true })
+            const { id } = this.state.session;
+            const saldo = await saldoData();
+            console.log(saldo)
+            this.setState({ saldo: saldo.sum, isLoading: false })
+        } catch (error) {
+            this.setState({ error });
+        }
+    }
     render() {
+        const { 
+            saldo,
+            error,
+            isLoading,
+            session: {
+                id
+            } = {}
+         } = this.state;
+
+
         return (
             <div className="profile">
                 <div className="profile-barcode">
@@ -14,9 +55,10 @@ class Profile extends React.Component {
                 <div className="profile-balance">
                     <div>
                         <h3>Saldo</h3>
+                        
                     </div>
                     <div className="balance">
-                        <h1>237 kr</h1>
+                        {error || <p>{saldo}kr</p>}
                     </div>
                     <div>
                         <button>Historikk</button>

@@ -28,7 +28,7 @@ export function activityData() {
   .then((res) => res.json())
 }
 
-export function saldoData(id) {
-  return fetch(`${API_URL}/saldo`)
-  .then((res) => res.json())
+export async function saldoData(id) {
+  const res = await fetch(`${API_URL}/saldo/${id}`);
+  return await res.json();
 }

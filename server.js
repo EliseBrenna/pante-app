@@ -38,7 +38,7 @@ app.use(express.static('build'));
 
 //Functions:
 
-getUsers = async () => {
+getUsersById = async (id) => {
   const { rows } = await pool.query(`
     SELECT 
       * 
@@ -128,9 +128,11 @@ getSaldoById = async (id) => {
       SUM(amount)
     FROM
       activity
+    WHERE
+      id = $1
     GROUP BY 
       id
-  `)
+  `, [id])
   
   return rows
 }
@@ -156,9 +158,9 @@ api.get('/activity', async (req, res) => {
   res.send(all)
 })
 
-api.get('/saldo', async (req, res) => {
+api.get('/saldo:id', async (req, res) => {
   const { id } = req.params;
-  const saldo = await getSaldoById();
+  const saldo = await getSaldoById(id);
   res.send(saldo)
 })
 
