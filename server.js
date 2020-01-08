@@ -164,7 +164,7 @@ api.get('/saldo', async (req, res) => {
 
 //Client routes
 
-api.get('/session', authenticate, async (req, res) => {
+api.post('/session', async (req, res) => {
   const { email, password } = req.body;
   try{
     const user = await getUserByEmail(email)
