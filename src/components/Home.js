@@ -20,9 +20,9 @@ class Home extends React.Component {
         event.preventDefault();
 
         updatePantData2(session);
-        alert('Pant lagt til i din saldo!')
         this.setState({
-            userCode: ''
+            userCode: '',
+            pantPop: true
         })
     }
 
@@ -52,12 +52,6 @@ class Home extends React.Component {
         history.push(`/support`);
     }
 
-    handlePantPop() {
-        this.setState({
-            pantPop: true
-          })
-    }
-
     handlePantExit() {
         this.setState({
             pantPop: false
@@ -80,16 +74,14 @@ class Home extends React.Component {
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <label htmlFor='userCode'>
                             Code:
-                            <input 
-                                type='text'
-                                name='userCode'
-                                value={this.state.userCode}
-                                onChange={this.handleInputChange.bind(this, 'userCode')}
-                            />
+                                <input 
+                                    type='text'
+                                    name='userCode'
+                                    value={this.state.userCode}
+                                    onChange={this.handleInputChange.bind(this, 'userCode')}
+                                />
                             </label>
-                            <div>
-                            <button onClick={() => this.handlePantPop()}>Pant</button>
-                            </div> 
+                            <button>Pant</button>
                         </form>
                     </div>
                     ) : (
