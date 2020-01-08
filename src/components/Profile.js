@@ -80,7 +80,7 @@ class Profile extends React.Component {
             <div className="profile">
                 <div className="profile-barcode">
                     <div className="barcode">
-                        <Barcode value={id}/>
+                        <Barcode value={id + saldo}/>
                         
                     </div>
                 </div>
@@ -94,7 +94,7 @@ class Profile extends React.Component {
                         
                     </div>
                     <div className="balance">
-                        <p>{saldo} kr</p>
+                        <h1>{saldo} kr</h1>
                     </div>
                     <div>
                         <button onClick={this.handleHistory.bind(this)}>Historikk</button>
