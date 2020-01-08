@@ -139,7 +139,7 @@ body {
     border: none;
     outline: none;
     margin-top: 15px;
-    
+
 }
 
 .profile {
@@ -338,7 +338,9 @@ svg path {
 .arrowLeft {
     width: 20px;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 
+    20px;
+    cursor: pointer;
 }
 
 .historyContainer {

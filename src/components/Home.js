@@ -55,7 +55,7 @@ class Home extends React.Component {
     handlePantExit() {
         this.setState({
             pantPop: false
-          })
+        })
     }
 
     render() {
