@@ -167,7 +167,7 @@ api.get(`/users`, async (req, res) => {
   res.send(users)
 })
 
-api.get(`/users`, authenticate, async (req, res) => {
+api.get(`/user`, authenticate, async (req, res) => {
   const { id } = req.user;
   const user = await getUserById(id);
   res.send(user)

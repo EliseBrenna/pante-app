@@ -32,7 +32,8 @@ class Profile extends React.Component {
             const { id } = this.state.session;
             console.log(id)
             const saldo = await getUserById();
-            const saldoSum = saldo[0].sum;
+            console.log(saldo)
+            const saldoSum = saldo.sum;
             this.setState({ saldo: saldoSum, isLoading: false })
         } catch (error) {
             this.setState({ error });
