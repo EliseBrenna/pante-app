@@ -7,8 +7,7 @@ class Signup extends React.Component {
 
         this.state = {
             signupForm: {
-                firstName: '',
-                lastName: '',
+                name: '',
                 email: '',
                 phone: '',
                 password: '',
@@ -31,14 +30,14 @@ class Signup extends React.Component {
     async handleSubmitAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
-        const { firstName, lastName, email, phone, password, confirmPassword } = this.state.signupForm;
+        const { name, email, phone, password, confirmPassword } = this.state.signupForm;
 
         if(confirmPassword !== password) {
             this.setState({ error: "Passwords don't match!" })
         } else {
             try{
                 this.setState({ isLoading: true });
-                const newUser = await createUser({ firstName, lastName, email, phone, password });
+                const newUser = await createUser({ name, email, phone, password });
                 console.log(newUser)
                 if(newUser.status === 403) {
                     this.setState({ error: newUser.message })
@@ -72,15 +71,9 @@ class Signup extends React.Component {
                     <label className="inputField">
                         <input 
                             type="text" 
-                            placeholder="Skriv inn fornavn" required
+                            placeholder="Skriv inn fult navn" required
                             value={this.state.signupForm.name}
-                            onChange={this.handleInputChange.bind(this, 'firstName')}
-                         />
-                         <input 
-                            type="text" 
-                            placeholder="Skriv inn etternavn" required
-                            value={this.state.signupForm.name}
-                            onChange={this.handleInputChange.bind(this, 'lastName')}
+                            onChange={this.handleInputChange.bind(this, 'name')}
                          />
                         <input 
                             type="text" 
