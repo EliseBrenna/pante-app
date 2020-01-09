@@ -315,8 +315,6 @@ api.post(`/signup`, async (req, res) => {
     return res.status(403).json({ status: 403, message: 'Email and phonenumber is already in use'})
   }else if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
-  } else if (+validatePhone.count) {
-    return res.status(403).json({ status: 403, message: 'Phonenumber is already in use'})
   } else {
     const newUser = await createUser(name, email, phone, hashPassword);
     res.send(newUser);

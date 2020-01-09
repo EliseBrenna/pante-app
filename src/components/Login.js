@@ -66,7 +66,7 @@ class Login extends React.Component {
         return (
             <div className="login">
                 <img src="./logo.png" alt="logo" className="logoLogin" />
-                <div className="subHeaderLogin"><h3>Logg inn for å pante</h3></div>
+                <div className="subHeaderLogin"><h3>Logg inn for å registrere pant</h3></div>
                 <div className="loginForm">
                     <label className="inputField">
                         <input 
@@ -87,11 +87,11 @@ class Login extends React.Component {
                 </div>
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
-                    <h4 onClick={this.handleSignup.bind(this)}>Ny bruker?</h4>
+                    <h3 onClick={this.handleSignup.bind(this)}>Ny bruker?</h3>
                 </div>
 
                 <div className="appVersion">
-                    <p>Beta v. 1.1</p>
+                    <p>Beta v. 1.2</p>
                 </div>
             </div>
         )
