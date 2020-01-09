@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="652" height="757" viewBox="0 0 652 757">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="650" height="754" viewBox="0 0 650 754">
   <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="652" height="757"/>
+    </clipPath>
     <filter id="Ellipse_1" x="-9" y="190" width="897" height="317" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="3" result="blur"/>
@@ -14,63 +17,56 @@
       <feComposite operator="in" in2="blur-2"/>
       <feComposite in="SourceGraphic"/>
     </filter>
-    <filter id="Path_2" x="288" y="222.05" width="316.276" height="205.639" filterUnits="userSpaceOnUse">
+    <filter id="Rectangle_2-2" x="488" y="430" width="94" height="27" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="3" result="blur-3"/>
       <feFlood flood-opacity="0.161"/>
       <feComposite operator="in" in2="blur-3"/>
       <feComposite in="SourceGraphic"/>
     </filter>
-    <filter id="Rectangle_2" x="488" y="430" width="94" height="27" filterUnits="userSpaceOnUse">
+    <filter id="Line_1" x="488" y="434.45" width="94.276" height="19" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="3" result="blur-4"/>
       <feFlood flood-opacity="0.161"/>
       <feComposite operator="in" in2="blur-4"/>
       <feComposite in="SourceGraphic"/>
     </filter>
-    <filter id="Line_1" x="488" y="434.45" width="94.276" height="19" filterUnits="userSpaceOnUse">
-      <feOffset dy="3" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="3" result="blur-5"/>
-      <feFlood flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur-5"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
     <clipPath id="clip-Web_1920_1">
-      <rect width="652" height="757"/>
+      <rect width="650" height="754"/>
     </clipPath>
   </defs>
   <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
-    <rect width="652" height="757" fill="#127334"/>
-    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_1)">
-      <g id="Ellipse_1-2" data-name="Ellipse 1" transform="translate(0 196)" fill="rgba(255,255,255,0)" stroke="#0f5f2b" stroke-width="5">
-        <ellipse cx="439.5" cy="149.5" rx="439.5" ry="149.5" stroke="none"/>
-        <ellipse cx="439.5" cy="149.5" rx="437" ry="147" fill="none"/>
+    <rect width="650" height="754" fill="#0d5526"/>
+    <g id="Web_1920_1-2" data-name="Web 1920 – 1" clip-path="url(#clip-path)">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_1)">
+        <g id="Ellipse_1-2" data-name="Ellipse 1" transform="translate(0 196)" fill="rgba(255,255,255,0)" stroke="#0f5f2b" stroke-width="5">
+          <ellipse cx="439.5" cy="149.5" rx="439.5" ry="149.5" stroke="none"/>
+          <ellipse cx="439.5" cy="149.5" rx="437" ry="147" fill="none"/>
+        </g>
       </g>
-    </g>
-    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_2)">
-      <g id="Ellipse_2-2" data-name="Ellipse 2" transform="translate(88 265)" stroke="#0f5f2b" stroke-width="5">
-        <circle cx="81" cy="81" r="81" stroke="none"/>
-        <circle cx="81" cy="81" r="78.5" fill="none"/>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_2)">
+        <g id="Ellipse_2-2" data-name="Ellipse 2" transform="translate(88 265)" stroke="#0f5f2b" stroke-width="5">
+          <circle cx="81" cy="81" r="81" stroke="none"/>
+          <circle cx="81" cy="81" r="78.5" fill="none"/>
+        </g>
       </g>
-    </g>
-    <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(117 294)" fill="#616161" stroke="#707070" stroke-width="1">
-      <circle cx="53" cy="53" r="53" stroke="none"/>
-      <circle cx="53" cy="53" r="52.5" fill="none"/>
-    </g>
-    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_2)">
-      <g id="Path_2-2" data-name="Path 2" transform="translate(297 228.05)" fill="#fff">
-        <path d="M 296.7761535644531 186.138671875 L 1.500023007392883 186.138671875 L 1.500023007392883 1.500020623207092 L 296.7761535644531 1.500020623207092 L 296.7761535644531 186.138671875 Z" stroke="none"/>
-        <path d="M 2.999969482421875 3 L 2.999969482421875 184.6386566162109 L 295.2760925292969 184.6386566162109 L 295.2760925292969 3 L 2.999969482421875 3 M -3.0517578125e-05 0 L 298.2760925292969 0 L 298.2760925292969 187.6386566162109 L -3.0517578125e-05 187.6386566162109 L -3.0517578125e-05 0 Z" stroke="none" fill="#707070"/>
+      <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(117 294)" fill="#616161" stroke="#707070" stroke-width="1">
+        <circle cx="53" cy="53" r="53" stroke="none"/>
+        <circle cx="53" cy="53" r="52.5" fill="none"/>
       </g>
-    </g>
-    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_2)">
-      <g id="Rectangle_2-2" data-name="Rectangle 2" transform="translate(497 436)" stroke="#000" stroke-width="1">
-        <rect width="76" height="9" stroke="none"/>
-        <rect x="0.5" y="0.5" width="75" height="8" fill="none"/>
+      <g id="Path_2" data-name="Path 2" transform="translate(297 228.05)">
+        <path id="Path_1" data-name="Path 1" d="M296.776,186.139H1.5V1.5H296.776Z" fill="#fff"/>
+        <path id="Path_2-2" data-name="Path 2" d="M3,3V184.639H295.276V3H3M0,0H298.276V187.639H0Z" fill="#707070"/>
       </g>
-    </g>
-    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Line_1)">
-      <line id="Line_1-2" data-name="Line 1" x2="76.276" transform="translate(497 440.95)" fill="none" stroke="#707070" stroke-width="1"/>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_2-2)">
+        <g id="Rectangle_2-3" data-name="Rectangle 2" transform="translate(497 436)" stroke="#000" stroke-width="1">
+          <rect width="76" height="9" stroke="none"/>
+          <rect x="0.5" y="0.5" width="75" height="8" fill="none"/>
+        </g>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Line_1)">
+        <line id="Line_1-2" data-name="Line 1" x2="76.276" transform="translate(497 440.95)" fill="none" stroke="#707070" stroke-width="1"/>
+      </g>
     </g>
   </g>
 </svg>

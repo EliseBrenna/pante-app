@@ -68,7 +68,7 @@ class Home extends React.Component {
                     !this.state.pantPop? (
                         <div className="home-content">
                         Tast inn kode fra <br/>
-                        panteautomaten:
+                        panteautomaten
                         
                         {/* Form to sumbit code */}
                         <form onSubmit={this.handleSubmit.bind(this)}>
