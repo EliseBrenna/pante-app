@@ -1,24 +1,57 @@
 import React from 'react';
 
 class FAQ extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+    }
+}
+
+handleBackProfile() {
+    const { history } = this.props;
+    history.push('/support');
+}
+
+handleHomeClicked() {
+    const { history } = this.props;
+    history.push(`/home`);
+}
+
+handleProfileClicked() {
+    const { history } = this.props;
+    history.push(`/profile`);
+}
+
+handleSupportClicked() {
+    const { history } = this.props;
+    history.push(`/support`);
+}
     render() {
         return (
           <div className="helpContainer">
           <div className="supportContainer">
+          <div className="arrowLeftHistory">
+            <svg onClick={this.handleBackProfile.bind(this)} version="1.1"
+	 viewBox="0 0 31.494 31.494">
+<path style={{fill: "#127334"}} d="M10.273,5.009c0.444-0.444,1.143-0.444,1.587,0c0.429,0.429,0.429,1.143,0,1.571l-8.047,8.047h26.554
+	c0.619,0,1.127,0.492,1.127,1.111c0,0.619-0.508,1.127-1.127,1.127H3.813l8.047,8.032c0.429,0.444,0.429,1.159,0,1.587
+	c-0.444,0.444-1.143,0.444-1.587,0l-9.952-9.952c-0.429-0.429-0.429-1.143,0-1.571L10.273,5.009z"/>
+</svg>
+            </div>
               <div className="support">
-                  <h3>Hjelp og kundeservice</h3>
+                  <h3>Ofte stilte spørsmål</h3>
               </div>
-              <div className="supportOptions">
-                  <p>Ofte stilte spørsmål</p>
-                  <p>Kontakt oss</p>
+              <div className="faqOptions">
+                  <h4>Hvorfor har vi valgt fargen rosa?</h4>
+                  <p>Vi kommer tilbake til dette.</p>
               </div>
-              <div className="supportArrows">
-                  <p>></p>
-                  <p>></p>
+              <div className="faqOptions">
+                  <h4>Hvorfor navnet digiPANT?</h4>
+                  <p>Vi kommer tilbake til dette.</p>
               </div>
               </div>
                   
-              
                <footer className="nav-bar">
                   <div className="homeIcon">
                       <svg onClick={this.handleHomeClicked.bind(this)} fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" height="30px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"/></svg>
