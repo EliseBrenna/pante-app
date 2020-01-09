@@ -100,13 +100,15 @@ body {
 
 /* NAVIGATION BAR */
 
-.footer {
+footer {
     position: fixed;
+    width: 100vw;
 }
 .nav-bar {
     background-color: #0d5526;
     grid-row: 3;
     height: 70px;
+    
     align-self: end;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
