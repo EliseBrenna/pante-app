@@ -91,44 +91,44 @@ getUserById = async (id) => {
   return rows[0]
 }
 
-amountQuery = async (code) => {
-  const { rows } = await pool.query(`
-    SELECT
-      amount
-    FROM
-      activity
-    WHERE
-      code = $1
-  `, [code])
+// amountQuery = async (code) => {
+//   const { rows } = await pool.query(`
+//     SELECT
+//       amount
+//     FROM
+//       activities
+//     WHERE
+//       code = $1
+//   `, [code])
 
-  return rows[0];
-}
+//   return rows[0];
+// }
 
-idValidation = async (code) => {
-  const { rows } = await pool.query(`
-    SELECT
-      id
-    FROM
-      activity
-    WHERE
-      code = $1
-  `, [code])
+// idValidation = async (code) => {
+//   const { rows } = await pool.query(`
+//     SELECT
+//       id
+//     FROM
+//       activities
+//     WHERE
+//       code = $1
+//   `, [code])
 
-  return rows[0];
-}
+//   return rows[0];
+// }
 
-codeValidation = async (code) => {
-  const { rows } = await pool.query(`
-    SELECT
-      COUNT(code)
-    FROM
-      activity
-    WHERE
-      code = $1
-  `, [code])
+// codeValidation = async (code) => {
+//   const { rows } = await pool.query(`
+//     SELECT
+//       COUNT(code)
+//     FROM
+//       activities
+//     WHERE
+//       code = $1
+//   `, [code])
 
-  return rows[0];
-}
+//   return rows[0];
+// }
 
 emailValidation = async (email) => {
   const { rows } = await pool.query(`
@@ -161,7 +161,7 @@ getActivities = async () => {
     SELECT 
       *
     FROM
-      activity
+      activities
   `)
 
   return rows
@@ -170,14 +170,11 @@ getActivities = async () => {
 getSaldoById = async (id) => {
   const { rows } = await pool.query(`
     SELECT 
-      id, 
-      SUM(amount)
+      *
     FROM
       activities
     WHERE
-      id = $1
-    GROUP BY 
-      id
+      user_id = $1
   `, [id])
   
   return rows
@@ -242,43 +239,44 @@ api.get('/saldo', authenticate, async (req, res) => {
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
-  const { code } = req.body;
+  const {userCode} = req.body;
+  console.log(userCode)
 
-  if(!code) {
+  if(!userCode) {
     res.send(404).json({status: 404, message: 'No code found - please insert a code'})
   } else {
-    const claimedCode = claimCode(code, id);
+    const claimedCode = claimCode(userCode, id);
     res.send(claimedCode) 
   }
   
 
 })
 
-api.put('/home', authenticate, async (req, res) => {
-  const userId = req.user.id;
-  const { userCode } = req.body;
+// api.put('/home', authenticate, async (req, res) => {
+//   const userId = req.user.id;
+//   const { userCode } = req.body;
 
-  const checkId = await idValidation( userCode )
-  const checkCode = await codeValidation( userCode )
-  const getAmount = await amountQuery( userCode )
+//   const checkId = await idValidation( userCode )
+//   const checkCode = await codeValidation( userCode )
+//   const getAmount = await amountQuery( userCode )
 
-  if (checkCode.count > 0) { // Sjekk om kode eksisterer
-    if (!checkId.id) { // kode eksisterer og ikke brukt av noen andre enda
-      await updatePantData({
-        userCode,
-        userId,
-        });
-        return res.status(200).json({ status: 200, message: `Din pant er registrert. Du pantet for ${getAmount.amount} kroner.`})
+//   if (checkCode.count > 0) { // Sjekk om kode eksisterer
+//     if (!checkId.id) { // kode eksisterer og ikke brukt av noen andre enda
+//       await updatePantData({
+//         userCode,
+//         userId,
+//         });
+//         return res.status(200).json({ status: 200, message: `Din pant er registrert. Du pantet for ${getAmount.amount} kroner.`})
       
-    } else if (checkId === userId) { // kode allerede assignet til brukeren som forsøker å skrive den inn
-      return res.status(403).json({ status: 403, message: 'Kode er allerede lagt til i din saldo'})
-    } else { // kode eksisterer, kode allerede brukt av annen bruker
-      return res.status(403).json({ status: 403, message: 'Kode er allerede benyttet og er ikke gyldig lengre'})
-    }
-  } else { // kode eksisterer ikke
-    return res.status(403).json({ status: 403, message: 'Koden du tastet inne eksisterer ikke'})
-  }
-});
+//     } else if (checkId === userId) { // kode allerede assignet til brukeren som forsøker å skrive den inn
+//       return res.status(403).json({ status: 403, message: 'Kode er allerede lagt til i din saldo'})
+//     } else { // kode eksisterer, kode allerede brukt av annen bruker
+//       return res.status(403).json({ status: 403, message: 'Kode er allerede benyttet og er ikke gyldig lengre'})
+//     }
+//   } else { // kode eksisterer ikke
+//     return res.status(403).json({ status: 403, message: 'Koden du tastet inne eksisterer ikke'})
+//   }
+// });
 
 api.put('/profile', function (req, res) {
   const userId = req.user.id;
@@ -403,17 +401,17 @@ createPantData = async (session) => {
     return rows[0]
 }
 
-updatePantData = async (session) => {
-  const { rows } = await pool.query(
-    `
-    UPDATE activity 
-    SET id=$1 WHERE code=$2
-    RETURNING *
-    `, [session.userId, session.userCode]
-  ) 
+// updatePantData = async (session) => {
+//   const { rows } = await pool.query(
+//     `
+//     UPDATE activities 
+//     SET id=$1 WHERE code=$2
+//     RETURNING *
+//     `, [session.userId, session.userCode]
+//   ) 
 
-  return rows[0]
-}
+//   return rows[0]
+// }
 
   //Routes
   
