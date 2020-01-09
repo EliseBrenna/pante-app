@@ -56,11 +56,7 @@ class History extends React.Component {
                         <p>Coop Extra Vossegata <br/>07/01-20, 09:45</p>
                         <p style={{fontWeight: "bold"}}>2 kr</p>  
                         </div>
-                        <div className="activities">
-                        <p>Rema 1000 Storo<br/>02/01-20, 20:01</p>
-                        <p style={{fontWeight: "bold"}}>13 kr</p>  
                     </div>
-                </div>
             </div>
             
             <footer className="nav-bar">
