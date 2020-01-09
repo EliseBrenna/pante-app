@@ -34,62 +34,59 @@ class Login extends React.Component {
         const { history } = this.props;
         const { email, password } = this.state.loginForm;
 
-        try{
-            this.setState({ isLoggingIn: true, error: null })
-            const loginAttempt = await createSession({ email, password })
-            console.log(loginAttempt)
-            const { token, error } = await createSession({ email, password })
-            if(error) {
-                this.setState({ error: loginAttempt.message})
+        try {
+            this.setState({ isLoggingIn: true, error: null });
+            const loginAttempt = await createSession({ email, password });
+            console.log (loginAttempt);
+            const { token, error } = await createSession({ email, password });
+            if (error) {
+                this.setState({ error: loginAttempt.message});
             } else if(loginAttempt.status === 401) {
-                this.setState({ error: loginAttempt.message })
+                this.setState({ error: loginAttempt.message });
             } else if (this.state.email === '') {
-                this.setState({ error: 'Please put in an valid email' })
+                this.setState({ error: 'Please put in an valid email' });
             } else if (this.state.password === '') {
-                this.setState({ error: 'Please put in a valid password' })
+                this.setState({ error: 'Please put in a valid password' });
             } else {
                 localStorage.setItem('pante_app_token', token);
-                history.push('/')
+                history.push('/');
             }
 
-            
-
-            
-        } catch(error) {
-            this.setState({ error, isLoggingIn: false })
+        } catch (error) {
+            this.setState({ error, isLoggingIn: false });
         }
-
-
     }
+
     render() {
         const { error } = this.state;
         return (
             <div className="login">
                 <img src="./logo.png" alt="logo" className="logoLogin" />
                 <div className="subHeaderLogin"><h3>Logg inn for å registrere pant</h3></div>
-                <div className="loginForm">
-                    <label className="inputField">
-                        <input 
-                        type="text" 
-                        placeholder="Skriv inn e-postadresse"
-                        value={this.state.loginForm.email}
-                        onChange={this.handleInputChange.bind(this, 'email')} />
-                        <input 
-                        type="password" 
-                        placeholder="Skriv inn passord"
-                        value={this.state.loginForm.password}
-                        onChange={this.handleInputChange.bind(this, 'password')} />
-                        <div className="errorMessage">
-                        {error && <p>{error}</p>}
+                    <div className="loginForm">
+                        <label className="inputField">
+                            <input 
+                            type="text" 
+                            placeholder="Skriv inn e-postadresse"
+                            value={this.state.loginForm.email}
+                            onChange={this.handleInputChange.bind(this, 'email')} />
+                        </label>
+                        <label className="inputField">
+                            <input 
+                            type="password" 
+                            placeholder="Skriv inn passord"
+                            value={this.state.loginForm.password}
+                            onChange={this.handleInputChange.bind(this, 'password')} />
+                            <div className="errorMessage">
+                            {error && <p>{error}</p>}
+                            </div>
+                        </label>
                     </div>
-                    </label>
-                    
-                </div>
+
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
                     <h3 onClick={this.handleSignup.bind(this)}>Ny bruker?</h3>
                 </div>
-
                 <div className="appVersion">
                     <p>Beta v. 1.2</p>
                 </div>
@@ -97,6 +94,5 @@ class Login extends React.Component {
         )
     }
 }
-
 
 export default Login;

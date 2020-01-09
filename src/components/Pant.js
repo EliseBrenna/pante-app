@@ -45,7 +45,6 @@ class Pant extends React.Component {
       id: this.state.id
     }
     addPantData(session);
-    
   };
 
   lotteryPop() {
@@ -84,8 +83,6 @@ handleInputChange(field, event) {
           [field]: event.target.value
   });
 }
-// 
-
 
   render() {
     return (
@@ -104,42 +101,42 @@ handleInputChange(field, event) {
           )}
 
           <div className="recycleButton">
-          <button className="greenButton" onClick={() => this.createCode()}></button>
+          	<button className="greenButton" onClick={() => this.createCode()}></button>
           </div>
           <button className="redCross" onClick={() => this.lotteryPop()}>+</button>
           <img src="./pantomat.svg" alt="panteautomat"></img>  
         </div>
+
         <div className="display">
-        <h1>Pantesimulator</h1>
-          <img className="bottle" src="./soda_small.png" alt="liten flaske"></img>
+        	<h1>Pantesimulator</h1>
+          	<img className="bottle" src="./soda_small.png" alt="liten flaske"></img>
             <button className="buttonKr" onClick={this.handleClick.bind(this, 2)}>+</button>
             <img className="bigBottle" src="./soda_big.png" alt="stor flaske"></img>
             <button className="buttonKr"onClick={this.handleClick.bind(this, 3)}>+</button>
   
-
             <div className='mobileUser'>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor='userCode'>
-              Code:
-              <input 
-                type='text'
-                name='userCode'
-                value={this.state.userCode}
-                onChange={this.handleInputChange.bind(this, 'userCode')}
-              />
-            </label>
-            bruker-ID
-            <label htmlFor='userId'>
-              <input 
-                type='number'
-                name='userId'
-                value={this.state.userId}
-                onChange={this.handleInputChange.bind(this, 'userId')}
-              />
-            </label>
-            <button>Trykk når felt er skrevet inn</button>
-          </form>
-        </div>
+				<form onSubmit={this.handleSubmit.bind(this)}>
+					<label htmlFor='userCode'>
+					Code:
+					<input 
+						type='text'
+						name='userCode'
+						value={this.state.userCode}
+						onChange={this.handleInputChange.bind(this, 'userCode')}
+					/>
+					</label>
+					bruker-ID
+					<label htmlFor='userId'>
+					<input 
+						type='number'
+						name='userId'
+						value={this.state.userId}
+						onChange={this.handleInputChange.bind(this, 'userId')}
+					/>
+					</label>
+					<button>Trykk når felt er skrevet inn</button>
+				</form>
+        	</div>
         </div>
       </div>
     );
