@@ -1,6 +1,7 @@
 import React from 'react';
 import { addPantData, updatePantData } from '../services/pantSession';
 
+
 class Pant extends React.Component {
   constructor(props) {
     super(props);
