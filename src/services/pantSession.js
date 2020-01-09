@@ -25,7 +25,7 @@ export function updatePantData(data) {
 
 export function updatePantData2 (data) {
   return fetch (`${API_URL}/home`, {
-    method: 'PUT',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-Auth-Token': localStorage.getItem('pante_app_token')
@@ -40,13 +40,14 @@ export function activityData() {
   .then((res) => res.json())
 }
 
-export async function saldoData(id) {
-  const res = await fetch(`${API_URL}/saldo`, {
+export async function saldoData() {
+  const response = await fetch(`${API_URL}/saldo`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(id)
+      'Content-Type': 'application/json',
+      'X-Auth-Token': localStorage.getItem('pante_app_token')
+    }
   });
-  return await res.json();
+  return await response.json();
 }
+
