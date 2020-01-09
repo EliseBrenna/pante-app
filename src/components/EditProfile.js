@@ -70,8 +70,9 @@ class EditProfile extends React.Component {
 
         if (isLoading) {
             return (
-                <div>
-                    <p>Loading profile...</p>
+                <div className="authenticate">
+                    <div className="loader">
+                    </div>
                 </div>
             );
         }
