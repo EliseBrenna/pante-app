@@ -22,7 +22,7 @@ class Home extends React.Component {
         
         try {
             const inputCode = await updatePantData2(session);
-            if (inputCode === 403) {
+            if (inputCode.status === 403) {
                 this.setState({ 
                     error: inputCode.message,
                     pantPop: true,

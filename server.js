@@ -91,18 +91,18 @@ getUserById = async (id) => {
   return rows[0]
 }
 
-// amountQuery = async (code) => {
-//   const { rows } = await pool.query(`
-//     SELECT
-//       amount
-//     FROM
-//       activities
-//     WHERE
-//       code = $1
-//   `, [code])
+amountQuery = async (code) => {
+  const { rows } = await pool.query(`
+    SELECT
+      amount
+    FROM
+      sessions
+    WHERE
+      code = $1
+  `, [code])
 
-//   return rows[0];
-// }
+  return rows[0];
+}
 
 // idValidation = async (code) => {
 //   const { rows } = await pool.query(`
@@ -117,18 +117,18 @@ getUserById = async (id) => {
 //   return rows[0];
 // }
 
-// codeValidation = async (code) => {
-//   const { rows } = await pool.query(`
-//     SELECT
-//       COUNT(code)
-//     FROM
-//       activities
-//     WHERE
-//       code = $1
-//   `, [code])
+codeValidation = async (code) => {
+  const { rows } = await pool.query(`
+    SELECT
+      COUNT(code)
+    FROM
+      sessions
+    WHERE
+      code = $1
+  `, [code])
 
-//   return rows[0];
-// }
+  return rows[0];
+}
 
 emailValidation = async (email) => {
   const { rows } = await pool.query(`
@@ -240,16 +240,15 @@ api.get('/saldo', authenticate, async (req, res) => {
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
   const {userCode} = req.body;
-  console.log(userCode)
+  const checkCode = await codeValidation( userCode )
+  const amountInCode = await amountQuery ( userCode )
 
-  if(!userCode) {
-    res.send(404).json({status: 404, message: 'No code found - please insert a code'})
+  if(checkCode.count == 0) {
+    return res.status(403).json({ status: 403, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
   } else {
-    const claimedCode = claimCode(userCode, id);
-    res.send(claimedCode) 
+    await claimCode(userCode, id);
+    return res.status(200).json({ status: 200, message: `Din pant er registrert. Du har pantet for ${amountInCode.amount} kroner.`})
   }
-  
-
 })
 
 // api.put('/home', authenticate, async (req, res) => {
