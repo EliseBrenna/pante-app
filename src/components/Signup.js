@@ -84,27 +84,33 @@ class Signup extends React.Component {
                             value={this.state.signupForm.name}
                             onChange={this.handleInputChange.bind(this, 'name')}
                          />
+                    </label>
+                    <label className="inputField">
                         <input 
                             type="text" 
                             placeholder="Skriv inn e-postadresse"
                             value={this.state.signupForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')}
                          />
+                    </label>
+                    <label className="inputField">
                         <input 
                             type="password" 
                             placeholder="Skriv inn passord"
                             value={this.state.signupForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')}
                          />
+                    </label>
+                    <label className="inputField">
                         <input 
                             type="password" 
                             placeholder="Gjenta passord"
                             value={this.state.signupForm.confirmPassword}
                             onChange={this.handleInputChange.bind(this, 'confirmPassword')}
-                         />
-                         <div className="errorMessage">
-                    {error && <p>{error}</p>}
-                </div>
+                        />
+                        <div className="errorMessage">
+                            {error && <p>{error}</p>}
+                        </div>
                     </label>
                 </div>
                 <button className="signupBtn" onClick={this.handleSubmitAttempt.bind(this)}>Registrer</button>
