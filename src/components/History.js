@@ -40,7 +40,9 @@ class History extends React.Component {
                         </svg>
                     </div>
 
-                    <h3>Din historikk</h3>
+                    <div className="historyHeader">
+                        <h3>Din historikk</h3>
+                    </div>
                     <div className="activity">
                         <div className="activities">
                         <p>Coop Mega Torgbygget <br/>28/12-19, 11:45</p>
