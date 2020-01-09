@@ -2,6 +2,7 @@ import React from 'react';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
 import { getUserById } from '../services/session';
+import { saldoData } from '../services/pantSession'
 
 
 class Profile extends React.Component {
@@ -30,10 +31,12 @@ class Profile extends React.Component {
             this.setState({ isLoading: true })
             const { id } = this.state.session;
             console.log(id)
-            const saldo = await getUserById();
+            const saldo = await saldoData();
             console.log(saldo)
-            const saldoSum = saldo.sum;
-            this.setState({ saldo: saldoSum, isLoading: false })
+            const sum = saldo
+            .map(({amount}) => amount)
+            .reduce((accu, curr) => accu+curr, 0)
+            this.setState({ saldo: sum, isLoading: false })
         } catch (error) {
             this.setState({ error });
         }
