@@ -80,7 +80,7 @@ class Signup extends React.Component {
                     <label className="inputField">
                         <input 
                             type="text" 
-                            placeholder="Skriv inn fult navn" required
+                            placeholder="Skriv inn fullt navn" required
                             value={this.state.signupForm.name}
                             onChange={this.handleInputChange.bind(this, 'name')}
                          />
