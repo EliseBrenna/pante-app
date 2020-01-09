@@ -9,22 +9,30 @@ class Pant extends React.Component {
         code: '',
         amount: 0,
         id: 0,
-        userCode: '',
-        userId: 0,
-        lotteryPop: false
+        lotteryPop: false,
+        activeSession: false,
     }
   }
 
-  // POSTING 
+  // POSTING
   handleClick = (panteSum) => {
-    this.setState((prevState, { amount }) => ({
-      amount: prevState.amount += panteSum
-    }));
-
-    function animate() {
-      document.getElementsByClassName("bottle").classList.toggle("animate");
+    if (!this.state.activeSession) {
+      this.setState((prevState, { amount }) => ({
+        amount: prevState.amount += panteSum
+      }));
+  
+      // function animate() {
+      //   document.getElementsByClassName("bottle").classList.toggle("animate");
+      // }
+      // animate();
+    } else {
+      this.setState({
+        code: '',
+        amount: 0,
+        activeSession: false,
+        lotteryPop: false,
+      })
     }
-    animate();
   };
 
 
@@ -44,7 +52,8 @@ class Pant extends React.Component {
 
     await this.setState(({ code }) => ({
       code: resultCode,
-      lotteryPop: false
+      lotteryPop: false,
+      activeSession: true,
     }));
 
     let session = {
@@ -57,33 +66,17 @@ class Pant extends React.Component {
 
   lotteryPop() {
     this.setState({
-      lotteryPop: true
+      lotteryPop: true,
+      activeSession: true,
     })
   }
 
-// Handeling input from the user
-  handleSubmit(event) {
-      let session = {
-        userCode: this.state.userCode,
-        userId: parseInt(this.state.userId)
-      }
-    event.preventDefault();
-
-    if (this.state.code === this.state.userCode && this.state.userId) {
-       updatePantData(session);
-       alert('Pant lagt til i din saldo!')
-       this.setState({
-        code: '',
-        amount: 0,
-        id: 0,
-        userCode: '',
-        userId: 0,
+  resetScreen() {
+    this.setState ({
+      lotteryPop: false,
+      code: '',
     })
-    } else {
-      alert('Vennligst tast inn korrekt kode og bruker-id')
-    }
-
-}
+  }
 
   render() {
     return (
