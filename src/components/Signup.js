@@ -87,12 +87,6 @@ class Signup extends React.Component {
                             onChange={this.handleInputChange.bind(this, 'email')}
                          />
                         <input 
-                            type="text" 
-                            placeholder="Skriv inn ditt telefonnummer"
-                            value={this.state.signupForm.phone}
-                            onChange={this.handleInputChange.bind(this, 'phone')}
-                             />
-                        <input 
                             type="password" 
                             placeholder="Skriv inn passord"
                             value={this.state.signupForm.password}
