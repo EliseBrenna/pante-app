@@ -5,6 +5,19 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+::placeholder {
+    color: #5c5c5c;
+    font-size: 15px;
+}
+
+svg path {
+    fill: white;
+}
+
+.newUser h4, button, .arrowLeftHistory svg {
+    cursor: pointer;
+}
+
 /* LOGIN PAGE & SIGNUP PAGE*/
 
 .login, .signup {
@@ -219,7 +232,11 @@ footer {
 .profile {
     display: grid;
     height: 100vh;
-    grid-template-rows: 30% 1fr;
+    grid-template-rows: 35% 58%;
+}
+
+.userName {
+    color: white;
 }
 
 .authenticate {
@@ -242,7 +259,8 @@ footer {
 .barcode {
     justify-self: center;
     align-self: center;
-    display:grid;
+    display: grid;
+    margin: 30px;
 }
 
 .profile-balance {
@@ -254,6 +272,21 @@ footer {
 
 .profile-balance h2 {
     margin-top: 0px;
+}
+
+.profile-balance button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18.72px;
+    color: white;
+    background-color: #0d5526;
+    border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
 }
 
 .balance {
@@ -290,7 +323,75 @@ footer {
     margin-right: 10px;
 }
 
-/* SUPPORT PAGE */
+/* EDIT PROFILE */
+
+.edit-profile {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 100vh;
+}
+
+.sub-header-edit {
+    display: grid;
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: center;
+    align-items: end;
+    font-size: 18.75px;;
+}
+
+.edit-form {
+    grid-row: 2;
+    grid-column: 2;
+    align-self: center;
+    justify-self: center;
+}
+
+.edit-form .inputField {
+    margin-left: 11px;
+}
+
+.edit-form input {
+    margin-bottom: 7px;
+}
+
+
+.nav-bar-edit {
+    background-color: #0d5526;
+    grid-row: 3;
+    grid-column: 1 / span 3;
+    height: 70px;
+    align-self: end;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: sticky;
+    bottom: 0;
+}
+
+.submit-button {
+    justify-self: center;
+    align-self: start;
+    justify-content: center;
+    display: grid;
+    grid-row: 3;
+    grid-column: 2;
+    margin-top: 20px;
+}
+
+.submit-button button {
+    border-radius: 25px;
+    background-color: #0d5526;
+    color: white;
+    padding: 5px; 
+    width: 120px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18.75px;
+    outline: none;
+}
+
+/* SUPPORT PAGE & FAQ PAGE*/
 
 .helpContainer {
     height: 100vh;
@@ -314,6 +415,22 @@ footer {
 
 .supportOptions {
     margin-left: 25px;
+    grid-column: 1 / span 2;
+    font-size: 18.72px;
+}
+
+.supportOptions a {
+    text-decoration: none;
+    color: black;
+}
+
+.supportArrows a {
+    text-decoration: none;
+    color: black;
+}
+
+.supportAnswers {
+    margin-left: 25px;
     grid-column: 1 / span 3;
     font-size: 18.72px;
 }
@@ -330,74 +447,15 @@ footer {
     font-size: 18.72px;
 }
 
-/* .pin-input {
-    justify-self: center;
-    display: flex;
-    margin: 20px;
-}
-
-.pin-input input {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    border-radius: 8px;
-    border: 1.5px solid #0d5526;
-    font-size: 35px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    outline: none;
-} */
-
-
-
-
-
-
-
-.barcode {
-    justify-self: center;
-    align-self: center;
-    display:grid;
-
-}
-
-
-
-
-
-
-
-.profile-balance button {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18.72px;
+.logoutBtn a {
+    text-decoration: none;
     color: white;
-    background-color: #0d5526;
-    border-radius: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 15px;
-    border: none;
-    outline: none;
 }
-
-
-
-
-
-
-
-
-
-
 
 .faqOptions {
     margin-left: 25px;
     grid-column: 1 / span 3;
 }
-
-
 
 .faqOptions h4 {
     position: absolute;
@@ -448,7 +506,12 @@ svg path {
     fill: white;
 }
 
-
+.historyHeader {
+    font-size: 18.75px;
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+}
 
 .historyContainer {
     height: 100vh;
@@ -459,11 +522,11 @@ svg path {
 .history {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 3fr;
+    grid-template-rows: 1fr 5fr;
 }
 
 .history h3 {
-    grid-column: 1 / span 3;
+    grid-column: 1;
     justify-self: center;
     grid-row: 1;
     align-self: end;
@@ -483,10 +546,12 @@ svg path {
     border-radius: 25px;
     padding-left: 10px;
     padding-right: 10px;
-    grid-row: 2 / span 2;
+    grid-row: 2;
     grid-column: 1 / span 3;
     width: 70%;
+    height: auto;
     justify-self: center;
+    align-self: start;
 }
 
 .activities {
@@ -494,63 +559,7 @@ svg path {
     justify-content: space-between;
 }
 
-.edit-profile {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 100vh;
-}
-
-.sub-header-edit {
-    display: grid;
-    grid-row: 1;
-    grid-column: 2;
-    justify-self: center;
-    align-items: end;
-    font-size: 18.75px;;
-}
-
-.edit-form {
-    grid-row: 2;
-    grid-column: 2;
-    align-self: center;
-    justify-self: center;
-}
-
-
-.nav-bar-edit {
-    background-color: #0d5526;
-    grid-row: 3;
-    grid-column: 1 / span 3;
-    height: 70px;
-    align-self: end;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    position: sticky;
-    bottom: 0;
-}
-
-.submit-button {
-    justify-self: center;
-    align-self: start;
-    display: grid;
-    grid-row: 3;
-    grid-column: 2;
-}
-
-.submit-button button {
-    border-radius: 25px;
-    background-color: #0d5526;
-    color: white;
-    padding: 5px; 
-    width: 120px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 18.75px;
-    outline: none;
-}
-
-
+/* PANTESIMULATOR */
 
 .panteContainer {
     display: grid;
@@ -564,7 +573,6 @@ svg path {
     grid-column: 2 / span 2;
     align-self: start;
     margin-top: 100px;
-
 }
 
 .display h1 {
@@ -654,14 +662,7 @@ svg path {
     position: absolute;
 }
 
-.newUser h4, button, .arrowLeftHistory svg {
-    cursor: pointer;
-}
-
-.logoutBtn a {
-    text-decoration: none;
-    color: white;
-}
+/*////////////////////////////////////////////////////////////////*/
 
 .authenticate {
     display: grid;
@@ -701,3 +702,31 @@ svg path {
       text-align: center;
       max-width: 280px;
   }
+
+  .pin-input {
+    justify-self: center;
+    display: flex;
+    margin: 20px;
+}
+
+.pin-input input {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-radius: 8px;
+    border: 1.5px solid #0d5526;
+    font-size: 35px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+} */
+
+
+.newUser a {
+    text-decoration: none;
+    color: black;
+}
+
+.newUser a:hover {
+    text-decoration: underline;
+}
