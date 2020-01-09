@@ -19,7 +19,14 @@ class Pant extends React.Component {
     this.setState((prevState, { amount }) => ({
       amount: prevState.amount += panteSum
     }));
+
+    function animate() {
+      document.getElementsByClassName("bottle").classList.toggle("animate");
+    }
+    animate();
   };
+
+
 
   createCode = async () => {
     function makeCode(length) {

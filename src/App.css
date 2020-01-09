@@ -199,7 +199,6 @@ footer {
     border: none;
     outline: none;
     margin-top: 15px;
-
 }
 
 .pantBtn {
@@ -259,8 +258,15 @@ footer {
 .barcode {
     justify-self: center;
     align-self: center;
-    display: grid;
+    justify-content: center;
     margin: 30px;
+    text-align: center;
+}
+
+.barcode rect {
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
 }
 
 .profile-balance {
@@ -601,6 +607,25 @@ svg path {
     width: 70px;
     margin-right: 6px;
     padding-top: 20px;
+}
+
+.bottle.animate {
+    animation: 3s side 0s;
+}
+
+@keyframes side {
+    0% {
+        left: 0px;
+    }
+    33% {
+        left: 100px;
+    }
+    66% {
+        left: 200px;
+    }
+    100% {
+        left: 0px;
+    }
 }
 
 .bigBottle {
