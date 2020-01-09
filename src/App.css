@@ -195,6 +195,7 @@ body {
 .balance h4 {
     margin-top: 10px;
     margin-bottom: 0px;
+    font-weight: 50; 
 }
 
 .balance h1 {
@@ -271,8 +272,11 @@ body {
     grid-column: 2 / span 1;
     justify-self: center;
     display: grid;
+}
+
+.inputField {
+    font-size: 12px;
     margin-top: 20px;
- 
 }
 
 .inputField input {
@@ -428,6 +432,7 @@ svg path {
     align-self: center;
     justify-self: center;
 }
+
 
 .nav-bar-edit {
     background-color: #0d5526;

@@ -66,7 +66,7 @@ class Login extends React.Component {
         return (
             <div className="login">
                 <img src="./logo.png" alt="logo" className="logoLogin" />
-                <div className="subHeaderLogin"><h3>Logg inn for å pante</h3></div>
+                <div className="subHeaderLogin"><h3>Logg inn for å registrere pant</h3></div>
                 <div className="loginForm">
                     <label className="inputField">
                         <input 
