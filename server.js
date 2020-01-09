@@ -243,13 +243,11 @@ api.post('/home', authenticate, async (req, res) => {
   console.log(userCode)
 
   if(!userCode) {
-    res.send(404).json({status: 404, message: 'No code found - please insert a code'})
+    res.send(404).json({status: 404, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
   } else {
-    const claimedCode = claimCode(userCode, id);
-    res.send(claimedCode) 
+    await claimCode(userCode, id);
+    return res.status(200).json({ status: 200, message: `Din pant er registrert. Du pantet for x kroner.`})
   }
-  
-
 })
 
 // api.put('/home', authenticate, async (req, res) => {
