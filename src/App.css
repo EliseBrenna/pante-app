@@ -728,7 +728,7 @@ svg path {
       max-width: 280px;
   }
 
-  /* .pin-input {
+  .pin-input {
     justify-self: center;
     display: flex;
     margin: 20px;
@@ -747,11 +747,11 @@ svg path {
 } */
 
 
-/* .newUser a {
+.newUser a {
     text-decoration: none;
     color: black;
-} */
+}
 
-/* .newUser a:hover {
+.newUser a:hover {
     text-decoration: underline;
-} */
+}
