@@ -44,7 +44,7 @@ render() {
                     <h3>Ofte stilte spørsmål</h3>
                 </div>
 
-                <div className="supportOptions">
+                <div className="supportAnswers">
                     <p>Hvorfor bruker vi fargen rosa? <br />
                     Vi kommer tilbake til dette senere.</p>
                     <p>Hvorfor navnet digiPANT? <br />
