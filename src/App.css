@@ -1,5 +1,5 @@
 body {
-    background-color: #FFE6ED;
+    background-color: #FFF2F5;
     display: grid;
     margin: 0px;
     font-family: 'Poppins', sans-serif;
@@ -74,7 +74,7 @@ body {
     grid-row: 2;
     justify-self: center;
     background-color: white;
-    border: 1.5px solid #127334;
+    border: 1.5px solid #0d5526;
     border-radius: 8px;
 }
 
@@ -110,7 +110,7 @@ body {
     height: 50px;
     margin: 5px;
     border-radius: 8px;
-    border: 1.5px solid #127334;
+    border: 1.5px solid #0d5526;
     font-size: 35px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -122,7 +122,7 @@ body {
     height: 50px;
     margin: 5px;
     border-radius: 8px;
-    border: 1.5px solid #127334;
+    border: 1.5px solid #0d5526;
     font-size: 35px;
     margin-top: 20px;
     font-family: 'Poppins', sans-serif;
@@ -134,7 +134,7 @@ body {
     font-size: 15px;
     font-weight: bold;
     color: white;
-    background-color: #127334;
+    background-color: #0d5526;
     border-radius: 25px;
     padding: 5px;
     width: 80px;
@@ -155,7 +155,7 @@ body {
     justify-self: center;
     align-self: center;
     grid-row: 1;
-    background-color: #127334;
+    background-color: #0d5526;
     height: 100%;
     width: 100%;
     text-align: center;
@@ -187,7 +187,7 @@ body {
     display: grid;
     margin-bottom: 25px;
     border-radius: 25px;
-    border: 1.5px solid #127334;
+    border: 1.5px solid #0d5526;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -206,7 +206,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     color: white;
-    background-color: #127334;
+    background-color: #0d5526;
     border-radius: 25px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -277,7 +277,7 @@ body {
 
 .inputField input {
     border-radius: 25px;
-    border: 2px solid #127334;
+    border: 2px solid #0d5526;
     padding: 20px; 
     width: 200px;
     height: 5px;
@@ -299,7 +299,7 @@ body {
 .loginBtn {
     display: grid;
     border-radius: 25px;
-    background-color: #127334;
+    background-color: #0d5526;
     color: white;
     padding: 5px; 
     width: 120px;
@@ -317,7 +317,7 @@ body {
 .signupBtn {
     display: grid;
     border-radius: 25px;
-    background-color: #127334;
+    background-color: #0d5526;
     color: white;
     padding: 5px; 
     width: 120px;
@@ -392,7 +392,7 @@ svg path {
 
 .activity {
     background-color: white;
-    border: 1.5px solid #127334;
+    border: 1.5px solid #0d5526;
     border-radius: 25px;
     padding-left: 10px;
     padding-right: 10px;
@@ -430,7 +430,7 @@ svg path {
 }
 
 .nav-bar-edit {
-    background-color: #127334;
+    background-color: #0d5526;
     grid-row: 3;
     grid-column: 1 / span 3;
     height: 70px;
@@ -451,7 +451,7 @@ svg path {
 
 .submit-button button {
     border-radius: 25px;
-    background-color: #127334;
+    background-color: #0d5526;
     color: white;
     padding: 5px; 
     width: 120px;
@@ -483,7 +483,7 @@ svg path {
 }
 
 .buttonKr {
-    background-color: #127334;
+    background-color: #0d5526;
     height: 80px;
     width: 80px;
     border-radius: 50%;
@@ -582,7 +582,7 @@ svg path {
 
 .loader {
     border: 16px solid white;
-    border-top: 16px solid #127334;
+    border-top: 16px solid #0d5526;
     border-radius: 50%;
     width: 50px;
     height: 50px;
