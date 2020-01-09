@@ -83,12 +83,13 @@ class Profile extends React.Component {
                 <div className="profile-barcode">
                     <div className="barcode">
                         <Barcode value={id + saldo}/>
+                        <div className="userName">
+                        <h2>{name}</h2>
+                    </div>
                     </div>
                 </div>
                 <div className="profile-balance">
-                    <div>
-                        <h2>{name}</h2>
-                    </div>
+                    
                     <div className="balance">
                         <h4>Saldo</h4>
                         <h1>{saldo} kr</h1>
