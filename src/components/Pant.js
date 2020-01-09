@@ -77,13 +77,6 @@ class Pant extends React.Component {
 
 }
 
-handleInputChange(field, event) {
-  this.setState({
-          ...this.state,
-          [field]: event.target.value
-  });
-}
-
   render() {
     return (
       <div className="panteContainer">
@@ -115,27 +108,7 @@ handleInputChange(field, event) {
             <button className="buttonKr"onClick={this.handleClick.bind(this, 3)}>+</button>
   
             <div className='mobileUser'>
-				<form onSubmit={this.handleSubmit.bind(this)}>
-					<label htmlFor='userCode'>
-					Code:
-					<input 
-						type='text'
-						name='userCode'
-						value={this.state.userCode}
-						onChange={this.handleInputChange.bind(this, 'userCode')}
-					/>
-					</label>
-					bruker-ID
-					<label htmlFor='userId'>
-					<input 
-						type='number'
-						name='userId'
-						value={this.state.userId}
-						onChange={this.handleInputChange.bind(this, 'userId')}
-					/>
-					</label>
-					<button>Trykk når felt er skrevet inn</button>
-				</form>
+
         	</div>
         </div>
       </div>

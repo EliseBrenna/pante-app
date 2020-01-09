@@ -214,6 +214,7 @@ footer {
     background-color: white;
     border: 1.5px solid #0d5526;
     border-radius: 8px;
+    max-width: 70%;
 }
 
 .pantePop h4 {
