@@ -56,7 +56,6 @@ body {
     width: 230px;
     height: 5px;
     display: grid;
-    margin-bottom: 0.7rem;
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     outline: none;
@@ -75,7 +74,7 @@ body {
     grid-row: 3 / span 1;
     justify-self: center;
     align-self: start;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 5.5rem;
     font-size: 18.72px;
     outline: none;
