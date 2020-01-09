@@ -102,6 +102,10 @@ body {
     justify-content: end;
 }
 
+.pantBtn {
+    margin-top: 8px;
+}
+
 .pin-input {
     justify-self: center;
     display: flex;
@@ -127,7 +131,6 @@ body {
     border-radius: 8px;
     border: 1.5px solid #0d5526;
     font-size: 35px;
-    margin-top: 20px;
     font-family: 'Poppins', sans-serif;
     text-align: center;
 }
@@ -207,7 +210,7 @@ body {
 
 .profile-balance button {
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 18.72px;
     color: white;
     background-color: #0d5526;
     border-radius: 25px;
@@ -215,11 +218,10 @@ body {
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: none;
     outline: none;
 }
-
 
 .logoLogin {
     display: grid;
@@ -242,7 +244,7 @@ body {
 .supportContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 3fr;
+    grid-template-rows: 1fr 3fr 1fr;
 }
 
 .helpContainer {
@@ -256,6 +258,7 @@ body {
     justify-self: center;
     grid-column: 1 / span 3;
     grid-row: 1;
+    font-size: 18.72px;
 }
 
 .faqOptions {
@@ -266,6 +269,7 @@ body {
 .supportOptions {
     margin-left: 25px;
     grid-column: 1 / span 2;
+    font-size: 18.72px;
 }
 
 .faqOptions h4 {
@@ -279,13 +283,23 @@ body {
 .supportArrows {
     grid-column: 3;
     justify-self: end;
-    align-self: center;
-    margin-right: 25px;
+    margin-right: 40px;
     cursor: pointer;
+    font-size: 18.72px;
+}
+
+.supportArrows a {
+    text-decoration: none;
+    color: black;
 }
 
 .clickable {
     cursor: pointer;
+}
+
+.supportOptions a {
+    text-decoration: none;
+    color: black;
 }
 
 .subHeaderLogin {
@@ -619,7 +633,7 @@ svg path {
   }
 
   .errorMessage {
-      font-size: 14px;
+      font-size: 12px;
       text-align: center;
-      max-width: 244px;
+      max-width: 280px;
   }

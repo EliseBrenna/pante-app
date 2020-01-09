@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
 import { getUserById } from '../services/session';
@@ -102,10 +101,7 @@ class Profile extends React.Component {
                         <button onClick={this.handleEditProfileClicked.bind(this)}>Endre profil</button>
                     </div>
                     <div>
-                        <button>Overfør til konto</button>
-                    </div>
-                    <div>
-                        <button className="logoutBtn"><Link to="/logout">Logg ut</Link></button>
+                        <button className="toAccount" >Overfør til konto</button>
                     </div>
                 </div>
                 <footer className="nav-bar">

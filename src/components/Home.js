@@ -67,8 +67,8 @@ class Home extends React.Component {
                 {
                     !this.state.pantPop? (
                         <div className="home-content">
-                        Tast inn kode fra <br/>
-                        panteautomaten
+                        <h3>Tast inn kode fra <br/>
+                        panteautomaten</h3>
                         
                         {/* Form to sumbit code */}
                         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -81,7 +81,7 @@ class Home extends React.Component {
                                 onChange={this.handleInputChange.bind(this, 'userCode')}
                             />
                             </label>
-                            <div><button>Pant</button></div>
+                            <div className="pantBtn"><button>Pant</button></div>
                         </form>
                     </div>
                     ) : (

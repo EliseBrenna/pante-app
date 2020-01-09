@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Support extends React.Component {
     constructor(props) {
@@ -44,10 +45,12 @@ class Support extends React.Component {
                 <div className="supportOptions">
                     <p className="clickable" onClick={() => this.handleFAQ()}>Ofte stilte spørsmål</p>
                     <p>Kontakt oss</p>
+                    <p><Link to="/logout">Logg ut</Link></p>
                 </div>
                 <div className="supportArrows">
                     <p onClick={() => this.handleFAQ()}>></p>
                     <p>></p>
+                    <p><Link to="/logout">></Link></p>
                 </div>
                 </div>
                     
