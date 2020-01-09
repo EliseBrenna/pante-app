@@ -87,7 +87,7 @@ class Login extends React.Component {
                 </div>
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
-                    <h4 onClick={this.handleSignup.bind(this)}>Ny bruker?</h4>
+                    <h3 onClick={this.handleSignup.bind(this)}>Ny bruker?</h3>
                 </div>
 
                 <div className="appVersion">

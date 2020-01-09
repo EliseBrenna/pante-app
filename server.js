@@ -91,10 +91,36 @@ getUserById = async (id) => {
   return rows[0]
 }
 
-codeValidation = async (code) => {
+amountQuery = async (code) => {
+  const { rows } = await pool.query(`
+    SELECT
+      amount
+    FROM
+      activity
+    WHERE
+      code = $1
+  `, [code])
+
+  return rows[0];
+}
+
+idValidation = async (code) => {
   const { rows } = await pool.query(`
     SELECT
       id
+    FROM
+      activity
+    WHERE
+      code = $1
+  `, [code])
+
+  return rows[0];
+}
+
+codeValidation = async (code) => {
+  const { rows } = await pool.query(`
+    SELECT
+      COUNT(code)
     FROM
       activity
     WHERE
@@ -230,21 +256,26 @@ api.put('/home', authenticate, async (req, res) => {
   const userId = req.user.id;
   const { userCode } = req.body;
 
-  const checkCode = await codeValidation(
-    userCode
-  )
+  const checkId = await idValidation( userCode )
+  const checkCode = await codeValidation( userCode )
+  const getAmount = await amountQuery( userCode )
 
-  if (!checkCode.id) {
-    const result = await updatePantData({
-      userCode,
-      userId,
-      });
-      res.send(result)
-  } else {
-    console.log('invalid, already in use')
+  if (checkCode.count > 0) { // Sjekk om kode eksisterer
+    if (!checkId.id) { // kode eksisterer og ikke brukt av noen andre enda
+      await updatePantData({
+        userCode,
+        userId,
+        });
+        return res.status(200).json({ status: 200, message: `Din pant er registrert. Du pantet for ${getAmount.amount} kroner.`})
+      
+    } else if (checkId === userId) { // kode allerede assignet til brukeren som forsøker å skrive den inn
+      return res.status(403).json({ status: 403, message: 'Kode er allerede lagt til i din saldo'})
+    } else { // kode eksisterer, kode allerede brukt av annen bruker
+      return res.status(403).json({ status: 403, message: 'Kode er allerede benyttet og er ikke gyldig lengre'})
+    }
+  } else { // kode eksisterer ikke
+    return res.status(403).json({ status: 403, message: 'Koden du tastet inne eksisterer ikke'})
   }
-
-  
 });
 
 api.put('/profile', function (req, res) {
@@ -269,7 +300,6 @@ api.put('/profile', function (req, res) {
 //Client routes
 
 api.get(`/session`, authenticate,  (req, res) => {
-  console.log(req.user.id)
   res.send({
       message: 'You are authenticated'
   });
@@ -301,9 +331,6 @@ api.post('/session', async (req, res) => {
       res.send({
         token: token
       })
-
-    console.log(token)
-
     
   } catch(error) {
     return res.status(401).json({status: 401, message: 'Oops something went wrong'})
@@ -391,7 +418,6 @@ updatePantData = async (session) => {
   //Routes
   
 api.post('/pant', async (req, res) => {
-  console.log('got request')
 
   const {
     code,
@@ -420,7 +446,6 @@ api.put('/pant', async (req, res) => {
     userCode,
     userId,
   } = req.body;
-  console.log(userId, userCode)
 
   const result = await updatePantData({
     userCode,
