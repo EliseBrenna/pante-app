@@ -28,6 +28,12 @@ class Support extends React.Component {
         const { history } = this.props;
         history.push(`/support`);
     }
+
+    handleFAQ() {
+        const { history } = this.props;
+        history.push('/faq');
+    }
+
     render() {
         return (
             <div className="helpContainer">
@@ -36,11 +42,11 @@ class Support extends React.Component {
                     <h3>Hjelp og kundeservice</h3>
                 </div>
                 <div className="supportOptions">
-                    <p>Ofte stilte spørsmål</p>
+                    <p className="clickable" onClick={() => this.handleFAQ()}>Ofte stilte spørsmål</p>
                     <p>Kontakt oss</p>
                 </div>
                 <div className="supportArrows">
-                    <p>></p>
+                    <p onClick={() => this.handleFAQ()}>></p>
                     <p>></p>
                 </div>
                 </div>

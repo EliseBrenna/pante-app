@@ -28,6 +28,7 @@ body {
     justify-self: center;
     display: grid;
     outline: none;
+    cursor: pointer;
 }
 
 .profileIcon {
@@ -36,6 +37,7 @@ body {
     justify-self: center;
     display: grid;
     outline: none;
+    cursor: pointer;
 }
 
 .infoIcon {
@@ -44,8 +46,8 @@ body {
     justify-self: center;
     display: grid;
     outline: none;
+    cursor: pointer;
 }
-
 
 .home {
     display: grid;
@@ -253,6 +255,12 @@ body {
     align-self: center;
     justify-self: center;
     grid-column: 1 / span 3;
+    grid-row: 1;
+}
+
+.faqOptions {
+    margin-left: 25px;
+    grid-column: 1 / span 2;
 }
 
 .supportOptions {
@@ -260,11 +268,24 @@ body {
     grid-column: 1 / span 2;
 }
 
+.faqOptions h4 {
+    position: absolute;
+}
+
+.faqOptions p {
+    margin-top: 50px;
+}
+
 .supportArrows {
     grid-column: 3;
     justify-self: end;
     align-self: center;
     margin-right: 25px;
+    cursor: pointer;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 .subHeaderLogin {
