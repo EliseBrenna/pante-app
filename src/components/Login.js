@@ -91,7 +91,7 @@ class Login extends React.Component {
                 </div>
 
                 <div className="appVersion">
-                    <p>Beta v. 1.1</p>
+                    <p>Beta v. 1.2</p>
                 </div>
             </div>
         )

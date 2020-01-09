@@ -272,6 +272,8 @@ body {
     grid-column: 2 / span 1;
     justify-self: center;
     display: grid;
+    text-align: center;
+    font-size: 14px;
 }
 
 .inputField {
