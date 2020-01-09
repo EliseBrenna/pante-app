@@ -273,11 +273,12 @@ body {
     justify-self: center;
     display: grid;
     text-align: center;
-    font-size: 14px;
+    /* font-size: 14px; */
+    margin-top: 40px;
 }
 
 .inputField {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 20px;
 }
 
@@ -285,11 +286,12 @@ body {
     border-radius: 25px;
     border: 2px solid #0d5526;
     padding: 20px; 
-    width: 200px;
+    width: 230px;
     height: 5px;
     display: grid;
     margin-bottom: 0.7rem;
     font-family: 'Poppins', sans-serif;
+    font-size: 14px;
     outline: none;
 }
 
@@ -315,8 +317,9 @@ body {
     grid-row: 3 / span 1;
     justify-self: center;
     align-self: start;
+    margin-top: 10px;
     margin-bottom: 5.5rem;
-    font-size: 15px;
+    font-size: 18.72px;
     outline: none;
 }
 
@@ -343,9 +346,9 @@ body {
     grid-row: 3 / span 1;
     justify-self: center;
     align-self: start;
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-bottom: 2.5rem;
-    font-size: 0.8rem;
+    /* font-size: 0.8rem; */
 }
 
 .newUser a {
