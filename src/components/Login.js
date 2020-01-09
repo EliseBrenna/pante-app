@@ -70,6 +70,8 @@ class Login extends React.Component {
                             placeholder="Skriv inn e-postadresse"
                             value={this.state.loginForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')} />
+                        </label>
+                        <label className="inputField">
                             <input 
                             type="password" 
                             placeholder="Skriv inn passord"
