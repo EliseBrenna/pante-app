@@ -87,7 +87,6 @@ class EditProfile extends React.Component {
                     </svg>
                 </div>
 
-                <div className="editFormWrapper">
                 <div className="sub-header-edit">
                     <h3>Endre Profil</h3>
                 </div>
@@ -107,13 +106,6 @@ class EditProfile extends React.Component {
                             type="text" 
                          />
                     </label>
-                    <label className="inputField">Telefonnummer
-                        <input 
-                            value={user.phone}
-                            onChange={this.handleChange.bind(this, 'phone')}
-                            type="text" 
-                             />
-                    </label>
                     <label className="inputField">Passord
                         <input 
                             value={user.password}
@@ -132,7 +124,6 @@ class EditProfile extends React.Component {
 
                 <div className="submit-button" onClick={this.handleEditUser.bind(this)}>
                     <button>Lagre</button>
-                </div>
                 </div>
 
                 <footer className="nav-bar-edit">

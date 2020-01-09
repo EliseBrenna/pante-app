@@ -348,6 +348,14 @@ footer {
     justify-self: center;
 }
 
+.edit-form .inputField {
+    margin-left: 11px;
+}
+
+.edit-form input {
+    margin-bottom: 7px;
+}
+
 
 .nav-bar-edit {
     background-color: #0d5526;
@@ -364,9 +372,11 @@ footer {
 .submit-button {
     justify-self: center;
     align-self: start;
+    justify-content: center;
     display: grid;
     grid-row: 3;
     grid-column: 2;
+    margin-top: 20px;
 }
 
 .submit-button button {
