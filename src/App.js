@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route, ScrollToTop } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 import Authenticate from './components/Authenticate';
 import Home from './components/Home';
@@ -12,10 +12,10 @@ import Pant from './components/Pant';
 import History from './components/History';
 import EditProfile from './components/EditProfile';
 import FAQ from './components/FAQ';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 class App extends React.Component {
-
   render() {
     return (
       <HashRouter>
