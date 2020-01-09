@@ -173,7 +173,7 @@ getSaldoById = async (id) => {
       id, 
       SUM(amount)
     FROM
-      activity
+      activities
     WHERE
       id = $1
     GROUP BY 
@@ -189,12 +189,14 @@ claimCode = async (code, id) => {
 
   try{
     await client.query('BEGIN');
-    const queryText = 'SELECT * FROM session WHERE code = $1 RETURNING amount;'
-    const res = await client.query(queryText, [code]);
+    const pickCodeFromSessionsText = 'SELECT * FROM sessions WHERE code = $1'
+    const res = await client.query(pickCodeFromSessionsText , [code]);
 
     const insertActivityText = 'INSERT INTO activities(amount, user_id) VALUES ($1, $2)'
     const insertActivityValues = [res.rows[0].amount, id]
-    await client.query(insertActivityText, insertActivityValues)
+    await client.query(insertActivityText, insertActivityValues);
+    const deleteCodeFromSessionsText = 'DELETE FROM sessions WHERE code = $1'
+    await client.query(deleteCodeFromSessionsText, [code]);
     await client.query('COMMIT');
   } catch(e) {
     await client.query('ROLLBACK')
@@ -240,7 +242,7 @@ api.get('/saldo', authenticate, async (req, res) => {
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
-  const code = req.body;
+  const { code } = req.body;
 
   if(!code) {
     res.send(404).json({status: 404, message: 'No code found - please insert a code'})
@@ -385,20 +387,18 @@ editUserProfile = async (userData) => {
 createPantData = async (session) => {
   const { rows } = await pool.query(
   `
-    INSERT INTO session(
-        id,
+    INSERT INTO sessions(
         code,
-        amount,
+        amount
     )
 
     VALUES(
         $1,
-        $2,
-        $3
+        $2
     )
 
     RETURNING * 
-    `, [session.id, session.code, session.amount]);
+    `, [session.code, session.amount]);
 
     return rows[0]
 }
@@ -421,20 +421,18 @@ api.post('/pant', async (req, res) => {
 
   const {
     code,
-    amount,
-    id,
+    amount
   } = req.body;
 
   try {
     const newSession = await createPantData({
       code,
       amount,
-      id,
     })
 
     res.send(newSession);
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 });
 
