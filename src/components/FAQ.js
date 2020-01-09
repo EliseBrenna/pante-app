@@ -39,17 +39,17 @@ handleSupportClicked() {
 	c-0.444,0.444-1.143,0.444-1.587,0l-9.952-9.952c-0.429-0.429-0.429-1.143,0-1.571L10.273,5.009z"/>
 </svg>
             </div>
-              <div className="support">
-                  <h3>Ofte stilte spørsmål</h3>
-              </div>
-              <div className="faqOptions">
-                  <h4>Hvorfor har vi valgt fargen rosa?</h4>
-                  <p>Vi kommer tilbake til dette.</p>
-              </div>
-              <div className="faqOptions">
-                  <h4>Hvorfor navnet digiPANT?</h4>
-                  <p>Vi kommer tilbake til dette.</p>
-              </div>
+            <div className="support">
+                    <h3>Ofte stilte spørsmål</h3>
+                </div>
+
+            <div className="supportOptions">
+                    <p>Hvorfor bruker vi fargen rosa? <br />
+                    Vi kommer tilbake til dette senere.</p>
+                    <p>Hvorfor navnet digiPANT? <br />
+                    Vi kommer tilbake til dette senere.</p>
+                </div>
+              
               </div>
                   
                <footer className="nav-bar">
