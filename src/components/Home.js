@@ -8,22 +8,35 @@ class Home extends React.Component {
             userCode: "",
             view: '',
             params: {},
-            pantPop: false
+            pantPop: false,
+            error: null
         }
     }
 
     // Handeling input from the user
-    handleSubmit(event) {
+    async handleSubmit(event) {
+        event.preventDefault();
         let session = {
             userCode: this.state.userCode,
         }
-        event.preventDefault();
-
-        updatePantData2(session);
-        this.setState({
-            userCode: '',
-            pantPop: true
-        })
+        
+        try {
+            const inputCode = await updatePantData2(session);
+            if (inputCode === 403) {
+                this.setState({ 
+                    error: inputCode.message,
+                    pantPop: true,
+                 })
+            } else {
+                this.setState({
+                    error: inputCode.message,
+                    userCode: "",
+                    pantPop: true
+                })
+            }
+        } catch (error) {
+            this.setState({ error })
+        }
     }
 
     handleInputChange(field, event) {
@@ -60,6 +73,7 @@ class Home extends React.Component {
 
     render() {
 
+        const { error } = this.state;
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
@@ -87,7 +101,7 @@ class Home extends React.Component {
                     ) : (
                         <div className="pantePop">
                             <div className="pantBtnContainer"><button className="exitBtn" onClick={() => this.handlePantExit()}>x</button></div>
-                            <h4>Din pant er registrert. <br />Du pantet for xx kroner.</h4>
+                                {error && <h4>{error}</h4>}
                         </div>
                     )
                 }
