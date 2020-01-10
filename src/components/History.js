@@ -1,10 +1,21 @@
 import React from 'react';
+import jwtDecode from 'jwt-decode'
+import { saldoData } from '../services/pantSession'
+import format from 'date-fns/format'
 
 class History extends React.Component {
     constructor(props) {
         super(props);
+
+        const token = localStorage.getItem('pante_app_token');
+        const payload = jwtDecode(token);
+
     
         this.state = {
+            activities: [],
+            session: payload,
+            amount: '',
+            time: ''
         }
     }
     
@@ -28,7 +39,46 @@ class History extends React.Component {
         history.push(`/support`);
     }
 
+    async componentDidMount() {
+        await this.userActivities();
+    }
+
+    userActivities = async () => {
+        const { id } = this.state.session;
+        const userActivities = await saldoData()
+        console.log(userActivities)
+        const activity = userActivities
+        .map(({amount, time}) => {
+            return {amount, time}
+        })
+        console.log(activity)
+        this.setState({activities: activity})
+    }
+
     render() {
+        const { activities } = this.state;
+        console.log(activities[0])
+
+        
+
+        
+
+        const activityElements = activities.map((activity) => {
+            let styles = {}
+            if(activity.amount > 0) {
+                styles = {color: "green"}
+            }else {
+                styles = {color: "red"}
+            }
+            return (
+                <li className="activities">
+                    <p>{activity.time}</p>
+                    <p className="amount" style={styles}>{activity.amount} kr</p>
+                </li>
+            )
+        })
+        
+
         return (
             <div className="historyContainer">
                 <div className="history">
@@ -44,18 +94,11 @@ class History extends React.Component {
                         <h3>Din historikk</h3>
                     </div>
                     <div className="activity">
-                        <div className="activities">
-                        <p>Coop Mega Torgbygget <br/>28/12-19, 11:45</p>
-                        <p style={{fontWeight: "bold"}}>13 kr</p>  
-                        </div>
-                        <div className="activities">
-                        <p>Coop Mega Storo <br/>08/01-20, 12:05</p>
-                        <p style={{fontWeight: "bold"}}>4 kr</p>  
-                        </div>
-                        <div className="activities">
-                        <p>Coop Extra Vossegata <br/>07/01-20, 09:45</p>
-                        <p style={{fontWeight: "bold"}}>2 kr</p>  
-                        </div>
+                        {activities.length ? (
+                        <ul>{activityElements}</ul>
+                        ) : (
+                        <p>Ingen aktiviteter endda. Kom i gang med at pante!</p>
+                        )}
                     </div>
             </div>
             

@@ -89,7 +89,7 @@ class Home extends React.Component {
                                     type='text'
                                     name='userCode'
                                     maxLength="4"
-                                    value={this.state.userCode}
+                                    value={this.state.userCode.toUpperCase()}
                                     onChange={this.handleInputChange.bind(this, 'userCode')}
                                 />
                                 </label>

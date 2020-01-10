@@ -80,7 +80,7 @@ class Profile extends React.Component {
             } = {}
          } = this.state;
 
-
+         
         return (
             <div className="profile">
                 <div className="profile-barcode">
