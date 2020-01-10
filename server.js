@@ -246,6 +246,7 @@ api.get('/saldo', authenticate, async (req, res) => {
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
+  console.log(id)
   const {userCode} = req.body;
   const checkCode = await codeValidation( userCode )
   const amountInCode = await amountQuery ( userCode )
@@ -341,7 +342,7 @@ api.post('/session', async (req, res) => {
 
 
 api.post(`/signup`, async (req, res) => {
-  const { name, email, phone, password } = req.body;
+  const { name, email, password } = req.body;
   const id = Math.floor(Math.random()*1000000000)
   // securing passwords
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
