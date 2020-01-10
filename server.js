@@ -240,13 +240,11 @@ api.get('/activity', authenticate, async (req, res) => {
 api.get('/saldo', authenticate, async (req, res) => {
   const { id } = req.user;
   const saldo = await getSaldoById(id);
-  console.log(saldo)
   res.send(saldo)
 })
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
-  console.log(id)
   const {userCode} = req.body;
   const checkCode = await codeValidation( userCode )
   const amountInCode = await amountQuery ( userCode )
@@ -328,7 +326,7 @@ api.post('/session', async (req, res) => {
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
-    }, new Buffer(secret, 'base64'));
+    }, new Buffer.alloc(secret, 'base64'));
 
       res.send({
         token: token
