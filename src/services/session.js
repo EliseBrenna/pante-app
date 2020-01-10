@@ -66,3 +66,15 @@ const response = await fetch(`${API_URL}/activity`, {
 });
 return await response.json();
 }
+
+export async function nameData() {
+    const response = await fetch(`${API_URL}/name`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('pante_app_token')
+      }
+    });
+    return await response.json();
+  }
+  

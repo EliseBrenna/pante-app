@@ -11,6 +11,7 @@ import Support from './components/Support';
 import Pant from './components/Pant';
 import History from './components/History';
 import EditProfile from './components/EditProfile';
+import Withdraw from './components/Withdraw';
 import FAQ from './components/FAQ';
 import ScrollToTop from './components/ScrollToTop';
 import './App.css';
@@ -31,6 +32,7 @@ class App extends React.Component {
           <Route path="/pant" exact component={Pant} />
           <Route path="/history" component={History} />
           <Route path="/editprofile" component={EditProfile} />
+          <Route path="/withdraw" component={Withdraw} />
           <Route path="/faq" component={FAQ} />
         </Switch>
       </HashRouter>

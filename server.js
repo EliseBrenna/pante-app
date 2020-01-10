@@ -171,6 +171,18 @@ getSaldoById = async (id) => {
   return rows
 }
 
+getNameById = async (id) => {
+  const { rows } = await pool.query(`
+  SELECT 
+    name 
+  FROM 
+    users 
+  WHERE id = $1
+  `, [id])
+
+  return rows[0]
+}
+
 claimCode = async (code, id) => {
 
   const client = await pool.connect();
@@ -243,13 +255,22 @@ api.get('/saldo', authenticate, async (req, res) => {
   res.send(saldo)
 })
 
+api.get('/name', authenticate, async (req, res) => {
+  const { id } = req.user;
+  const userName = await getNameById(id);
+  res.send(userName)
+})
+
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
+
   const {userCode} = req.body;
+  console.log('code:', userCode);
   const checkCode = await codeValidation( userCode )
+  console.log(checkCode.count)
   const amountInCode = await amountQuery ( userCode )
 
-  if(checkCode.count == 0) {
+  if(checkCode.count === 0) {
     return res.status(403).json({ status: 403, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
   } else {
     await claimCode(userCode, id);
@@ -326,7 +347,7 @@ api.post('/session', async (req, res) => {
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
-    }, new Buffer.alloc(secret, 'base64'));
+    }, new Buffer(secret, 'base64'));
 
       res.send({
         token: token
