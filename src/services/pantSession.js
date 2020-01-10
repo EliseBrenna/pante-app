@@ -12,18 +12,7 @@ export function addPantData(data) {
   .then((res) => res.json());
 }
 
-export function updatePantData(data) {
-  return fetch (`${API_URL}/pant`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then((res) => res.json());
-}
-
-export function updatePantData2 (data) {
+export function updatePantData (data) {
   return fetch (`${API_URL}/home`, {
     method: 'POST',
     headers: {

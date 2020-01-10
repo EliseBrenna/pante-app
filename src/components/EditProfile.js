@@ -70,8 +70,9 @@ class EditProfile extends React.Component {
 
         if (isLoading) {
             return (
-                <div>
-                    <p>Loading profile...</p>
+                <div className="authenticate">
+                    <div className="loader">
+                    </div>
                 </div>
             );
         }
@@ -103,7 +104,7 @@ class EditProfile extends React.Component {
                         <input 
                             value={user.email}
                             onChange={this.handleChange.bind(this, 'email')}
-                            type="text" 
+                            type="email" 
                          />
                     </label>
                     <label className="inputField">Passord

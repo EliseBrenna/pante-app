@@ -4,7 +4,6 @@ import jwtDecode from 'jwt-decode';
 import { getUserById } from '../services/session';
 import { saldoData } from '../services/pantSession'
 
-
 class Profile extends React.Component {
     constructor(props){
         super(props);
@@ -87,8 +86,8 @@ class Profile extends React.Component {
                     <div className="barcode">
                         <Barcode value={id + saldo}/>
                         <div className="userName">
-                        <h2>{name}</h2>
-                    </div>
+                            <h2>{name}</h2>
+                        </div>
                     </div>
                 </div>
                 <div className="profile-balance">

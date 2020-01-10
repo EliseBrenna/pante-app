@@ -1,5 +1,5 @@
 import React from 'react';
-import { updatePantData2 } from '../services/pantSession';
+import { updatePantData } from '../services/pantSession';
 
 class Home extends React.Component {
     constructor(props) {
@@ -21,8 +21,8 @@ class Home extends React.Component {
         }
         
         try {
-            const inputCode = await updatePantData2(session);
-            if (inputCode === 403) {
+            const inputCode = await updatePantData(session);
+            if (inputCode.status === 403) {
                 this.setState({ 
                     error: inputCode.message,
                     pantPop: true,
