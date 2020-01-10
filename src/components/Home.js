@@ -42,7 +42,7 @@ class Home extends React.Component {
     handleInputChange(field, event) {
         this.setState({
             ...this.state,
-            [field]: event.target.value
+            [field]: event.target.value.toUpperCase()
         });
     }
 
@@ -73,6 +73,7 @@ class Home extends React.Component {
 
     render() {
         const { error } = this.state;
+        console.log(this.state.userCode)
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>

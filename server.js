@@ -171,6 +171,18 @@ getSaldoById = async (id) => {
   return rows
 }
 
+getNameById = async (id) => {
+  const { rows } = await pool.query(`
+  SELECT 
+    name 
+  FROM 
+    users 
+  WHERE id = $1
+  `, [id])
+
+  return rows[0]
+}
+
 claimCode = async (code, id) => {
 
   const client = await pool.connect();
@@ -194,6 +206,21 @@ claimCode = async (code, id) => {
   }
 }
 
+// UPDATE users SET name='test2' WHERE id=120908182;
+
+editUserProfile = async (userData) => {
+  const { rows } = await pool.query(
+    `
+      UPDATE users SET
+          name = $1,
+          email = $2
+      WHERE
+        id = $3
+      RETURNING * 
+      `, [userData.name, userData.email, userData.id]);
+  
+      return rows[0]
+}
 
 //   Creating activity
 
@@ -225,18 +252,25 @@ api.get('/activity', authenticate, async (req, res) => {
 api.get('/saldo', authenticate, async (req, res) => {
   const { id } = req.user;
   const saldo = await getSaldoById(id);
-  console.log(saldo)
   res.send(saldo)
+})
+
+api.get('/name', authenticate, async (req, res) => {
+  const { id } = req.user;
+  const userName = await getNameById(id);
+  res.send(userName)
 })
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
-  console.log(id)
+
   const {userCode} = req.body;
+  console.log('code:', userCode);
   const checkCode = await codeValidation( userCode )
+  console.log(checkCode.count)
   const amountInCode = await amountQuery ( userCode )
 
-  if(checkCode.count == 0) {
+  if(checkCode.count === 0) {
     return res.status(403).json({ status: 403, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
   } else {
     await claimCode(userCode, id);
@@ -270,20 +304,17 @@ api.post('/home', authenticate, async (req, res) => {
 //   }
 // });
 
-api.put('/profile', function (req, res) {
-  const userId = req.user.id;
-  console.log(userId)
+api.put('/editprofile', authenticate, async function (req, res) {
+  const { id } = req.user;
   const {
     name,
     email,
-    phone
   } = req.body;
 
-  const updateUser = editUserProfile({
+  const updateUser = await editUserProfile({
     name,
     email,
-    phone,
-    userId
+    id
   });
 
   res.send(updateUser);
@@ -312,8 +343,6 @@ api.post('/session', async (req, res) => {
     if(!match) {
       return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
-
-    
 
     const token = jwt.sign({ 
       id: user.id,
@@ -350,28 +379,6 @@ api.post(`/signup`, async (req, res) => {
 // PANTEMASKIN
 
 //Functions
-
-editUserProfile = async (userData) => {
-  const { rows } = await pool.query(
-    `
-      UPDATE users(
-          name,
-          email,
-          phone
-      )
-  
-      VALUES(
-          $1,
-          $2,
-          $3
-      )
-      WHERE
-        id = $4
-      RETURNING * 
-      `, [userData.name, userData.email, userData.phone]);
-  
-      return rows[0]
-}
 
 createPantData = async (session) => {
   const { rows } = await pool.query(

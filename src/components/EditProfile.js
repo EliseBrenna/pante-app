@@ -6,9 +6,41 @@ class EditProfile extends React.Component {
         super(props);
 
         this.state = {
+            editForm: {
+                name: '',
+                email: ''
+            },
             user: {},
             isLoading: false,
             error: null,
+        }
+    }
+
+    handleInputChange(field, event) {
+        this.setState({
+            editForm: {
+                ...this.state.editForm,
+                [field]: event.target.value,
+            }
+        })
+    }
+
+    async handleSubmitAttempt(event) {
+        event.preventDefault();
+        const { history } = this.props;
+        const { name, email } = this.state.editForm;
+        
+        try {
+                this.setState({ isLoading: true });
+                const editedUser = await updateUser({ name, email });
+                
+                if(editedUser.status === 403) {
+                    this.setState({ error: editedUser.message })
+                } else {
+                    history.replace('/profile');
+                }
+        } catch (error) {
+                this.setState({ error })
         }
     }
 
@@ -16,24 +48,30 @@ class EditProfile extends React.Component {
         try {
             this.setState({ isLoading: true });
             const user = await getUserById(this.props.id);
-            this.setState({ user, isLoading: false });
+            this.setState({ 
+                user,
+                editForm: {
+                    name: user.name,
+                    email: user.email
+                },
+                isLoading: false });
         }   catch(error) {
             this.setState({ error });
         }
     }
 
-    async handleEditUser() {
-        const { user } = this.state;
-        await updateUser(user);
-        const { history } = this.props;
-        history.push(`/profile`);
-    }
+    // async handleEditUser() {
+    //     const { user } = this.state;
+    //     await updateUser(user);
+    //     const { history } = this.props;
+    //     history.push(`/profile`);
+    // }
 
-    handleChange(field, event) {
-        const { user } = this.state;
-        user[field] = event.target.value;
-        this.setState({ user });
-    }
+    // handleChange(field, event) {
+    //     const { user } = this.state;
+    //     user[field] = event.target.value;
+    //     this.setState({ user });
+    // }
 
     handleBackProfile() {
         const { history } = this.props;
@@ -56,7 +94,7 @@ class EditProfile extends React.Component {
     }
 
     render() {
-        const { user, isLoading, error } = this.state;
+        const { isLoading, error } = this.state;
 
         if (error) {
             return (
@@ -95,35 +133,35 @@ class EditProfile extends React.Component {
                 <div className="edit-form">
                     <label className="inputField" id="iconName">
                         <input 
-                            value={user.name}
-                            onChange={this.handleChange.bind(this, 'name')}
+                            value={this.state.editForm.name}
+                            onChange={this.handleInputChange.bind(this, 'name')}
                             type="text" 
                          />
                     </label>
                     <label className="inputField" id="iconUsername">
                         <input 
-                            value={user.email}
-                            onChange={this.handleChange.bind(this, 'email')}
-                            type="email" 
+                            value={this.state.editForm.email}
+                            onChange={this.handleInputChange.bind(this, 'email')}
+                            type="text" 
                          />
                     </label>
-                    <label className="inputField" id="iconPassword">
+                    {/* <label className="inputField">Passord
                         <input 
-                            value={user.password}
-                            onChange={this.handleChange.bind(this, 'password')}
+                            value={this.state.editForm.password}
+                            onChange={this.handleInputChange.bind(this, 'password')}
                             type="password" 
                          />
                     </label>
                     <label className="inputField" id="iconPassword">
                         <input 
-                            value={user.password}
-                            onChange={this.handleChange.bind(this, 'password')}
+                            value={this.state.editForm.confirmPassword}
+                            onChange={this.handleInputChange.bind(this, 'confirmPassword')}
                             type="password" 
                          /> 
-                    </label>
+                    </label> */}
                 </div>
 
-                <div className="submit-button" onClick={this.handleEditUser.bind(this)}>
+                <div className="submit-button" onClick={this.handleSubmitAttempt.bind(this)}>
                     <button>Lagre</button>
                 </div>
 

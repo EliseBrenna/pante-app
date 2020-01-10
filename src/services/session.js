@@ -44,16 +44,16 @@ export async function getUserById() {
     return response.json();
 }
 
-export function updateUser(user) {
-    return fetch(`${API_URL}/editprofile`, {
+export async function updateUser({ name, email }) {
+    const response = await fetch(`${API_URL}/editprofile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'X-Auth-Token': localStorage.getItem('pante_app_token')
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify({ name, email })
     })
-    .then((res) => res.json());
+    return response.json();
   }
 
 export async function activitiesData() {
@@ -66,3 +66,15 @@ const response = await fetch(`${API_URL}/activity`, {
 });
 return await response.json();
 }
+
+export async function nameData() {
+    const response = await fetch(`${API_URL}/name`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('pante_app_token')
+      }
+    });
+    return await response.json();
+  }
+  
