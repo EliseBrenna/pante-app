@@ -69,6 +69,11 @@ class Profile extends React.Component {
         history.push(`/editprofile`);
     }
 
+    handleWithdrawClicked() {
+        const { history } = this.props;
+        history.push(`/withdraw`);
+    }
+
     render() {
         const { 
             saldo,
@@ -102,7 +107,7 @@ class Profile extends React.Component {
                         <button onClick={this.handleEditProfileClicked.bind(this)}>Endre profil</button>
                     </div>
                     <div>
-                        <button className="toAccount" >Overfør til konto</button>
+                        <button onClick={this.handleWithdrawClicked.bind(this)} className="toAccount" >Overfør til konto</button>
                     </div>
                 </div>
                 <footer className="nav-bar">

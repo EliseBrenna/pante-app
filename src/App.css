@@ -82,7 +82,7 @@ svg path {
     transition: 1s;
 }
 
-.inputField input:hover {
+.inputField input:focus {
     border: 2px solid #0d5526;
 }
 
