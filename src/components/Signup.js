@@ -76,8 +76,8 @@ class Signup extends React.Component {
                     <h3>Opprett ny bruker</h3>
                 </div>
 
-                <div className="loginForm">
-                    <label className="inputField">
+                <div className="loginForm" >
+                    <label className="inputField" id="iconName">
                         <input 
                             type="text" 
                             placeholder="Skriv inn fullt navn" required
@@ -85,26 +85,26 @@ class Signup extends React.Component {
                             onChange={this.handleInputChange.bind(this, 'name')}
                          />
                     </label>
-                    <label className="inputField">
+                    <label className="inputField" id="iconUsername">
                         <input 
                             type="email" 
-                            placeholder="Skriv inn e-postadresse"
+                            placeholder="Skriv inn e-postadresse" required
                             value={this.state.signupForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')}
                          />
                     </label>
-                    <label className="inputField">
+                    <label className="inputField" id="iconPassword">
                         <input 
                             type="password" 
-                            placeholder="Skriv inn passord"
+                            placeholder="Skriv inn passord" required
                             value={this.state.signupForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')}
                          />
                     </label>
-                    <label className="inputField">
+                    <label className="inputField" id="iconPassword">
                         <input 
                             type="password" 
-                            placeholder="Gjenta passord"
+                            placeholder="Gjenta passord" required
                             value={this.state.signupForm.confirmPassword}
                             onChange={this.handleInputChange.bind(this, 'confirmPassword')}
                         />

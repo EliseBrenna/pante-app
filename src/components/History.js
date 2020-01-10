@@ -10,7 +10,6 @@ class History extends React.Component {
         const token = localStorage.getItem('pante_app_token');
         const payload = jwtDecode(token);
 
-    
         this.state = {
             activities: [],
             session: payload,
@@ -59,10 +58,6 @@ class History extends React.Component {
         const { activities } = this.state;
         console.log(activities[0])
 
-        
-
-        
-
         const activityElements = activities.map((activity) => {
             let styles = {}
             if(activity.amount > 0) {
@@ -76,8 +71,7 @@ class History extends React.Component {
                     <p className="amount" style={styles}>{activity.amount} kr</p>
                 </li>
             )
-        })
-        
+        })  
 
         return (
             <div className="historyContainer">
