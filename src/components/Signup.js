@@ -43,7 +43,6 @@ class Signup extends React.Component {
             try {
                 this.setState({ isLoading: true });
                 const newUser = await createUser({ name, email, phone, password });
-                console.log(newUser);
 
                 if(newUser.status === 403) {
                     this.setState({ error: newUser.message })

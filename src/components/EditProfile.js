@@ -56,7 +56,7 @@ class EditProfile extends React.Component {
                 editForm: {
                     name: user.name,
                     email: user.email,
-                    password: "placeholder",
+                    password: "",
                     newPassword: "",
                     confirmPassword: ""
                 },
@@ -138,7 +138,8 @@ class EditProfile extends React.Component {
                             type="text" 
                          />
                     </label>
-                     <label className="inputField">Gammel passord
+                        <p>Gammelt Passord (påkrevd)</p>
+                     <label className="inputField" id="iconPassword">
                         <input 
                             value={this.state.editForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')}
@@ -148,6 +149,7 @@ class EditProfile extends React.Component {
                             {error && <p>{error}</p>}
                             </div>     
                     </label>
+                    <p>Nytt passord (ikke påkrevd)</p>
                     <label className="inputField" id="iconPassword">
                         <input 
                             value={this.state.editForm.newPassword}

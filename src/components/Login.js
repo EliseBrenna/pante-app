@@ -45,7 +45,6 @@ class Login extends React.Component {
         try {
             this.setState({ isLoggingIn: true, error: null });
             const loginAttempt = await createSession({ email, password });
-            console.log (loginAttempt);
             const { token, error } = await createSession({ email, password });
             if (error) {
                 this.setState({ error: loginAttempt.message});
@@ -102,7 +101,7 @@ class Login extends React.Component {
                     <h3 onClick={this.handleSignup.bind(this)}>Ny bruker?</h3>
                 </div>
                 <div className="appVersion">
-                    <p>Beta v. 1.4</p>
+                    <p>Beta v. 1.5</p>
                 </div>
             </div>
         )

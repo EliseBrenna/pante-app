@@ -309,20 +309,30 @@ api.put('/editprofile', authenticate, async function (req, res) {
 
   const user = await getUserByEmail(email)
   const match = bcrypt.compareSync(password, user.password);
-  console.log(match)
 
   if (!match) {
     return res.status(401).json({status: 401, message: 'Feil passord'})
   } else {
     const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
-    const updateUser = await editUserProfile({
-      name,
-      email,
-      id,
-      hashPassword,
-    });
-  
-    res.send(updateUser);
+    if(newPassword) {
+      const updateUser = await editUserProfile({
+        name,
+        email,
+        id,
+        hashPassword,
+      });
+      res.send(updateUser);
+    } else {
+      const hashPassword = user.password
+      const updateUser = await editUserProfile({
+        name,
+        email,
+        id,
+        hashPassword,
+      });
+      res.send(updateUser);
+    }
+    
   }
 })
 
