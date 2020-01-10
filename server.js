@@ -45,12 +45,11 @@ getUsers = async (id) => {
 }
 
 // Creating new users
-createUser = async (name, email, phone, password, id) => {
+createUser = async (name, email, password, id) => {
     const { rows } = await pool.query(`
       INSERT INTO users(
         name,
         email,
-        phone,
         password,
         id
       )
@@ -58,11 +57,10 @@ createUser = async (name, email, phone, password, id) => {
         $1,
         $2,
         $3,
-        $4,
-        $5
+        $4
       )
       RETURNING *
-      `, [name, email, phone, password, id]);
+      `, [name, email, password, id]);
 
     return rows[0]
 }
@@ -233,6 +231,7 @@ api.get('/saldo', authenticate, async (req, res) => {
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
+  console.log(id)
   const {userCode} = req.body;
   const checkCode = await codeValidation( userCode )
   const amountInCode = await amountQuery ( userCode )
@@ -333,7 +332,7 @@ api.post('/session', async (req, res) => {
 
 
 api.post(`/signup`, async (req, res) => {
-  const { name, email, phone, password } = req.body;
+  const { name, email, password } = req.body;
   const id = Math.floor(Math.random()*1000000000)
   // securing passwords
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -343,7 +342,7 @@ api.post(`/signup`, async (req, res) => {
   if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
   } else {
-    const newUser = await createUser(name, email, phone, hashPassword, id);
+    const newUser = await createUser(name, email, hashPassword, id);
     res.send(newUser);
   } 
 })
