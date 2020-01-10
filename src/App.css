@@ -492,15 +492,6 @@ footer {
 }
 
 
-
-
-
-
-
-
-
-
-
 /* .newUser a {
     text-decoration: none;
     color: black;
@@ -513,6 +504,8 @@ footer {
 svg path {
     fill: white;
 }
+
+/* HISTORY */
 
 .historyHeader {
     font-size: 18.75px;
@@ -572,6 +565,11 @@ svg path {
     margin-left: 0px;
     padding-left: 0px;
 }
+
+/* WITHDRAW */
+
+
+
 
 /* PANTESIMULATOR */
 
