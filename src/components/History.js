@@ -84,13 +84,13 @@ class History extends React.Component {
                     </div>
 
                     <div className="historyHeader">
-                        <h3>Din historikk</h3>
+                        <h3>Historikk</h3>
                     </div>
                     <div className="activity">
                         {activities.length ? (
                         <ul>{activityElements}</ul>
                         ) : (
-                        <p>Ingen aktiviteter endda. Kom i gang med at pante!</p>
+                        <p>Ingen aktiviteter enda.</p>
                         )}
                     </div>
             </div>
