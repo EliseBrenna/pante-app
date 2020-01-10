@@ -1,5 +1,5 @@
 import React from 'react';
-import { addPantData, updatePantData } from '../services/pantSession';
+import { addPantData } from '../services/pantSession';
 
 
 class Pant extends React.Component {

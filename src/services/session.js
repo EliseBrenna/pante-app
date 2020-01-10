@@ -55,3 +55,14 @@ export async function updateUser({ name, email }) {
     })
     return response.json();
   }
+
+export async function activitiesData() {
+const response = await fetch(`${API_URL}/activity`, {
+    method: 'GET',
+    headers: {
+    'Content-Type': 'application/json',
+    'X-Auth-Token': localStorage.getItem('pante_app_token')
+    }
+});
+return await response.json();
+}

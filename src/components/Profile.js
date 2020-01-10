@@ -1,9 +1,7 @@
 import React from 'react';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
-import { getUserById } from '../services/session';
 import { saldoData } from '../services/pantSession'
-
 
 class Profile extends React.Component {
     constructor(props){
@@ -80,7 +78,7 @@ class Profile extends React.Component {
             } = {}
          } = this.state;
 
-
+         
         return (
             <div className="profile">
                 <div className="profile-barcode">

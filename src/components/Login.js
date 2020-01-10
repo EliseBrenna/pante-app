@@ -64,14 +64,14 @@ class Login extends React.Component {
                 <img src="./logo.png" alt="logo" className="logoLogin" />
                 <div className="subHeaderLogin"><h3>Logg inn for å registrere pant</h3></div>
                     <div className="loginForm">
-                        <label className="inputField">
+                        <label className="inputField" id="iconUsername">
                             <input 
-                            type="text" 
+                            type="email" 
                             placeholder="Skriv inn e-postadresse"
                             value={this.state.loginForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')} />
                         </label>
-                        <label className="inputField">
+                        <label className="inputField" id="iconPassword">
                             <input 
                             type="password" 
                             placeholder="Skriv inn passord"
