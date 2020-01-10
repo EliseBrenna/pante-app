@@ -4,7 +4,6 @@ import jwtDecode from 'jwt-decode';
 import { getUserById } from '../services/session';
 import { saldoData } from '../services/pantSession'
 
-
 class Profile extends React.Component {
     constructor(props){
         super(props);

@@ -87,7 +87,7 @@ class Signup extends React.Component {
                     </label>
                     <label className="inputField">
                         <input 
-                            type="text" 
+                            type="email" 
                             placeholder="Skriv inn e-postadresse"
                             value={this.state.signupForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')}

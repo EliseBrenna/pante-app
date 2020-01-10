@@ -104,7 +104,7 @@ class EditProfile extends React.Component {
                         <input 
                             value={user.email}
                             onChange={this.handleChange.bind(this, 'email')}
-                            type="text" 
+                            type="email" 
                          />
                     </label>
                     <label className="inputField">Passord
