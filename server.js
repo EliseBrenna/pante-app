@@ -145,19 +145,6 @@ emailValidation = async (email) => {
   return rows[0];
 }
 
-phoneValidation = async (phone) => {
-  const { rows } = await pool.query(`
-    SELECT
-      COUNT(phone)
-    FROM
-      users
-    WHERE
-      phone = $1
-  `, [phone])
-
-  return rows[0]
-}
-
 getActivitiesById = async (id) => {
   const { rows } = await pool.query(`
     SELECT 
@@ -349,11 +336,9 @@ api.post(`/signup`, async (req, res) => {
   // securing passwords
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const validateEmail = await emailValidation(email);
-  const validatePhone = await phoneValidation(phone);
 
-  if(+validateEmail.count && +validatePhone.count){
-    return res.status(403).json({ status: 403, message: 'Email and phonenumber is already in use'})
-  }else if(+validateEmail.count) {
+  
+  if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
   } else {
     const newUser = await createUser(name, email, phone, hashPassword, id);
