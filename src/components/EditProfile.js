@@ -28,14 +28,12 @@ class EditProfile extends React.Component {
     async handleSubmitAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
-        const { name, email, password, confirmPassword } = this.state.editForm;
-
-    
+        const { name, email } = this.state.editForm;
+        
         try {
                 this.setState({ isLoading: true });
                 const editedUser = await updateUser({ name, email });
-                console.log(editedUser);
-
+                
                 if(editedUser.status === 403) {
                     this.setState({ error: editedUser.message })
                 } else {
@@ -62,18 +60,18 @@ class EditProfile extends React.Component {
         }
     }
 
-    async handleEditUser() {
-        const { user } = this.state;
-        await updateUser(user);
-        const { history } = this.props;
-        history.push(`/profile`);
-    }
+    // async handleEditUser() {
+    //     const { user } = this.state;
+    //     await updateUser(user);
+    //     const { history } = this.props;
+    //     history.push(`/profile`);
+    // }
 
-    handleChange(field, event) {
-        const { user } = this.state;
-        user[field] = event.target.value;
-        this.setState({ user });
-    }
+    // handleChange(field, event) {
+    //     const { user } = this.state;
+    //     user[field] = event.target.value;
+    //     this.setState({ user });
+    // }
 
     handleBackProfile() {
         const { history } = this.props;
@@ -96,7 +94,7 @@ class EditProfile extends React.Component {
     }
 
     render() {
-        const { user, isLoading, error } = this.state;
+        const { isLoading, error } = this.state;
 
         if (error) {
             return (
@@ -163,7 +161,7 @@ class EditProfile extends React.Component {
                     </label> */}
                 </div>
 
-                <div className="submit-button" onClick={this.handleEditUser.bind(this)}>
+                <div className="submit-button" onClick={this.handleSubmitAttempt.bind(this)}>
                     <button>Lagre</button>
                 </div>
 

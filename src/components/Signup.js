@@ -17,7 +17,7 @@ class Signup extends React.Component {
             error: null,
         }
     }
-
+    
     handleInputChange(field, event) {
         this.setState({
             signupForm: {

@@ -45,12 +45,11 @@ getUsers = async (id) => {
 }
 
 // Creating new users
-createUser = async (name, email, phone, password, id) => {
+createUser = async (name, email, password, id) => {
     const { rows } = await pool.query(`
       INSERT INTO users(
         name,
         email,
-        phone,
         password,
         id
       )
@@ -58,11 +57,10 @@ createUser = async (name, email, phone, password, id) => {
         $1,
         $2,
         $3,
-        $4,
-        $5
+        $4
       )
       RETURNING *
-      `, [name, email, phone, password, id]);
+      `, [name, email, password, id]);
 
     return rows[0]
 }
@@ -196,6 +194,21 @@ claimCode = async (code, id) => {
   }
 }
 
+// UPDATE users SET name='test2' WHERE id=120908182;
+
+editUserProfile = async (userData) => {
+  const { rows } = await pool.query(
+    `
+      UPDATE users SET
+          name = $1,
+          email = $2
+      WHERE
+        id = $3
+      RETURNING * 
+      `, [userData.name, userData.email, userData.id]);
+  
+      return rows[0]
+}
 
 //   Creating activity
 
@@ -271,9 +284,8 @@ api.post('/home', authenticate, async (req, res) => {
 //   }
 // });
 
-api.put('/editprofile', async function (req, res) {
+api.put('/editprofile', authenticate, async function (req, res) {
   const { id } = req.user;
-  console.log(id)
   const {
     name,
     email,
@@ -312,8 +324,6 @@ api.post('/session', async (req, res) => {
       return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
 
-    
-
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
@@ -341,7 +351,7 @@ api.post(`/signup`, async (req, res) => {
   if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
   } else {
-    const newUser = await createUser(name, email, phone, hashPassword, id);
+    const newUser = await createUser(name, email, hashPassword, id);
     res.send(newUser);
   } 
 })
@@ -349,26 +359,6 @@ api.post(`/signup`, async (req, res) => {
 // PANTEMASKIN
 
 //Functions
-
-editUserProfile = async (userData) => {
-  const { rows } = await pool.query(
-    `
-      UPDATE users(
-          name,
-          email
-      )
-  
-      VALUES(
-          $1,
-          $2
-      )
-      WHERE
-        id = $3
-      RETURNING * 
-      `, [userData.name, userData.email, userData.id]);
-  
-      return rows[0]
-}
 
 createPantData = async (session) => {
   const { rows } = await pool.query(
