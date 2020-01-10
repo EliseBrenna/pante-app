@@ -825,3 +825,8 @@ label {
     margin-top: 12px;
     z-index: 1;
 }
+
+#passwordEye:focus {
+    fill: black;
+    stroke: black;
+}

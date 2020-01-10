@@ -13,12 +13,14 @@ class Login extends React.Component {
             },
             isLoggingIn: false,
             error: null,
-            type: 'password'
+            type: 'password',
+            fill: false
         }
     }
 
     handleClick = () => this.setState(({type}) => ({
-        type: type === 'text' ? 'password' : 'text'
+        type: type === 'text' ? 'password' : 'text',
+        fill: !this.state.fill
     }))
 
     handleInputChange(field, event) {
@@ -86,7 +88,7 @@ class Login extends React.Component {
                             placeholder="Skriv inn passord"
                             value={this.state.loginForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')} />
-                            <svg id="passwordEye" onClick={this.handleClick} width="25" height="21" fill="none" stroke="#000">{this.state.type === 'text' ? 'skjul' : 'vis'} 
+                            <svg id="passwordEye" onClick={this.handleClick} width="25" height="21" fill={(this.state.fill? "black" : "none")} stroke="#000">{this.state.type === 'text' ? 'skjul' : 'vis'} 
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                             <circle cx="12" cy="12" r="3"/></svg>
                             </label>
@@ -95,7 +97,6 @@ class Login extends React.Component {
                             {error && <p>{error}</p>}
                             </div>                     
                     </div>
-
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
                     <h3 onClick={this.handleSignup.bind(this)}>Ny bruker?</h3>
