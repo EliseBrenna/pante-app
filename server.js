@@ -179,7 +179,7 @@ claimCode = async (code, id) => {
     await client.query('BEGIN');
     const pickCodeFromSessionsText = 'SELECT * FROM sessions WHERE code = $1'
     const res = await client.query(pickCodeFromSessionsText , [code]);
-    console.log('line 182', code)
+
     const insertActivityText = 'INSERT INTO activities(amount, user_id) VALUES ($1, $2)'
     const insertActivityValues = [res.rows[0].amount, id]
     await client.query(insertActivityText, insertActivityValues);

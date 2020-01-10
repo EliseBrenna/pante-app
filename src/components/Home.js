@@ -17,7 +17,7 @@ class Home extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         let session = {
-            userCode: this.state.userCode.toUpperCase(),
+            userCode: this.state.userCode,
         }
         
         try {
@@ -42,7 +42,7 @@ class Home extends React.Component {
     handleInputChange(field, event) {
         this.setState({
             ...this.state,
-            [field]: event.target.value
+            [field]: event.target.value.toUpperCase()
         });
     }
 
@@ -72,8 +72,8 @@ class Home extends React.Component {
     }
 
     render() {
-        const { error, userCode } = this.state;
-        console.log(userCode)
+        const { error } = this.state;
+        console.log(this.state.userCode)
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
