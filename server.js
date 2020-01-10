@@ -179,7 +179,7 @@ claimCode = async (code, id) => {
     await client.query('BEGIN');
     const pickCodeFromSessionsText = 'SELECT * FROM sessions WHERE code = $1'
     const res = await client.query(pickCodeFromSessionsText , [code]);
-
+    console.log(code)
     const insertActivityText = 'INSERT INTO activities(amount, user_id) VALUES ($1, $2)'
     const insertActivityValues = [res.rows[0].amount, id]
     await client.query(insertActivityText, insertActivityValues);
@@ -233,10 +233,12 @@ api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
   console.log(id)
   const {userCode} = req.body;
+  console.log('code:', userCode);
   const checkCode = await codeValidation( userCode )
+  console.log(checkCode.count)
   const amountInCode = await amountQuery ( userCode )
 
-  if(checkCode.count == 0) {
+  if(checkCode.count === 0) {
     return res.status(403).json({ status: 403, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
   } else {
     await claimCode(userCode, id);
