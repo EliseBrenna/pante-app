@@ -13,6 +13,7 @@ import History from './components/History';
 import EditProfile from './components/EditProfile';
 import FAQ from './components/FAQ';
 import ScrollToTop from './components/ScrollToTop';
+import withAuthentication from './HOC/withAuthentication'
 import './App.css';
 
 class App extends React.Component {
@@ -22,15 +23,15 @@ class App extends React.Component {
         <ScrollToTop />
         <Switch>
           <Route path="/" exact component={Authenticate} />
-          <Route path="/home" component={Home} />
+          <Route path="/home" component={withAuthentication(Home)} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/profile" component={withAuthentication(Profile)} />
           <Route path="/signup" component={Signup} />
           <Route path="/support" component={Support} />
           <Route path="/pant" exact component={Pant} />
-          <Route path="/history" component={History} />
-          <Route path="/editprofile" component={EditProfile} />
+          <Route path="/history" component={withAuthentication(History)} />
+          <Route path="/editprofile" component={withAuthentication(EditProfile)} />
           <Route path="/faq" component={FAQ} />
         </Switch>
       </HashRouter>

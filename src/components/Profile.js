@@ -27,7 +27,6 @@ class Profile extends React.Component {
     async currentSaldo() {
         try {
             this.setState({ isLoading: true })
-            const { id } = this.state.session;
             const saldo = await saldoData();
             const sum = saldo
             .map(({amount}) => amount)

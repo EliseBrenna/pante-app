@@ -210,13 +210,8 @@ editUserProfile = async (userData) => {
       return rows[0]
 }
 
-//   Creating activity
 
-//Routes:
-// api.get(`/users`, async (req, res) => {
-//     const users = await getUsers();
-//     res.send(users)
-// })
+
 
 //Developers routes
 
@@ -247,9 +242,7 @@ api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
 
   const {userCode} = req.body;
-  console.log('code:', userCode);
   const checkCode = await codeValidation( userCode )
-  console.log(checkCode.count)
   const amountInCode = await amountQuery ( userCode )
 
   if(checkCode.count === 0) {
