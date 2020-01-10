@@ -1,7 +1,5 @@
 import React from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 
 import Authenticate from './components/Authenticate';
 import Home from './components/Home';
@@ -16,8 +14,6 @@ import EditProfile from './components/EditProfile';
 import FAQ from './components/FAQ';
 import ScrollToTop from './components/ScrollToTop';
 import './App.css';
-
-library.add(faEnvelope, faKey);
 
 class App extends React.Component {
   render() {

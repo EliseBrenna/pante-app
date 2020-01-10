@@ -93,28 +93,28 @@ class EditProfile extends React.Component {
                 </div>
                
                 <div className="edit-form">
-                    <label className="inputField">Navn
+                    <label className="inputField" id="iconName">
                         <input 
                             value={user.name}
                             onChange={this.handleChange.bind(this, 'name')}
                             type="text" 
                          />
                     </label>
-                    <label className="inputField">E-post
+                    <label className="inputField" id="iconUsername">
                         <input 
                             value={user.email}
                             onChange={this.handleChange.bind(this, 'email')}
                             type="email" 
                          />
                     </label>
-                    <label className="inputField">Passord
+                    <label className="inputField" id="iconPassword">
                         <input 
                             value={user.password}
                             onChange={this.handleChange.bind(this, 'password')}
                             type="password" 
                          />
                     </label>
-                    <label className="inputField">Bekreft passord
+                    <label className="inputField" id="iconPassword">
                         <input 
                             value={user.password}
                             onChange={this.handleChange.bind(this, 'password')}
