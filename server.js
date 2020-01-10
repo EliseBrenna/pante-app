@@ -213,11 +213,12 @@ editUserProfile = async (userData) => {
     `
       UPDATE users SET
           name = $1,
-          email = $2
+          email = $2,
+          password = $3
       WHERE
-        id = $3
+        id = $4
       RETURNING * 
-      `, [userData.name, userData.email, userData.id]);
+      `, [userData.name, userData.email, userData.hashPassword ,userData.id]);
   
       return rows[0]
 }
@@ -309,15 +310,27 @@ api.put('/editprofile', authenticate, async function (req, res) {
   const {
     name,
     email,
+    password,
+    newPassword
   } = req.body;
 
-  const updateUser = await editUserProfile({
-    name,
-    email,
-    id
-  });
+  const user = await getUserByEmail(email)
+  const match = bcrypt.compareSync(password, user.password);
+  console.log(match)
 
-  res.send(updateUser);
+  if (!match) {
+    return res.status(401).json({status: 401, message: 'Feil passord'})
+  } else {
+    const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
+    const updateUser = await editUserProfile({
+      name,
+      email,
+      id,
+      hashPassword,
+    });
+  
+    res.send(updateUser);
+  }
 })
 
 //Client routes
