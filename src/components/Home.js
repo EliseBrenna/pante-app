@@ -72,7 +72,8 @@ class Home extends React.Component {
     }
 
     render() {
-        const { error } = this.state;
+        const { error, userCode } = this.state;
+        console.log(userCode)
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
@@ -89,7 +90,7 @@ class Home extends React.Component {
                                     type='text'
                                     name='userCode'
                                     maxLength="4"
-                                    value={this.state.userCode.toUpperCase()}
+                                    value={userCode.toUpperCase()}
                                     onChange={this.handleInputChange.bind(this, 'userCode')}
                                 />
                                 </label>
