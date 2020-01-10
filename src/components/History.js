@@ -1,7 +1,7 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode'
 import { saldoData } from '../services/pantSession'
-// import format from 'date-fns/format';
+// import format from 'date-fns/format'
 
 class History extends React.Component {
     constructor(props) {
