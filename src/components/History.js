@@ -1,6 +1,6 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode'
-import { saldoData } from '../services/pantSession'
+import { activitiesData } from '../services/session'
 import format from 'date-fns/format'
 
 class History extends React.Component {
@@ -44,8 +44,7 @@ class History extends React.Component {
     }
 
     userActivities = async () => {
-        const { id } = this.state.session;
-        const userActivities = await saldoData()
+        const userActivities = await activitiesData()
         console.log(userActivities)
         const activity = userActivities
         .map(({amount, time}) => {
@@ -72,7 +71,7 @@ class History extends React.Component {
             }
             return (
                 <li className="activities">
-                    <p>{activity.time}</p>
+                    <p>{format(new Date(activity.time), "dd/MM/yyyy")} - {format(new Date(activity.time), "H:mm")}</p>
                     <p className="amount" style={styles}>{activity.amount} kr</p>
                 </li>
             )

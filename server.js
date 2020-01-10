@@ -45,22 +45,24 @@ getUsers = async (id) => {
 }
 
 // Creating new users
-createUser = async (name, email, phone, password) => {
+createUser = async (name, email, phone, password, id) => {
     const { rows } = await pool.query(`
       INSERT INTO users(
         name,
         email,
         phone,
-        password
+        password,
+        id
       )
       VALUES(
         $1,
         $2,
         $3,
-        $4
+        $4,
+        $5
       )
       RETURNING *
-      `, [name, email, phone, password]);
+      `, [name, email, phone, password, id]);
 
     return rows[0]
 }
@@ -156,13 +158,17 @@ phoneValidation = async (phone) => {
   return rows[0]
 }
 
-getActivities = async () => {
+getActivitiesById = async (id) => {
   const { rows } = await pool.query(`
     SELECT 
       *
     FROM
       activities
-  `)
+    WHERE
+      user_id = $1
+    ORDER BY 
+      time DESC
+  `, [id])
 
   return rows
 }
@@ -225,9 +231,10 @@ api.get(`/user`, authenticate, async (req, res) => {
   res.send(user)
 })
 
-api.get('/activity', async (req, res) => {
-  const all = await getActivities();
-  res.send(all)
+api.get('/activity', authenticate, async (req, res) => {
+  const { id } = req.user;
+  const allActivities = await getActivitiesById(id);
+  res.send(allActivities)
 })
 
 api.get('/saldo', authenticate, async (req, res) => {
@@ -340,6 +347,7 @@ api.post('/session', async (req, res) => {
 
 api.post(`/signup`, async (req, res) => {
   const { name, email, phone, password } = req.body;
+  const id = Math.floor(Math.random()*1000000000)
   // securing passwords
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const validateEmail = await emailValidation(email);
@@ -350,7 +358,7 @@ api.post(`/signup`, async (req, res) => {
   }else if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
   } else {
-    const newUser = await createUser(name, email, phone, hashPassword);
+    const newUser = await createUser(name, email, phone, hashPassword, id);
     res.send(newUser);
   } 
 })

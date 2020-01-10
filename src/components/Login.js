@@ -1,6 +1,6 @@
 import React from 'react';
 import { createSession } from '../services/session';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends React.Component {
     constructor(props) {

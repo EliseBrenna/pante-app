@@ -22,7 +22,7 @@ class Signup extends React.Component {
         this.setState({
             signupForm: {
                 ...this.state.signupForm,
-                [field]: event.target.value,
+                [field]: event.target.value
             }
         })
     }
