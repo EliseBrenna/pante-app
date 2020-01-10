@@ -12,9 +12,14 @@ class Login extends React.Component {
                 password: ''
             },
             isLoggingIn: false,
-            error: null
+            error: null,
+            type: 'text'
         }
     }
+
+    handleClick = () => this.setState(({type}) => ({
+        type: type === 'text' ? 'password' : 'text'
+      }))
 
     handleInputChange(field, event) {
         this.setState({
@@ -60,6 +65,7 @@ class Login extends React.Component {
 
     render() {
         const { error } = this.state;
+        const { label } = this.props
         return (
             <div className="login">
                 <img src="./logo.png" alt="logo" className="logoLogin" />
@@ -74,10 +80,11 @@ class Login extends React.Component {
                         </label>
                         <label className="inputField" id="iconPassword">
                             <input 
-                            type="password" 
+                            type={this.state.type} 
                             placeholder="Skriv inn passord"
                             value={this.state.loginForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')} />
+                            <span className="password_show" onClick={this.handleClick}>{this.state.type === 'text' ? 'show' : 'hide'}</span>
                             <div className="errorMessage">
                             {error && <p>{error}</p>}
                             </div>
