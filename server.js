@@ -194,6 +194,21 @@ claimCode = async (code, id) => {
   }
 }
 
+// UPDATE users SET name='test2' WHERE id=120908182;
+
+editUserProfile = async (userData) => {
+  const { rows } = await pool.query(
+    `
+      UPDATE users SET
+          name = $1,
+          email = $2
+      WHERE
+        id = $3
+      RETURNING * 
+      `, [userData.name, userData.email, userData.id]);
+  
+      return rows[0]
+}
 
 //   Creating activity
 
@@ -225,13 +240,11 @@ api.get('/activity', authenticate, async (req, res) => {
 api.get('/saldo', authenticate, async (req, res) => {
   const { id } = req.user;
   const saldo = await getSaldoById(id);
-  console.log(saldo)
   res.send(saldo)
 })
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
-  console.log(id)
   const {userCode} = req.body;
   console.log('code:', userCode);
   const checkCode = await codeValidation( userCode )
@@ -272,20 +285,17 @@ api.post('/home', authenticate, async (req, res) => {
 //   }
 // });
 
-api.put('/profile', function (req, res) {
-  const userId = req.user.id;
-  console.log(userId)
+api.put('/editprofile', authenticate, async function (req, res) {
+  const { id } = req.user;
   const {
     name,
     email,
-    phone
   } = req.body;
 
-  const updateUser = editUserProfile({
+  const updateUser = await editUserProfile({
     name,
     email,
-    phone,
-    userId
+    id
   });
 
   res.send(updateUser);
@@ -315,12 +325,10 @@ api.post('/session', async (req, res) => {
       return res.status(401).json({ status: 401, message: 'Wrong password' })
     }
 
-    
-
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
-    }, new Buffer(secret, 'base64'));
+    }, new Buffer.alloc(secret, 'base64'));
 
       res.send({
         token: token
@@ -352,28 +360,6 @@ api.post(`/signup`, async (req, res) => {
 // PANTEMASKIN
 
 //Functions
-
-editUserProfile = async (userData) => {
-  const { rows } = await pool.query(
-    `
-      UPDATE users(
-          name,
-          email,
-          phone
-      )
-  
-      VALUES(
-          $1,
-          $2,
-          $3
-      )
-      WHERE
-        id = $4
-      RETURNING * 
-      `, [userData.name, userData.email, userData.phone]);
-  
-      return rows[0]
-}
 
 createPantData = async (session) => {
   const { rows } = await pool.query(
