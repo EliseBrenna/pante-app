@@ -13,13 +13,15 @@ class Login extends React.Component {
             },
             isLoggingIn: false,
             error: null,
-            type: 'text'
+            type: 'password',
+            fill: false
         }
     }
 
     handleClick = () => this.setState(({type}) => ({
-        type: type === 'text' ? 'password' : 'text'
-      }))
+        type: type === 'text' ? 'password' : 'text',
+        fill: !this.state.fill
+    }))
 
     handleInputChange(field, event) {
         this.setState({
@@ -78,19 +80,23 @@ class Login extends React.Component {
                             value={this.state.loginForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')} />
                         </label>
-                        <label className="inputField" id="iconPassword">
+                        
+                        <div className="inputPassword">
+                        <label className="inputField passwordEye" id="iconPassword">    
                             <input 
                             type={this.state.type} 
                             placeholder="Skriv inn passord"
                             value={this.state.loginForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')} />
-                            <span className="password_show" onClick={this.handleClick}>{this.state.type === 'text' ? 'show' : 'hide'}</span>
+                            <svg id="passwordEye" onClick={this.handleClick} width="25" height="21" fill={(this.state.fill? "black" : "none")} stroke="#000">{this.state.type === 'text' ? 'skjul' : 'vis'} 
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/></svg>
+                            </label>
+                            </div>
                             <div className="errorMessage">
                             {error && <p>{error}</p>}
-                            </div>
-                        </label>
+                            </div>                     
                     </div>
-
                 <button className="loginBtn" onClick={this.handleLoginAttempt.bind(this)}>Logg inn</button>
                 <div className="newUser">
                     <h3 onClick={this.handleSignup.bind(this)}>Ny bruker?</h3>
@@ -104,3 +110,6 @@ class Login extends React.Component {
 }
 
 export default Login;
+
+
+{/* <div className="password_show" onClick={this.handleClick}>{this.state.type === 'text' ? 'skjul' : 'vis'}</div> */}
