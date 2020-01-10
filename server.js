@@ -277,20 +277,18 @@ api.post('/home', authenticate, async (req, res) => {
 //   }
 // });
 
-api.put('/profile', function (req, res) {
-  const userId = req.user.id;
-  console.log(userId)
+api.put('/editprofile', async function (req, res) {
+  const { id } = req.user;
+  console.log(id)
   const {
     name,
     email,
-    phone
   } = req.body;
 
-  const updateUser = editUserProfile({
+  const updateUser = await editUserProfile({
     name,
     email,
-    phone,
-    userId
+    id
   });
 
   res.send(updateUser);
@@ -364,19 +362,17 @@ editUserProfile = async (userData) => {
     `
       UPDATE users(
           name,
-          email,
-          phone
+          email
       )
   
       VALUES(
           $1,
-          $2,
-          $3
+          $2
       )
       WHERE
-        id = $4
+        id = $3
       RETURNING * 
-      `, [userData.name, userData.email, userData.phone]);
+      `, [userData.name, userData.email, userData.id]);
   
       return rows[0]
 }
