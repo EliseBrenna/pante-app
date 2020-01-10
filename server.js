@@ -245,6 +245,7 @@ api.get('/saldo', authenticate, async (req, res) => {
 
 api.post('/home', authenticate, async (req, res) => {
   const { id } = req.user;
+
   const {userCode} = req.body;
   console.log('code:', userCode);
   const checkCode = await codeValidation( userCode )
@@ -328,7 +329,7 @@ api.post('/session', async (req, res) => {
     const token = jwt.sign({ 
       id: user.id,
       name: user.name
-    }, new Buffer.alloc(secret, 'base64'));
+    }, new Buffer(secret, 'base64'));
 
       res.send({
         token: token

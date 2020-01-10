@@ -17,7 +17,7 @@ class Home extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         let session = {
-            userCode: this.state.userCode,
+            userCode: this.state.userCode.toUpperCase(),
         }
         
         try {
@@ -90,7 +90,7 @@ class Home extends React.Component {
                                     type='text'
                                     name='userCode'
                                     maxLength="4"
-                                    value={userCode.toUpperCase()}
+                                    value={this.state.userCode.toUpperCase()}
                                     onChange={this.handleInputChange.bind(this, 'userCode')}
                                 />
                                 </label>
