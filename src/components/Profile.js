@@ -2,6 +2,7 @@ import React from 'react';
 import Barcode from 'react-barcode'
 import jwtDecode from 'jwt-decode';
 import { saldoData } from '../services/pantSession'
+import { nameData } from '../services/session'
 
 class Profile extends React.Component {
     constructor(props){
@@ -16,18 +17,28 @@ class Profile extends React.Component {
             session: payload,
             saldo: '',
             view: '',
-            params: {}
+            params: {},
+            name: '',
         }
     }
 
     async componentDidMount() {
+        await this.getName();
         await this.currentSaldo();
     }
 
+    async getName() {
+        try {
+            const fetchedName = await nameData();
+            this.setState({ name: fetchedName.name })
+        } catch (error) {
+            this.setState({ error });
+        }
+    }
+    
     async currentSaldo() {
         try {
             this.setState({ isLoading: true })
-            const { id } = this.state.session;
             const saldo = await saldoData();
             const sum = saldo
             .map(({amount}) => amount)
@@ -70,9 +81,9 @@ class Profile extends React.Component {
     render() {
         const { 
             saldo,
+            name,
             session: {
-                id,
-                name
+                id
             } = {}
          } = this.state;
 

@@ -171,6 +171,18 @@ getSaldoById = async (id) => {
   return rows
 }
 
+getNameById = async (id) => {
+  const { rows } = await pool.query(`
+  SELECT 
+    name 
+  FROM 
+    users 
+  WHERE id = $1
+  `, [id])
+
+  return rows[0]
+}
+
 claimCode = async (code, id) => {
 
   const client = await pool.connect();
@@ -241,6 +253,12 @@ api.get('/saldo', authenticate, async (req, res) => {
   const { id } = req.user;
   const saldo = await getSaldoById(id);
   res.send(saldo)
+})
+
+api.get('/name', authenticate, async (req, res) => {
+  const { id } = req.user;
+  const userName = await getNameById(id);
+  res.send(userName)
 })
 
 api.post('/home', authenticate, async (req, res) => {
