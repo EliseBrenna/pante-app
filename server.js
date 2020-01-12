@@ -265,8 +265,7 @@ api.post('/home', authenticate, async (req, res) => {
   const checkCode = await codeValidation( userCode )
   const amountInCode = await amountQuery ( userCode )
   
-
-  if(checkCode.count === 0) {
+  if(parseInt(checkCode.count) === 0) {
     return res.status(403).json({ status: 403, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
   } else {
     await claimCode(userCode, id);
