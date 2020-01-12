@@ -10,7 +10,8 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const api = express();
 const { authenticate } = require('./middleware')
-
+const { cryptPassword, decryptPassword } = require('./bcrypt')
+ 
 
 
 const secret = process.env.SECRET;
@@ -309,12 +310,12 @@ api.put('/editprofile', authenticate, async function (req, res) {
   } = req.body;
 
   const user = await getUserByEmail(email)
-  const match = bcrypt.compareSync(password, user.password);
+  const match = await decryptPassword(password, user.password);
 
   if (!match) {
     return res.status(401).json({status: 401, message: 'Feil passord'})
   } else {
-    const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
+    const hashPassword = await cryptPassword(newPassword)
     if(newPassword) {
       const updateUser = await editUserProfile({
         name,
@@ -355,7 +356,7 @@ api.post('/session', async (req, res) => {
       return res.status(401).json({status: 401, message: 'Unknown email' })
     }
 
-    const match = bcrypt.compareSync(password, user.password);
+    const match = await decryptPassword(password, user.password);
 
     if(!match) {
       return res.status(401).json({ status: 401, message: 'Wrong password' })
@@ -375,29 +376,12 @@ api.post('/session', async (req, res) => {
   }
 });
 
-
-
 api.post(`/signup`, async (req, res) => {
   const { name, email, password } = req.body;
   const id = Math.floor(Math.random()*1000000000)
 
-  // securing passwords
-  // const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const validateEmail = await emailValidation(email);
-
-  const saltRounds = 10;
-  const myPlaintextPassword = password;
-  const someOtherPlaintextPassword = 'not_bacon';
-
-  const hashPassword = await new Promise((resolve, reject) => {
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-      bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
-          resolve(hash);
-      });
-    });
-  })
-
-  console.log(hashPassword);
+  const hashPassword = await cryptPassword(password);
   
   if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
@@ -405,7 +389,7 @@ api.post(`/signup`, async (req, res) => {
     const newUser = await createUser(name, email, hashPassword, id);
     res.send(newUser);
   } 
-})
+});
 
 // PANTEMASKIN
 
