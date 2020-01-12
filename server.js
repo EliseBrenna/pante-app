@@ -263,6 +263,7 @@ api.post('/home', authenticate, async (req, res) => {
   const {userCode} = req.body;
   const checkCode = await codeValidation( userCode )
   const amountInCode = await amountQuery ( userCode )
+  
 
   if(checkCode.count === 0) {
     return res.status(403).json({ status: 403, message: 'Ingen kode funnet, vennligst tast inn korrekt kode'})
@@ -379,10 +380,24 @@ api.post('/session', async (req, res) => {
 api.post(`/signup`, async (req, res) => {
   const { name, email, password } = req.body;
   const id = Math.floor(Math.random()*1000000000)
+
   // securing passwords
-  const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  // const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const validateEmail = await emailValidation(email);
 
+  const saltRounds = 10;
+  const myPlaintextPassword = password;
+  const someOtherPlaintextPassword = 'not_bacon';
+
+  const hashPassword = await new Promise((resolve, reject) => {
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+      bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+          resolve(hash);
+      });
+    });
+  })
+
+  console.log(hashPassword);
   
   if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Email is already in use'})
