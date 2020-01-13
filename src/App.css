@@ -245,6 +245,29 @@ footer {
     justify-content: end;
 }
 
+.withdrawPop {
+    font-size: 20px;
+    font-weight: bold;
+    grid-row: 2;
+    grid-column: 1/ span 3;
+    justify-self: center;
+    background-color: white;
+    border: 1.5px solid #0d5526;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+.withdrawPop h4 {
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.withdrawBtnContainer {
+    display: grid;
+    justify-content: end;
+}
+
 /* PROFILE PAGE */
 
 .profile {

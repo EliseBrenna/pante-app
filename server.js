@@ -22,7 +22,8 @@ const {
   claimCode,
   editUserProfile,
   createPantData,
-  deleteUser
+  deleteUser,
+  withdrawSaldo,
  } = require('./middlewares/functions')
 
 const secret = process.env.SECRET;
@@ -134,6 +135,22 @@ api.post(`/signup`, async (req, res) => {
     const newUser = await createUser(name, email, hashPassword, id);
     res.send(newUser);
   } 
+});
+
+api.post('/withdraw', authenticate, async (req, res) => {
+  const { id } = req.user;
+
+  const saldo = await getSaldoById(id);
+  const sum = saldo
+  .map(({amount}) => amount)
+  .reduce((accu, curr) => accu+curr, 0)
+  
+  if (sum <= 0) {
+    return res.status(401).json({status: 401, message: "Du har ingen innestående saldo på din konto."})
+  } else {
+    const withdraw = await withdrawSaldo(-sum, id)
+    return res.status(200).json({status: 200, message: `Ditt uttak på ${sum} kroner er velykket!`})
+  }
 });
 
 //Client routes
