@@ -89,17 +89,6 @@ export async function withdrawAccountBalance() {
     return await response.json();
 }
 
-// export function withdrawAccountBalance() {
-//     return fetch(`${API_URL}/withdraw`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-Auth-Token': localStorage.getItem('pante_app_token')
-//         }
-//     })
-//     .then((res) => res.json());
-// }
-
 export function updatePantData (data) {
     return fetch (`${API_URL}/home`, {
       method: 'POST',
