@@ -1,13 +1,12 @@
 import React from 'react';
 import Authentication from './Authentication'
 
-function withAuthentication(Foo) {
+function withAuthentication(Component) {
     return class extends React.Component {
         render() {
-            console.log(this.props);
             return(
                 <Authentication {...this.props}>
-                    <Foo {...this.props} />
+                    <Component {...this.props} />
                 </Authentication>
             );
         }
