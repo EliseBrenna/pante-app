@@ -38,6 +38,7 @@ getUsers = async (id) => {
       return rows[0]
   }
   
+  // getting all user-data by email
   getUserByEmail = async (email) => {
     const { rows } = await pool.query(`
       SELECT
@@ -51,6 +52,7 @@ getUsers = async (id) => {
     return rows[0]
   }
   
+  // getting all user-data by id
   getUserById = async (id) => {
     const { rows } = await pool.query(`
       SELECT
@@ -64,6 +66,7 @@ getUsers = async (id) => {
     return rows[0]
   }
   
+  // Getting amount that is pantet
   amountQuery = async (code) => {
     const { rows } = await pool.query(`
       SELECT
@@ -77,19 +80,7 @@ getUsers = async (id) => {
     return rows[0];
   }
   
-  // idValidation = async (code) => {
-  //   const { rows } = await pool.query(`
-  //     SELECT
-  //       id
-  //     FROM
-  //       activities
-  //     WHERE
-  //       code = $1
-  //   `, [code])
-  
-  //   return rows[0];
-  // }
-  
+  // Checking that code exists in sessions
   codeValidation = async (code) => {
     const { rows } = await pool.query(`
       SELECT
@@ -103,6 +94,7 @@ getUsers = async (id) => {
     return rows[0];
   }
   
+  // Checking if email exists in users
   emailValidation = async (email) => {
     const { rows } = await pool.query(`
       SELECT
@@ -116,6 +108,7 @@ getUsers = async (id) => {
     return rows[0];
   }
   
+  // Getting all activities connected to a specific user
   getActivitiesById = async (id) => {
     const { rows } = await pool.query(`
       SELECT 
@@ -131,6 +124,7 @@ getUsers = async (id) => {
     return rows
   }
   
+  // Getting total saldo by user id
   getSaldoById = async (id) => {
     const { rows } = await pool.query(`
       SELECT 
@@ -144,6 +138,7 @@ getUsers = async (id) => {
     return rows
   }
   
+  // Getting name by id
   getNameById = async (id) => {
     const { rows } = await pool.query(`
     SELECT 
@@ -156,6 +151,7 @@ getUsers = async (id) => {
     return rows[0]
   }
   
+  // Used in transactions to insert into activities and remove from sessions
   claimCode = async (code, id) => {
   
     const client = await pool.connect();
@@ -179,56 +175,54 @@ getUsers = async (id) => {
     }
   }
   
-  // UPDATE users SET name='test2' WHERE id=120908182;
-  
+  // Used to update userinfo in editprofile-route
   editUserProfile = async (userData) => {
     const { rows } = await pool.query(
       `
-        UPDATE users SET
-            name = $1,
-            email = $2,
-            password = $3
-        WHERE
-          id = $4
-        RETURNING * 
-        `, [userData.name, userData.email, userData.hashPassword ,userData.id]);
-    
-        return rows[0]
-  }
-
-//   Pantemaskin
-
-createPantData = async (session) => {
-    const { rows } = await pool.query(
-    `
-      INSERT INTO sessions(
-          code,
-          amount
-      )
-  
-      VALUES(
-          $1,
-          $2
-      )
-  
+      UPDATE users SET
+          name = $1,
+          email = $2,
+          password = $3
+      WHERE
+        id = $4
       RETURNING * 
-      `, [session.code, session.amount]);
-  
-      return rows[0]
-  }
+      `, [userData.name, userData.email, userData.hashPassword ,userData.id]);
+    
+    return rows[0]
+  }  
 
-  module.exports = {
-    getUsers,
-    createUser,
-    getUserByEmail,
-    getUserById,
-    amountQuery,
-    codeValidation,
-    emailValidation,
-    getActivitiesById,
-    getSaldoById,
-    getNameById,
-    claimCode,
-    editUserProfile,
-    createPantData
+//Pantemaskin - creating input for sessions
+createPantData = async (session) => {
+  const { rows } = await pool.query(
+  `
+    INSERT INTO sessions(
+        code,
+        amount
+    )
+
+    VALUES(
+        $1,
+        $2
+    )
+
+    RETURNING * 
+    `, [session.code, session.amount]);
+
+    return rows[0]
+}
+
+module.exports = {
+  getUsers,
+  createUser,
+  getUserByEmail,
+  getUserById,
+  amountQuery,
+  codeValidation,
+  emailValidation,
+  getActivitiesById,
+  getSaldoById,
+  getNameById,
+  claimCode,
+  editUserProfile,
+  createPantData
 }

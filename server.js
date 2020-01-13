@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const jwtDecode = require('jwt-decode');
-const bcrypt = require('bcryptjs');
 const app = express();
 const api = express();
 const { authenticate } = require('./middlewares/middleware')
@@ -28,22 +26,19 @@ const {
  } = require('./middlewares/functions')
 
 const secret = process.env.SECRET;
-
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
-
-// 
-
 //Defining middlewares: 
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static('build'));
-
+app.use('/api', api)
 
 //Developers routes
 
@@ -91,32 +86,6 @@ api.post('/home', authenticate, async (req, res) => {
   }
 })
 
-// api.put('/home', authenticate, async (req, res) => {
-//   const userId = req.user.id;
-//   const { userCode } = req.body;
-
-//   const checkId = await idValidation( userCode )
-//   const checkCode = await codeValidation( userCode )
-//   const getAmount = await amountQuery( userCode )
-
-//   if (checkCode.count > 0) { // Sjekk om kode eksisterer
-//     if (!checkId.id) { // kode eksisterer og ikke brukt av noen andre enda
-//       await updatePantData({
-//         userCode,
-//         userId,
-//         });
-//         return res.status(200).json({ status: 200, message: `Din pant er registrert. Du pantet for ${getAmount.amount} kroner.`})
-      
-//     } else if (checkId === userId) { // kode allerede assignet til brukeren som forsøker å skrive den inn
-//       return res.status(403).json({ status: 403, message: 'Kode er allerede lagt til i din saldo'})
-//     } else { // kode eksisterer, kode allerede brukt av annen bruker
-//       return res.status(403).json({ status: 403, message: 'Kode er allerede benyttet og er ikke gyldig lengre'})
-//     }
-//   } else { // kode eksisterer ikke
-//     return res.status(403).json({ status: 403, message: 'Koden du tastet inne eksisterer ikke'})
-//   }
-// });
-
 api.put('/editprofile', authenticate, async function (req, res) {
   const { id } = req.user;
   const {
@@ -154,6 +123,21 @@ api.put('/editprofile', authenticate, async function (req, res) {
     
   }
 })
+
+api.post(`/signup`, async (req, res) => {
+  const { name, email, password } = req.body;
+  const id = Math.floor(Math.random()*1000000000)
+
+  const validateEmail = await emailValidation(email);
+  const hashPassword = await cryptPassword(password);
+  
+  if(+validateEmail.count) {
+    return res.status(403).json({ status: 403, message: 'Email is already in use'})
+  } else {
+    const newUser = await createUser(name, email, hashPassword, id);
+    res.send(newUser);
+  } 
+});
 
 //Client routes
 
@@ -193,40 +177,7 @@ api.post('/session', async (req, res) => {
   }
 });
 
-api.post(`/signup`, async (req, res) => {
-  const { name, email, password } = req.body;
-  const id = Math.floor(Math.random()*1000000000)
-
-  const validateEmail = await emailValidation(email);
-  const hashPassword = await cryptPassword(password);
-  
-  if(+validateEmail.count) {
-    return res.status(403).json({ status: 403, message: 'Email is already in use'})
-  } else {
-    const newUser = await createUser(name, email, hashPassword, id);
-    res.send(newUser);
-  } 
-});
-
-// PANTEMASKIN
-
-//Functions
-
-
-
-// updatePantData = async (session) => {
-//   const { rows } = await pool.query(
-//     `
-//     UPDATE activities 
-//     SET id=$1 WHERE code=$2
-//     RETURNING *
-//     `, [session.userId, session.userCode]
-//   ) 
-
-//   return rows[0]
-// }
-
-  //Routes
+//Pantemaskin Routes
   
 api.post('/pant', async (req, res) => {
 
@@ -247,9 +198,6 @@ api.post('/pant', async (req, res) => {
   }
 });
 
-
-
-
 api.put('/pant', async (req, res) => {
   const {
     userCode,
@@ -263,10 +211,8 @@ api.put('/pant', async (req, res) => {
     res.send(result)
 }); 
 
-
-app.use('/api', api)
-
 //Listens to port:
+
 const port = process.env.PORT;
 
 app.listen(port, () => {
