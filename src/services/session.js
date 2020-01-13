@@ -44,14 +44,14 @@ export async function getUserById() {
     return response.json();
 }
 
-export async function updateUser({ name, email }) {
+export async function updateUser({ name, email, password, newPassword }) {
     const response = await fetch(`${API_URL}/editprofile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'X-Auth-Token': localStorage.getItem('pante_app_token')
       },
-      body: JSON.stringify({ name, email })
+      body: JSON.stringify({ name, email, password, newPassword })
     })
     return response.json();
   }

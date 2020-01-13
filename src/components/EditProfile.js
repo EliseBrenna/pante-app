@@ -28,19 +28,22 @@ class EditProfile extends React.Component {
     async handleSubmitAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
-        const { name, email } = this.state.editForm;
-        
-        try {
+        const { name, email, password, newPassword, confirmPassword } = this.state.editForm;
+
+        if (confirmPassword !== newPassword) {
+            this.setState({ error: "Nytt passord matcher ikke!"})
+        } else {
+            try {
                 this.setState({ isLoading: true });
-                const editedUser = await updateUser({ name, email });
-                
-                if(editedUser.status === 403) {
+                const editedUser = await updateUser({ name, email, password, newPassword });
+                if (editedUser.status === 401) {
                     this.setState({ error: editedUser.message })
                 } else {
                     history.replace('/profile');
                 }
-        } catch (error) {
+            } catch (error) {
                 this.setState({ error })
+            }
         }
     }
 
@@ -52,26 +55,16 @@ class EditProfile extends React.Component {
                 user,
                 editForm: {
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    password: "",
+                    newPassword: "",
+                    confirmPassword: ""
                 },
                 isLoading: false });
         }   catch(error) {
-            this.setState({ error });
+            this.setState({ error, isLoading: false });
         }
     }
-
-    // async handleEditUser() {
-    //     const { user } = this.state;
-    //     await updateUser(user);
-    //     const { history } = this.props;
-    //     history.push(`/profile`);
-    // }
-
-    // handleChange(field, event) {
-    //     const { user } = this.state;
-    //     user[field] = event.target.value;
-    //     this.setState({ user });
-    // }
 
     handleBackProfile() {
         const { history } = this.props;
@@ -96,24 +89,24 @@ class EditProfile extends React.Component {
     render() {
         const { isLoading, error } = this.state;
 
-        if (error) {
-            return (
-                <div>
-                    <p>Oops! Something went wrong!</p>
-                    <pre>{error.message}</pre>
-                    <button>Retry</button>
-                </div>
-            )
-        }
+        // if (error) {
+        //     return (
+        //         <div>
+        //             <p>Oops! Something went wrong!</p>
+        //             <pre>{error.message}</pre>
+        //             <button>Retry</button>
+        //         </div>
+        //     )
+        // }
 
-        if (isLoading) {
-            return (
-                <div className="authenticate">
-                    <div className="loader">
-                    </div>
-                </div>
-            );
-        }
+        // if (isLoading) {
+        //     return (
+        //         <div className="authenticate">
+        //             <div className="loader">
+        //             </div>
+        //         </div>
+        //     );
+        // }
 
         return (
             <div className="edit-profile">
@@ -145,12 +138,24 @@ class EditProfile extends React.Component {
                             type="text" 
                          />
                     </label>
-                    {/* <label className="inputField">Passord
+                        <p>Gammelt Passord (påkrevd)</p>
+                     <label className="inputField" id="iconPassword">
                         <input 
                             value={this.state.editForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')}
                             type="password" 
                          />
+                    <div className="errorMessage">
+                            {error && <p>{error}</p>}
+                            </div>     
+                    </label>
+                    <p>Nytt passord (ikke påkrevd)</p>
+                    <label className="inputField" id="iconPassword">
+                        <input 
+                            value={this.state.editForm.newPassword}
+                            onChange={this.handleInputChange.bind(this, 'newPassword')}
+                            type="password" 
+                         /> 
                     </label>
                     <label className="inputField" id="iconPassword">
                         <input 
@@ -158,7 +163,7 @@ class EditProfile extends React.Component {
                             onChange={this.handleInputChange.bind(this, 'confirmPassword')}
                             type="password" 
                          /> 
-                    </label> */}
+                    </label>
                 </div>
 
                 <div className="submit-button" onClick={this.handleSubmitAttempt.bind(this)}>
