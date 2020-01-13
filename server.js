@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Pool } = require('pg');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const app = express();
@@ -22,13 +21,11 @@ const {
   getNameById,
   claimCode,
   editUserProfile,
-  createPantData
+  createPantData,
+  deleteUser
  } = require('./middlewares/functions')
 
 const secret = process.env.SECRET;
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
-});
 
 //Defining middlewares: 
 
@@ -177,6 +174,17 @@ api.post('/session', async (req, res) => {
   }
 });
 
+api.delete('/delete', authenticate, async (req, res) => {
+  const { id } = req.user;
+  console.log(id)
+
+  if(!id) {
+    return res.status(401).json({status: 401, message: 'No id found'})
+  }
+  await deleteUser(id)
+  res.send({id})
+})
+
 //Pantemaskin Routes
   
 api.post('/pant', async (req, res) => {
@@ -210,6 +218,8 @@ api.put('/pant', async (req, res) => {
     });
     res.send(result)
 }); 
+
+
 
 //Listens to port:
 

@@ -405,6 +405,11 @@ footer {
     outline: none;
 }
 
+.submit-button .delete-button {
+    margin-top: 5px;
+    background-color: rgb(182, 30, 19);
+}
+
 /* SUPPORT PAGE & FAQ PAGE*/
 
 .helpContainer {

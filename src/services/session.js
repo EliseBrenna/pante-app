@@ -77,4 +77,14 @@ export async function nameData() {
     });
     return await response.json();
   }
+
+export async function deleteUser() {
+    const response = await fetch(`${API_URL}/delete`, {
+        method: 'DELETE',
+        headers: {
+            'X-Auth-Token': localStorage.getItem('pante_app_token')
+        }
+    })
+    return await response.json();
+}
   
