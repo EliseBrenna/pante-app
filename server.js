@@ -93,8 +93,16 @@ api.put('/editprofile', authenticate, async function (req, res) {
     newPassword
   } = req.body;
 
-  const user = await getUserByEmail(email)
+  const user = await getUserById(id)
   const match = await decryptPassword(password, user.password);
+
+  // Checks if email that user tried to change to is already in use by another user
+  if (user.email !== email) {
+    const validateEmail = await emailValidation(email)
+    if (+validateEmail.count) {
+      return res.status(401).json({ status: 401, message: 'Epostadresse er allerede i bruk'})
+    }
+  }
 
   if (!match) {
     return res.status(401).json({status: 401, message: 'Feil passord'})
@@ -130,7 +138,7 @@ api.post(`/signup`, async (req, res) => {
   const hashPassword = await cryptPassword(password);
   
   if(+validateEmail.count) {
-    return res.status(403).json({ status: 403, message: 'Email is already in use'})
+    return res.status(403).json({ status: 403, message: 'Epostadresse er allerede i bruk'})
   } else {
     const newUser = await createUser(name, email, hashPassword, id);
     res.send(newUser);
@@ -168,13 +176,13 @@ api.post('/session', async (req, res) => {
     const user = await getUserByEmail(email)
 
     if(!user) {
-      return res.status(401).json({status: 401, message: 'Unknown email' })
+      return res.status(401).json({status: 401, message: 'Ukjent epostadresse' })
     }
 
     const match = await decryptPassword(password, user.password);
 
     if(!match) {
-      return res.status(401).json({ status: 401, message: 'Wrong password' })
+      return res.status(401).json({ status: 401, message: 'Feil passord' })
     }
 
     const token = jwt.sign({ 
@@ -187,7 +195,7 @@ api.post('/session', async (req, res) => {
       })
     
   } catch(error) {
-    return res.status(401).json({status: 401, message: 'Oops something went wrong'})
+    return res.status(401).json({status: 401, message: 'Oops, noe gikk galt'})
   }
 });
 
@@ -196,7 +204,7 @@ api.delete('/delete', authenticate, async (req, res) => {
   console.log(id)
 
   if(!id) {
-    return res.status(401).json({status: 401, message: 'No id found'})
+    return res.status(401).json({status: 401, message: 'Ingen ID funnet'})
   }
   await deleteUser(id)
   res.send({id})
