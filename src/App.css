@@ -437,7 +437,6 @@ footer {
     background-color: #0d5526;
     color: white;
     padding: 5px; 
-    width: 120px;
     border: none;
     font-family: 'Poppins', sans-serif;
     font-size: 18.75px;
@@ -447,6 +446,15 @@ footer {
 .submit-button .delete-button {
     margin-top: 5px;
     background-color: rgb(182, 30, 19);
+}
+
+.delete-button {
+    width: 150px;
+}
+
+.saveButton {
+    width: 100px;
+    justify-self: center;
 }
 
 /* SUPPORT PAGE & FAQ PAGE*/
