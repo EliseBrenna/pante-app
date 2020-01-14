@@ -44,18 +44,15 @@ class History extends React.Component {
 
     userActivities = async () => {
         const userActivities = await activitiesData()
-        console.log(userActivities)
         const activity = userActivities
         .map(({amount, time}) => {
             return {amount, time}
         })
-        console.log(activity)
         this.setState({activities: activity})
     }
 
     render() {
         const { activities } = this.state;
-        console.log(activities[0])
 
         const activityElements = activities.map((activity) => {
             let styles = {}
