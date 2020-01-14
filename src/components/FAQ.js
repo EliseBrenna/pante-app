@@ -45,10 +45,10 @@ render() {
                 </div>
 
                 <div className="supportAnswers">
-                    <p>Hvorfor bruker vi fargen rosa? <br />
-                    Vi kommer tilbake til dette senere.</p>
-                    <p>Hvorfor navnet digiPANT? <br />
-                    Vi kommer tilbake til dette senere.</p>
+                    <p style={{fontSize: "14px"}}><span style={{fontWeight: "bold"}}>Hvorfor bruker vi fargene rosa og grønn? </span><br />
+                    Fargen grønn ble et naturlig valg da panting er noe man gjør for miljøet, og ofte forbindes med grønt. Den lyse rosafargen som går igjen på bakgrunnsfargen er komplimentærfargen til grønn, og er visuelt pent og behagelig for øyet.</p>
+                    <p style={{fontSize: "14px"}}><span style={{fontWeight: "bold"}}>Hvorfor navnet digiPANT?</span><br />
+                    For å beskrive mest mulig hva appen egentilg gjør. Den muliggjør "digitale" pantelapper.</p>
                 </div>
             </div>
                   

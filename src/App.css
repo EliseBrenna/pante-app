@@ -297,6 +297,21 @@ footer {
     text-align: center;
 }
 
+@media only screen and (max-height: 570px) {
+
+    .profile {
+        grid-template-rows: 45% 50%;
+    }
+
+    .barcode .userName {
+        margin: 10px;
+    }
+
+    .profile-balance {
+        padding: 10px;
+    }
+}
+
 .barcode {
     justify-self: center;
     align-self: center;
