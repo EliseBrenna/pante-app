@@ -446,7 +446,7 @@ footer {
 
 .submit-button .delete-button {
     margin-top: 5px;
-    background-color: rgb(182, 30, 19);
+    background-color: #0d5526;
 }
 
 .delete-button {
@@ -719,6 +719,11 @@ svg path {
     font-size: 20px;
     font-weight: bold;
 
+}
+
+.screen .timer {
+    font-size: 1rem;
+    grid-column: 1;
 }
 
 .recycleButton {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { updateUser, getUserById, deleteUser } from '../services/session';
+const { passwordTest, emailTest } = require('../RegExp')
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -13,6 +14,8 @@ class EditProfile extends React.Component {
             user: {},
             isLoading: false,
             error: null,
+            emailError: null,
+            passwordError: null,
         }
     }
 
@@ -30,8 +33,16 @@ class EditProfile extends React.Component {
         const { history } = this.props;
         const { name, email, password, newPassword, confirmPassword } = this.state.editForm;
 
+        if(!emailTest(email)) {
+            this.setState({ emailError: "Ikke gyldig e-postadresse" })
+        } else {
+            this.setState({ emailError: null })
+        }
+
         if (confirmPassword !== newPassword) {
-            this.setState({ error: "Nytt passord matcher ikke!"})
+            this.setState({ passwordError: "Nytt passord matcher ikke!"})
+        } else if (confirmPassword && !passwordTest(newPassword)) {
+            this.setState({ passwordError: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd" })
         } else {
             try {
                 this.setState({ isLoading: true });
@@ -102,7 +113,7 @@ class EditProfile extends React.Component {
     }
 
     render() {
-        const { isLoading, error } = this.state;
+        const { isLoading, error, emailError, passwordError } = this.state;
 
         // if (error) {
         //     return (
@@ -152,6 +163,9 @@ class EditProfile extends React.Component {
                             onChange={this.handleInputChange.bind(this, 'email')}
                             type="text" 
                          />
+                         <div className="errorMessage">
+                            {emailError && <p>{emailError}</p>}
+                            </div>     
                     </label>
                      <label className="inputField" id="iconPassword">
                         <input 
@@ -178,8 +192,12 @@ class EditProfile extends React.Component {
                             onChange={this.handleInputChange.bind(this, 'confirmPassword')}
                             type="password" 
                             placeholder="Bekreft nytt passord"
-                         /> 
+                         />
+                         <div className="errorMessage">
+                            {passwordError && <p>{passwordError}</p>}
+                            </div>     
                     </label>
+                    
                 </div>
 
                 <div className="submit-button" >
