@@ -391,7 +391,7 @@ footer {
 }
 
 .edit-form input {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .nav-bar-edit {
@@ -413,7 +413,7 @@ footer {
     display: grid;
     grid-row: 3;
     grid-column: 2;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .submit-button button {
