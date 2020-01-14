@@ -17,7 +17,7 @@ class Signup extends React.Component {
             error: null,
         }
     }
-    
+
     handleInputChange(field, event) {
         this.setState({
             signupForm: {
@@ -37,8 +37,16 @@ class Signup extends React.Component {
         const { history } = this.props;
         const { name, email, phone, password, confirmPassword } = this.state.signupForm;
 
+        const re = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+
         if(confirmPassword !== password) {
-            this.setState({ error: "Passwords don't match!" })
+            this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
+        }
+        
+        if (!re.test(password)) {
+            this.setState({ error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd"})
+        } else if (confirmPassword !== password) {
+            this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
         } else {    
             try {
                 this.setState({ isLoading: true });
