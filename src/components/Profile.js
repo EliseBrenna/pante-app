@@ -102,6 +102,7 @@ class Profile extends React.Component {
                             <h2>{name}</h2>
                         </div>
                     </div>
+                    
                 </div>
                 <div className="profile-balance">
                     

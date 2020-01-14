@@ -86,7 +86,7 @@ class Login extends React.Component {
                         <label className="inputField" id="iconUsername">
                             <input 
                             type="email" 
-                            placeholder="Skriv inn e-postadresse"
+                            placeholder="Skriv inn e-post"
                             value={this.state.loginForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')} />
                         </label>
