@@ -204,6 +204,7 @@ footer {
     font-size: 35px;
     font-family: 'Poppins', sans-serif;
     text-align: center;
+    outline: none;
 }
 
 .home-content button {
@@ -218,6 +219,7 @@ footer {
     outline: none;
     margin-top: 15px;
 }
+
 
 .pantBtn {
     margin-top: 8px;
@@ -449,7 +451,9 @@ footer {
 
 .delete-button {
     width: 150px;
+    margin-top: 10px;
 }
+
 
 .saveButton {
     width: 100px;
@@ -711,7 +715,7 @@ svg path {
     grid-row: 1;
     grid-column: 2;
     top: 260px;
-    left: 340px;
+    left: 200px;
     font-size: 20px;
     font-weight: bold;
 
@@ -721,8 +725,8 @@ svg path {
     position: absolute;
     grid-row: 1;
     grid-column: 2;
-    top: 425px;
-    left: 340px;
+    top: 415px;
+    left: 200px;
 }
 
 .recycleButton .greenButton {
@@ -730,6 +734,7 @@ svg path {
     border-radius: 50%;
     height: 40px;
     width: 40px;
+    outline: none;
 }
 
 .redCross {
@@ -742,8 +747,9 @@ svg path {
     width: 40px;
     margin-left: 10px;
     position: absolute;
-    top: 425px;
-    left: 380px;
+    top: 415px;
+    left: 240px;
+    outline: none;
 }
 
 .redCrossLottery {
@@ -878,4 +884,9 @@ label {
 #passwordEye:focus {
     fill: black;
     stroke: black;
+}
+
+
+.inputField .invalid {
+    border: 1px solid #ff0000;
 }

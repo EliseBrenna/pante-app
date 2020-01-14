@@ -98,7 +98,7 @@ class Pant extends React.Component {
           	<button className="greenButton" onClick={() => this.createCode()}></button>
           </div>
           <button className="redCross" onClick={() => this.lotteryPop()}>+</button>
-          <img src="./pantomat.svg" alt="panteautomat"></img>  
+          <img src="./pantomat2.svg" alt="panteautomat"></img>  
         </div>
 
         <div className="display">
