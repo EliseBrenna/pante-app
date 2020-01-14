@@ -219,6 +219,7 @@ footer {
     margin-top: 15px;
 }
 
+
 .pantBtn {
     margin-top: 8px;
 }
@@ -449,7 +450,9 @@ footer {
 
 .delete-button {
     width: 150px;
+    margin-top: 10px;
 }
+
 
 .saveButton {
     width: 100px;
@@ -878,4 +881,9 @@ label {
 #passwordEye:focus {
     fill: black;
     stroke: black;
+}
+
+
+.inputField .invalid {
+    border: 1px solid #ff0000;
 }
