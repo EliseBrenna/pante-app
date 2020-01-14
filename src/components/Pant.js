@@ -9,13 +9,16 @@ class Pant extends React.Component {
         code: '',
         amount: 0,
         id: 0,
+        timer: 25,
         lotteryPop: false,
         activeSession: false,
+        countValid: false
     }
+    this.timer = null;
   }
 
   // POSTING
-  handleClick = (panteSum) => {
+  handleClick = async (panteSum) => {
     if (!this.state.activeSession) {
       this.setState((prevState, { amount }) => ({
         amount: prevState.amount += panteSum
@@ -32,6 +35,7 @@ class Pant extends React.Component {
         activeSession: false,
         lotteryPop: false,
       })
+      
     }
   };
 
@@ -45,6 +49,7 @@ class Pant extends React.Component {
       for ( var i = 0; i < length; i++ ) {
          result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
+      
       return result;
    }
 
@@ -62,6 +67,7 @@ class Pant extends React.Component {
       id: this.state.id
     }
     addPantData(session);
+    await this._timer();
   };
 
   lotteryPop() {
@@ -71,14 +77,29 @@ class Pant extends React.Component {
     })
   }
 
-  resetScreen() {
-    this.setState ({
-      lotteryPop: false,
-      code: '',
-    })
+  _timer() {
+    const { timer, countValid } = this.state;
+    this.setState({timer: timer - 1, countValid: true})
+    if(timer === 0 && countValid) {
+      this.resetScreen()
+      return clearTimeout(this._timer)
+    }
+    setTimeout(this._timer.bind(this), 1000)
   }
+  
+  resetScreen() {
+      this.setState ({
+        lotteryPop: false,
+        code: '',
+        amount: 0,
+        timer: 25,
+        countValid: false
+      })
+    }
+    
 
   render() {
+    const { timer, countValid } = this.state;
     return (
       <div className="panteContainer">
         <div className="panteAutomat">
@@ -87,6 +108,7 @@ class Pant extends React.Component {
             <div className="screen">
               <p>Pantesum: {this.state.amount}kr</p>
               <p>Pin-kode: {this.state.code}</p>
+          <p className="timer">{countValid ? (timer) : null}</p>  
             </div>
           ) : (
             <div className="screen">

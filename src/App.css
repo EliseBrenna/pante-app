@@ -721,6 +721,11 @@ svg path {
 
 }
 
+.screen .timer {
+    font-size: 1rem;
+    grid-column: 1;
+}
+
 .recycleButton {
     position: absolute;
     grid-row: 1;
