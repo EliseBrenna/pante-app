@@ -183,7 +183,7 @@ class EditProfile extends React.Component {
                 </div>
 
                 <div className="submit-button" >
-                    <button  onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
+                    <button className="saveButton" onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
                     <button className="delete-button" onClick={this.handleDeleteAttempt.bind(this)}>Slett bruker</button>
                 </div>
                 <div >
