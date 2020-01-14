@@ -19,6 +19,7 @@ class Profile extends React.Component {
             view: '',
             params: {},
             name: '',
+            options: {displayValue: false}
         }
     }
 
@@ -97,7 +98,7 @@ class Profile extends React.Component {
             <div className="profile">
                 <div className="profile-barcode">
                     <div className="barcode">
-                        <Barcode value={id}/>
+                        <Barcode value={id} option={this.state.options}/>
                         <div className="userName">
                             <h2>{name}</h2>
                         </div>
