@@ -73,7 +73,6 @@ class Home extends React.Component {
 
     render() {
         const { error } = this.state;
-        console.log(this.state.userCode)
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>

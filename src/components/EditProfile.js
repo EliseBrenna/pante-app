@@ -1,5 +1,5 @@
 import React from 'react';
-import { updateUser, getUserById } from '../services/session';
+import { updateUser, getUserById, deleteUser } from '../services/session';
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -44,6 +44,21 @@ class EditProfile extends React.Component {
             } catch (error) {
                 this.setState({ error })
             }
+        }
+    }
+
+    async handleDeleteAttempt(event) {
+        event.preventDefault();
+        const { history } = this.props;
+        try{
+            const confirm = window.confirm('Er du sikker på at du vil slette brukeren din?')
+            if(confirm){
+                await deleteUser(this.props.id);
+                await history.replace('/logout')
+            }
+            
+        } catch(error) {
+            this.setState({error})
         }
     }
 
@@ -166,8 +181,12 @@ class EditProfile extends React.Component {
                     </label>
                 </div>
 
-                <div className="submit-button" onClick={this.handleSubmitAttempt.bind(this)}>
-                    <button>Lagre</button>
+                <div className="submit-button" >
+                    <button  onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
+                    <button className="delete-button" onClick={this.handleDeleteAttempt.bind(this)}>Slett bruker</button>
+                </div>
+                <div >
+                    
                 </div>
 
                 <footer className="nav-bar-edit">

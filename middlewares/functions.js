@@ -231,6 +231,18 @@ createPantData = async (session) => {
     return rows[0]
 }
 
+deleteUser = async (id) => {
+  const { rows } = await pool.query(
+    `
+    DELETE FROM 
+      users
+    WHERE 
+      id = $1
+    `, [id]
+  );
+  return rows[0]
+}
+
 module.exports = {
   getUsers,
   createUser,
@@ -244,6 +256,7 @@ module.exports = {
   getNameById,
   claimCode,
   editUserProfile,
-  withdrawSaldo,
   createPantData,
+  deleteUser,
+  withdrawSaldo,
 }
