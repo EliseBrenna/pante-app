@@ -134,11 +134,11 @@ footer {
     position: fixed;
     width: 100vw;
 }
+
 .nav-bar {
     background-color: #0d5526;
     grid-row: 3;
     height: 70px;
-    
     align-self: end;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -185,18 +185,7 @@ footer {
 }
 
 .toAccount {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18.72px;
-    color: white;
-    background-color: #0d5526;
-    border-radius: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 15px;
-    border: none;
-    outline: none;
+    text-align: center;
 }
 
 .logo-home {
@@ -249,7 +238,6 @@ footer {
     font-weight: bold;
     grid-row: 2;
     justify-self: center;
-    justify-content: center;
     background-color: white;
     border: 1.5px solid #0d5526;
     border-radius: 8px;
@@ -260,6 +248,22 @@ footer {
     text-align: center;
     padding-left: 30px;
     padding-right: 30px;
+    align-self: center;
+}
+
+.pantePop .toAccountBtn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18.72px;
+    color: white;
+    background-color: #0d5526;
+    border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
 }
 
 .barcodePop {
