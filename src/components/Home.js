@@ -9,7 +9,7 @@ class Home extends React.Component {
             view: '',
             params: {},
             pantPop: false,
-            error: null
+            error: null,
         }
     }
 
@@ -73,6 +73,7 @@ class Home extends React.Component {
 
     render() {
         const { error } = this.state;
+
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
