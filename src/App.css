@@ -456,8 +456,9 @@ footer {
 
 
 .saveButton {
-    width: 100px;
+    width: 250px;
     justify-self: center;
+    margin-bottom: 10px;
 }
 
 /* SUPPORT PAGE & FAQ PAGE*/
