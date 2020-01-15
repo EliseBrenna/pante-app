@@ -180,7 +180,11 @@ footer {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.toAccount button {
+.popMessage {
+    text-align: center;
+}
+
+.toAccount {
     font-family: 'Poppins', sans-serif;
     font-size: 18.72px;
     color: white;
@@ -245,6 +249,7 @@ footer {
     font-weight: bold;
     grid-row: 2;
     justify-self: center;
+    justify-content: center;
     background-color: white;
     border: 1.5px solid #0d5526;
     border-radius: 8px;
@@ -476,7 +481,7 @@ footer {
     bottom: 0;
 }
 
-.submit-button {
+.submit-button, .submit-button-password {
     justify-self: center;
     align-self: start;
     justify-content: center;
@@ -484,6 +489,18 @@ footer {
     grid-row: 3;
     grid-column: 2;
     /* margin-top: 20px; */
+}
+
+.submit-button-password button {
+    border-radius: 25px;
+    background-color: #0d5526;
+    color: white;
+    padding: 5px; 
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18.75px;
+    outline: none;
+    width: 100px;
 }
 
 .submit-button button {
@@ -503,15 +520,21 @@ footer {
 }
 
 .delete-button {
-    width: 150px;
+    width: 140px;
+    margin-top: 10px;
+    justify-self: center;
+}
+
+.changePassword {
+    width: 200px;
+    justify-self: center;
     margin-top: 10px;
 }
 
-
 .saveButton {
-    width: 250px;
     justify-self: center;
     margin-bottom: 10px;
+    width: 100px;
 }
 
 /* SUPPORT PAGE & FAQ PAGE*/
@@ -638,7 +661,7 @@ svg path {
 .history {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 7% 85% 3%;
 }
 
 .history h3 {
@@ -646,6 +669,7 @@ svg path {
     justify-self: center;
     grid-row: 1;
     align-self: end;
+    text-align: center;
 }
 
 .arrowLeftHistory {

@@ -35,8 +35,6 @@ class Pant extends React.Component {
     }
   };
 
-
-
   createCode = async () => {
     const { isClicked} = this.state;
     this.setState({isClicked: true})

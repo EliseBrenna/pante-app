@@ -145,8 +145,8 @@ class EditProfile extends React.Component {
                 {/* SKJEMA SLUTT */}
 
                 <div className="submit-button" >
-                    <button className="saveButton" onClick={this.handleChangePasswordClick.bind(this)}>Endre passord</button>
-                    <button className="save-button" onClick={this.handleDeleteAttempt.bind(this)}>Slett bruker</button>
+                    <button className="changePassword" onClick={this.handleChangePasswordClick.bind(this)}>Endre passord</button>
+                    <button className="delete-button" onClick={this.handleDeleteAttempt.bind(this)}>Slett bruker</button>
                 </div>
 
                 <footer className="nav-bar-edit">
