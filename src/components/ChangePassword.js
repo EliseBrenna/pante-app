@@ -1,6 +1,6 @@
 import React from 'react';
 import { updatePassword } from '../services/session';
-const { passwordTest } = require('../RegExp')
+const { passwordTest } = require('../services/RegExp')
 
 class changePassword extends React.Component {
     constructor(props) {

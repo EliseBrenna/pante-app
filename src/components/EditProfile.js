@@ -1,6 +1,6 @@
 import React from 'react';
 import { updateUser, getUserById, deleteUser } from '../services/session';
-const { passwordTest, emailTest } = require('../RegExp')
+const { passwordTest, emailTest } = require('../services/RegExp')
 
 class EditProfile extends React.Component {
     constructor(props) {

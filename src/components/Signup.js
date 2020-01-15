@@ -1,6 +1,6 @@
 import React from 'react';
 import { createUser, createSession } from '../services/session';
-const { passwordTest, emailTest } = require('../RegExp')
+const { passwordTest, emailTest } = require('../services/RegExp')
 
 class Signup extends React.Component {
     constructor(props){
