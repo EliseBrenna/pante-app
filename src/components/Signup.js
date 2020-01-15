@@ -90,7 +90,9 @@ class Signup extends React.Component {
                 <div className="loginForm" >
                     <label className="inputField" id="iconName">
                         <input 
-                            type="text" 
+                            type="text"
+                            name="name"
+                            style={{textTransform: "capitalize"}}
                             placeholder="Skriv inn fullt navn" required
                             value={this.state.signupForm.name}
                             onChange={this.handleInputChange.bind(this, 'name')}
