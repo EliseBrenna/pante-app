@@ -112,8 +112,10 @@ class Home extends React.Component {
                             <div className="pantBtnContainer">
                                 <button className="exitBtn" onClick={() => this.handlePantExit()}>x</button>
                             </div>
+                            <div className="toAccount">
                                 {error && <h4>{error}</h4>}
-                                {showButton && <button className="toAccount">Overfør til konto</button>}
+                                {showButton && <button className="toAccountBtn">Overfør til konto</button>}
+                            </div>
                         </div>
                     )
                 }
