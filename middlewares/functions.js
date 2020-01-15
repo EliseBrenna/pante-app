@@ -181,12 +181,25 @@ editUserProfile = async (userData) => {
     `
     UPDATE users SET
         name = $1,
-        email = $2,
-        password = $3
+        email = $2
     WHERE
-      id = $4
+      id = $3
     RETURNING * 
-    `, [userData.name, userData.email, userData.hashPassword ,userData.id]);
+    `, [userData.name, userData.email ,userData.id]);
+  
+  return rows[0]
+}
+
+// Used to update password on editprofile-route
+editUserPassword = async (userData) => {
+  const { rows } = await pool.query(
+    `
+    UPDATE users SET
+        password = $1
+    WHERE
+      id = $2
+    RETURNING * 
+    `, [userData.hashPassword ,userData.id]);
   
   return rows[0]
 }
@@ -256,6 +269,7 @@ module.exports = {
   getNameById,
   claimCode,
   editUserProfile,
+  editUserPassword,
   createPantData,
   deleteUser,
   withdrawSaldo,
