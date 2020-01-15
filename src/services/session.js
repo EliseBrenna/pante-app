@@ -44,17 +44,29 @@ export async function getUserById() {
     return response.json();
 }
 
-export async function updateUser({ name, email, password, newPassword }) {
+export async function updateUser({ name, email }) {
     const response = await fetch(`${API_URL}/editprofile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'X-Auth-Token': localStorage.getItem('pante_app_token')
       },
-      body: JSON.stringify({ name, email, password, newPassword })
+      body: JSON.stringify({ name, email })
     })
     return response.json();
-  }
+}
+
+export async function updatePassword({ password, newPassword }) {
+    const response = await fetch(`${API_URL}/changepassword`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': localStorage.getItem('pante_app_token')
+      },
+      body: JSON.stringify({ password, newPassword })
+    })
+    return response.json();
+}
 
 export async function activitiesData() {
 const response = await fetch(`${API_URL}/activity`, {

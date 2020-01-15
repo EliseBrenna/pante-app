@@ -27,6 +27,7 @@ class Home extends React.Component {
                 this.setState({ 
                     error: inputCode.message,
                     pantPop: true,
+                    showButton: false
                  })
             } else {
                 this.setState({

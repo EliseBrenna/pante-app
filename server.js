@@ -21,6 +21,7 @@ const {
   getNameById,
   claimCode,
   editUserProfile,
+  editUserPassword,
   createPantData,
   deleteUser,
   withdrawSaldo,
@@ -84,11 +85,9 @@ api.post('/home', authenticate, async (req, res) => {
   }
 })
 
-api.put('/editprofile', authenticate, async function (req, res) {
+api.put('/changepassword', authenticate, async function (req, res) {
   const { id } = req.user;
   const {
-    name,
-    email,
     password,
     newPassword
   } = req.body;
@@ -96,6 +95,28 @@ api.put('/editprofile', authenticate, async function (req, res) {
   const user = await getUserById(id)
   const match = await decryptPassword(password, user.password);
 
+  if (!match) {
+    return res.status(401).json({status: 401, message: 'Feil passord'})
+  } else {
+    const hashPassword = await cryptPassword(newPassword)
+    const updateUser = await editUserPassword({
+      hashPassword,
+      id,
+    });
+    res.send(updateUser);
+  }
+
+})
+
+api.put('/editprofile', authenticate, async function (req, res) {
+  const { id } = req.user;
+  const {
+    name,
+    email
+  } = req.body;
+
+  const user = await getUserById(id)
+  
   // Checks if email that user tried to change to is already in use by another user
   if (user.email !== email) {
     const validateEmail = await emailValidation(email)
@@ -104,30 +125,13 @@ api.put('/editprofile', authenticate, async function (req, res) {
     }
   }
 
-  if (!match) {
-    return res.status(401).json({status: 401, message: 'Feil passord'})
-  } else {
-    const hashPassword = await cryptPassword(newPassword)
-    if(newPassword) {
-      const updateUser = await editUserProfile({
-        name,
-        email,
-        id,
-        hashPassword,
-      });
-      res.send(updateUser);
-    } else {
-      const hashPassword = user.password
-      const updateUser = await editUserProfile({
-        name,
-        email,
-        id,
-        hashPassword,
-      });
-      res.send(updateUser);
-    }
-    
-  }
+  const updateUser = await editUserProfile({
+    name,
+    email,
+    id,
+  });
+
+  res.send(updateUser);
 })
 
 api.post(`/signup`, async (req, res) => {
