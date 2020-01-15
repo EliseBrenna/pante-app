@@ -40,7 +40,7 @@ class Support extends React.Component {
             <div className="helpContainer">
             <div className="supportContainer">
                 <div className="support">
-                    <h3>Hjelp og kundeservice</h3>
+                    <h3>Innstillinger</h3>
                 </div>
                 <div className="supportOptions">
                     <p className="clickable" onClick={() => this.handleFAQ()}>Ofte stilte spørsmål</p>

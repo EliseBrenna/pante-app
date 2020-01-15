@@ -9,7 +9,8 @@ class Home extends React.Component {
             view: '',
             params: {},
             pantPop: false,
-            error: null
+            error: null,
+            showButton: false
         }
     }
 
@@ -31,7 +32,8 @@ class Home extends React.Component {
                 this.setState({
                     error: inputCode.message,
                     userCode: "",
-                    pantPop: true
+                    pantPop: true,
+                    showButton: true
                 })
             }
         } catch (error) {
@@ -72,7 +74,8 @@ class Home extends React.Component {
     }
 
     render() {
-        const { error } = this.state;
+        const { error, showButton } = this.state;
+
         return (
             <div className="home">
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
@@ -101,7 +104,8 @@ class Home extends React.Component {
                             <div className="pantBtnContainer">
                                 <button className="exitBtn" onClick={() => this.handlePantExit()}>x</button>
                             </div>
-                                {error && <h4>{error}</h4>}
+                    {error && <h4>{error}</h4>}
+                                {showButton && <button className="toAccount">Overfør til konto</button>}
                         </div>
                     )
                 }
