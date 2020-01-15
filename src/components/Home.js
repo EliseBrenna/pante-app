@@ -1,5 +1,5 @@
 import React from 'react';
-import { updatePantData } from '../services/pantSession';
+import { updatePantData, saldoData } from '../services/pantSession';
 
 class Home extends React.Component {
     constructor(props) {
@@ -10,7 +10,9 @@ class Home extends React.Component {
             params: {},
             pantPop: false,
             error: null,
-            showButton: false
+            showButton: false,
+            saldo: '',
+            overlay: ''
         }
     }
 
@@ -23,18 +25,22 @@ class Home extends React.Component {
         
         try {
             const inputCode = await updatePantData(session);
+            const saldo = await saldoData();
             if (inputCode.status === 403) {
                 this.setState({ 
                     error: inputCode.message,
                     pantPop: true,
-                    showButton: false
+                    showButton: false,
+                    overlay: 'overlay'
                  })
             } else {
                 this.setState({
                     error: inputCode.message,
                     userCode: "",
                     pantPop: true,
-                    showButton: true
+                    showButton: true,
+                    saldo,
+                    overlay: 'overlay'
                 })
             }
         } catch (error) {
@@ -70,15 +76,16 @@ class Home extends React.Component {
 
     handlePantExit() {
         this.setState({
-            pantPop: false
+            pantPop: false,
+            overlay: ''
         })
     }
 
     render() {
-        const { error, showButton } = this.state;
+        const { error, showButton, overlay } = this.state;
 
         return (
-            <div className="home">
+            <div className="home" id={overlay}>
                 <img className="logo-home" src="./logo.png" alt="logo"></img>
 
                 {
@@ -105,7 +112,7 @@ class Home extends React.Component {
                             <div className="pantBtnContainer">
                                 <button className="exitBtn" onClick={() => this.handlePantExit()}>x</button>
                             </div>
-                    {error && <h4>{error}</h4>}
+                                {error && <h4>{error}</h4>}
                                 {showButton && <button className="toAccount">Overfør til konto</button>}
                         </div>
                     )
