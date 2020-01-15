@@ -92,7 +92,6 @@ class Signup extends React.Component {
                         <input 
                             type="text"
                             name="name"
-                            style={{textTransform: "capitalize"}}
                             placeholder="Skriv inn fullt navn" required
                             value={this.state.signupForm.name}
                             onChange={this.handleInputChange.bind(this, 'name')}
