@@ -24,10 +24,6 @@ class Pant extends React.Component {
         amount: prevState.amount += panteSum
       }));
   
-      // function animate() {
-      //   document.getElementsByClassName("bottle").classList.toggle("animate");
-      // }
-      // animate();
     } else {
       this.setState({
         code: '',
@@ -35,7 +31,6 @@ class Pant extends React.Component {
         activeSession: false,
         lotteryPop: false,
       })
-      
     }
   };
 
