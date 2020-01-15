@@ -19,6 +19,9 @@ class Profile extends React.Component {
             view: '',
             params: {},
             name: '',
+            options: {displayValue: false},
+            isBarcodeClicked: false,
+            overlay: ''
         }
     }
 
@@ -83,10 +86,25 @@ class Profile extends React.Component {
         history.push(`/withdraw`);
     }
 
+    handleinfoExit() {
+        this.setState({
+            isBarcodeClicked: false,
+            overlay: ''
+        })
+    }
+
+    handleInfoPop() {
+        this.setState({
+            isBarcodeClicked: true,
+            overlay: 'overlay'
+        })
+    }
+
     render() {
         const { 
             saldo,
             name,
+            overlay,
             session: {
                 id
             } = {}
@@ -94,17 +112,19 @@ class Profile extends React.Component {
 
          
         return (
-            <div className="profile">
+            <div className="profile" id={overlay}>
                 <div className="profile-barcode">
+                <svg className="infoIconProfile" onClick={() => this.handleInfoPop()} enable-background="new 0 0 524.235 524.235" height="30" viewBox="0 0 524.235 524.235" width="30" xmlns="http://www.w3.org/2000/svg"><path d="m262.118 0c-144.53 0-262.118 117.588-262.118 262.118s117.588 262.118 262.118 262.118 262.118-117.588 262.118-262.118-117.589-262.118-262.118-262.118zm17.05 417.639c-12.453 2.076-37.232 7.261-49.815 8.303-10.651.882-20.702-5.215-26.829-13.967-6.143-8.751-7.615-19.95-3.968-29.997l49.547-136.242h-51.515c-.044-28.389 21.25-49.263 48.485-57.274 12.997-3.824 37.212-9.057 49.809-8.255 7.547.48 20.702 5.215 26.829 13.967 6.143 8.751 7.615 19.95 3.968 29.997l-49.547 136.242h51.499c.01 28.356-20.49 52.564-48.463 57.226zm15.714-253.815c-18.096 0-32.765-14.671-32.765-32.765 0-18.096 14.669-32.765 32.765-32.765s32.765 14.669 32.765 32.765c0 18.095-14.668 32.765-32.765 32.765z"/></svg>
                     <div className="barcode">
-                        <Barcode value={id}/>
+                        <Barcode value={id} option={this.state.options} />
+                    </div>
+                    
                         <div className="userName">
                             <h2>{name}</h2>
                         </div>
-                    </div>
                 </div>
-                <div className="profile-balance">
-                    
+                {
+                    !this.state.isBarcodeClicked ? (<div className="profile-balance">    
                     <div className="balance">
                         <h4>Saldo</h4>
                         <h1>{saldo} kr</h1>
@@ -118,7 +138,14 @@ class Profile extends React.Component {
                     <div>
                         <button onClick={this.handleWithdrawClicked.bind(this)} className="toAccount" >Overfør til konto</button>
                     </div>
-                </div>
+                </div>) : (<div className="barcodePop">
+                            <div className="pantBtnContainer">
+                                <button className="exitBtn" onClick={() => this.handleinfoExit()}>x</button>
+                            </div>
+                            <p>Dette er din unike strekkode, og den kan scannes i kassen i hvilken som helst butikk dersom du ønsker å bruke oppspart saldo.</p>
+                        </div>)
+                }
+                
                 <footer className="nav-bar">
                     <div className="homeIcon">
                         <svg onClick={this.handleHomeClicked.bind(this)} fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" height="30px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"/>

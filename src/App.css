@@ -134,11 +134,11 @@ footer {
     position: fixed;
     width: 100vw;
 }
+
 .nav-bar {
     background-color: #0d5526;
     grid-row: 3;
     height: 70px;
-    
     align-self: end;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -180,6 +180,14 @@ footer {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
+.popMessage {
+    text-align: center;
+}
+
+.toAccount {
+    text-align: center;
+}
+
 .logo-home {
     grid-row: 1;
     height: 80px;
@@ -204,6 +212,7 @@ footer {
     font-size: 35px;
     font-family: 'Poppins', sans-serif;
     text-align: center;
+    outline: none;
 }
 
 .home-content button {
@@ -218,6 +227,7 @@ footer {
     outline: none;
     margin-top: 15px;
 }
+
 
 .pantBtn {
     margin-top: 8px;
@@ -238,6 +248,40 @@ footer {
     text-align: center;
     padding-left: 30px;
     padding-right: 30px;
+    align-self: center;
+}
+
+.pantePop .toAccountBtn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18.72px;
+    color: white;
+    background-color: #0d5526;
+    border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+}
+
+.barcodePop {
+    font-size: 20px;
+    font-weight: bold;
+    grid-row: 2;
+    grid-column: 1 / span 3;
+    justify-self: center;
+    background-color: white;
+    border: 1.5px solid #0d5526;
+    border-radius: 8px;
+    max-width: 60%;
+    height: 250px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    align-self: center;
+    margin-bottom: 40px;
 }
 
 .pantBtnContainer {
@@ -274,10 +318,17 @@ footer {
     display: grid;
     height: 100vh;
     grid-template-rows: 35% 58%;
+    grid-template-columns: 1fr 3fr 1fr;
 }
 
 .userName {
     color: white;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    justify-self: center;
+    align-self: end;
+    margin-top: 10px;
+
 }
 
 .authenticate {
@@ -295,6 +346,22 @@ footer {
     height: 100%;
     width: 100%;
     text-align: center;
+    grid-column: 1 / span 3;
+}
+
+@media only screen and (max-height: 570px) {
+
+    .profile {
+        grid-template-rows: 45% 50%;
+    }
+
+    .barcode .userName {
+        margin: 10px;
+    }
+
+    .profile-balance {
+        padding: 10px;
+    }
 }
 
 .barcode {
@@ -303,6 +370,9 @@ footer {
     justify-content: center;
     margin: 30px;
     text-align: center;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    padding-bottom: 10px;
 }
 
 .profile-balance {
@@ -310,6 +380,7 @@ footer {
     align-self: center;
     text-align: center;
     grid-row: 2;
+    grid-column: 1 / span 3;
 }
 
 .profile-balance h2 {
@@ -329,6 +400,14 @@ footer {
     margin-bottom: 15px;
     border: none;
     outline: none;
+}
+
+.profile-barcode .infoIconProfile {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: right;
+    padding-top: 15px;
+    padding-right: 15px;
 }
 
 .balance {
@@ -391,7 +470,7 @@ footer {
 }
 
 .edit-form input {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .nav-bar-edit {
@@ -406,14 +485,26 @@ footer {
     bottom: 0;
 }
 
-.submit-button {
+.submit-button, .submit-button-password {
     justify-self: center;
     align-self: start;
     justify-content: center;
     display: grid;
     grid-row: 3;
     grid-column: 2;
-    margin-top: 20px;
+    /* margin-top: 20px; */
+}
+
+.submit-button-password button {
+    border-radius: 25px;
+    background-color: #0d5526;
+    color: white;
+    padding: 5px; 
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18.75px;
+    outline: none;
+    width: 100px;
 }
 
 .submit-button button {
@@ -421,7 +512,6 @@ footer {
     background-color: #0d5526;
     color: white;
     padding: 5px; 
-    width: 120px;
     border: none;
     font-family: 'Poppins', sans-serif;
     font-size: 18.75px;
@@ -430,7 +520,25 @@ footer {
 
 .submit-button .delete-button {
     margin-top: 5px;
-    background-color: rgb(182, 30, 19);
+    background-color: #0d5526;
+}
+
+.delete-button {
+    width: 140px;
+    margin-top: 10px;
+    justify-self: center;
+}
+
+.changePassword {
+    width: 200px;
+    justify-self: center;
+    margin-top: 10px;
+}
+
+.saveButton {
+    justify-self: center;
+    margin-bottom: 10px;
+    width: 100px;
 }
 
 /* SUPPORT PAGE & FAQ PAGE*/
@@ -557,7 +665,7 @@ svg path {
 .history {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 7% 85% 3%;
 }
 
 .history h3 {
@@ -565,6 +673,7 @@ svg path {
     justify-self: center;
     grid-row: 1;
     align-self: end;
+    text-align: center;
 }
 
 .arrowLeftHistory {
@@ -688,18 +797,23 @@ svg path {
     grid-row: 1;
     grid-column: 2;
     top: 260px;
-    left: 340px;
+    left: 200px;
     font-size: 20px;
     font-weight: bold;
 
+}
+
+.screen .timer {
+    font-size: 1rem;
+    grid-column: 1;
 }
 
 .recycleButton {
     position: absolute;
     grid-row: 1;
     grid-column: 2;
-    top: 425px;
-    left: 340px;
+    top: 415px;
+    left: 200px;
 }
 
 .recycleButton .greenButton {
@@ -707,6 +821,7 @@ svg path {
     border-radius: 50%;
     height: 40px;
     width: 40px;
+    outline: none;
 }
 
 .redCross {
@@ -719,8 +834,9 @@ svg path {
     width: 40px;
     margin-left: 10px;
     position: absolute;
-    top: 425px;
-    left: 380px;
+    top: 415px;
+    left: 240px;
+    outline: none;
 }
 
 .redCrossLottery {
@@ -833,6 +949,7 @@ label {
     color: black;
     top: 0;
     bottom: 0;
+
     width: 20px;
     height: 20px;
     margin-top: 15px;
@@ -856,3 +973,20 @@ label {
     fill: black;
     stroke: black;
 }
+
+
+.inputField .invalid {
+    border: 1px solid #ff0000;
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content * /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  }

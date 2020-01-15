@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUser, createSession } from '../services/session';
+const { passwordTest, emailTest } = require('../RegExp')
 
 class Signup extends React.Component {
     constructor(props){
@@ -15,9 +16,10 @@ class Signup extends React.Component {
             },
             isLoading: false,
             error: null,
+            emailError: null
         }
     }
-    
+
     handleInputChange(field, event) {
         this.setState({
             signupForm: {
@@ -37,8 +39,18 @@ class Signup extends React.Component {
         const { history } = this.props;
         const { name, email, phone, password, confirmPassword } = this.state.signupForm;
 
-        if(confirmPassword !== password) {
-            this.setState({ error: "Passwords don't match!" })
+        if (!emailTest(email)) {
+            this.setState({ emailError: "Ikke gyldig e-postadresse" })
+        } else if(confirmPassword !== password) {
+            this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
+        } else {
+            this.setState({ emailError: null })
+        }
+        
+        if (!passwordTest(password)) {
+            this.setState({ error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd" })
+        } else if (confirmPassword !== password) {
+            this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
         } else {    
             try {
                 this.setState({ isLoading: true });
@@ -58,7 +70,7 @@ class Signup extends React.Component {
     }
 
     render() {
-        const { error } = this.state;
+        const { error, emailError } = this.state;
         return (
             <div className="signup">
                 <div className="arrowLeft" onClick={() => this.handleLogin()}>
@@ -78,7 +90,8 @@ class Signup extends React.Component {
                 <div className="loginForm" >
                     <label className="inputField" id="iconName">
                         <input 
-                            type="text" 
+                            type="text"
+                            name="name"
                             placeholder="Skriv inn fullt navn" required
                             value={this.state.signupForm.name}
                             onChange={this.handleInputChange.bind(this, 'name')}
@@ -91,6 +104,9 @@ class Signup extends React.Component {
                             value={this.state.signupForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')}
                          />
+                         <div className="errorMessage">
+                            {emailError && <p>{emailError}</p>}
+                        </div>
                     </label>
                     <label className="inputField" id="iconPassword">
                         <input 

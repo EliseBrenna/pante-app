@@ -16,6 +16,7 @@ import FAQ from './components/FAQ';
 import ScrollToTop from './components/ScrollToTop';
 import withAuthentication from './HOC/withAuthentication'
 import './App.css';
+import changePassword from './components/ChangePassword';
 
 class App extends React.Component {
   render() {
@@ -33,6 +34,7 @@ class App extends React.Component {
           <Route path="/pant" exact component={Pant} />
           <Route path="/history" component={withAuthentication(History)} />
           <Route path="/editprofile" component={withAuthentication(EditProfile)} />
+          <Route path="/changepassword" component={withAuthentication(changePassword)} />
           <Route path="/withdraw" component={withAuthentication(Withdraw)} />
           <Route path="/faq" component={FAQ} />
         </Switch>

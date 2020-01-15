@@ -1,19 +1,26 @@
 import React from 'react';
-import { updateUser, getUserById, deleteUser } from '../services/session';
-const { passwordTest, emailTest } = require('../RegExp')
+import { updatePassword } from '../services/session';
+const { passwordTest } = require('../RegExp')
 
-class EditProfile extends React.Component {
+class changePassword extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             editForm: {},
-            user: {},
-            isLoading: false,
             error: null,
-            emailError: null,
             passwordError: null,
         }
+    }
+
+    async componentDidMount() {
+        this.setState({ 
+            editForm: {
+                password: "",
+                newPassword: "",
+                confirmPassword: ""
+            }
+        });
     }
 
     handleInputChange(field, event) {
@@ -28,55 +35,25 @@ class EditProfile extends React.Component {
     async handleSubmitAttempt(event) {
         event.preventDefault();
         const { history } = this.props;
-        const { name, email } = this.state.editForm;
+        const { password, newPassword, confirmPassword } = this.state.editForm;
 
-        if(!emailTest(email)) {
-            this.setState({ emailError: "Ikke gyldig e-postadresse" })
+        if (confirmPassword !== newPassword) {
+            this.setState({ passwordError: "Nytt passord matcher ikke!"})
+        } else if (confirmPassword && !passwordTest(newPassword)) {
+            this.setState({ passwordError: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd" })
         } else {
             try {
                 this.setState({ isLoading: true });
-                await updateUser({ name, email });
-                history.replace('/profile');
+                const editedUser = await updatePassword({ password, newPassword });
+                if (editedUser.status === 401) {
+                    this.setState({ error: editedUser.message })
+                } else {
+                    history.replace('/editprofile');
+                }
             } catch (error) {
                 this.setState({ error })
             }
         }
-    }
-
-    async handleDeleteAttempt(event) {
-        event.preventDefault();
-        const { history } = this.props;
-        try{
-            const confirm = window.confirm('Er du sikker på at du vil slette brukeren din?')
-            if(confirm){
-                await deleteUser(this.props.id);
-                await history.replace('/logout')
-            }
-            
-        } catch(error) {
-            this.setState({error})
-        }
-    }
-
-    async componentDidMount() {
-        try {
-            this.setState({ isLoading: true });
-            const user = await getUserById(this.props.id);
-            this.setState({ 
-                user,
-                editForm: {
-                    name: user.name,
-                    email: user.email,
-                },
-                isLoading: false });
-        }   catch(error) {
-            this.setState({ error, isLoading: false });
-        }
-    }
-
-    handleChangePasswordClick() {
-        const { history } = this.props;
-        history.push('/changepassword')
     }
 
     handleBackProfile() {
@@ -100,7 +77,7 @@ class EditProfile extends React.Component {
     }
 
     render() {
-        const { error, emailError, passwordError } = this.state;
+        const { error, passwordError } = this.state
 
         return (
             <div className="edit-profile">
@@ -114,42 +91,51 @@ class EditProfile extends React.Component {
                 </div>
 
                 <div className="sub-header-edit">
-                    <h3>Endre Profil</h3>
+                    <h3>Endre passord</h3>
                 </div>
 
                 {/* SKJEMA */}
 
-                <div className="edit-form">
-                    <label className="inputField" id="iconName">
-                        <input 
-                            value={this.state.editForm.name}
-                            onChange={this.handleInputChange.bind(this, 'name')}
-                            type="text" 
-                         />
-                    </label>
-                    <label className="inputField" id="iconUsername">
-                        <input 
-                            value={this.state.editForm.email}
-                            onChange={this.handleInputChange.bind(this, 'email')}
-                            type="text" 
-                         />
-                         <div className="errorMessage">
-                            {emailError && <p>{emailError}</p>}
-                            </div>
-                    </label>
-                    <div className="submit-button">
-                        <button className="saveButton" onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
-                    </div>
-                </div>
+        <div className="edit-form">
+            <label className="inputField" id="iconPassword">
+                <input 
+                    value={this.state.editForm.password}
+                    onChange={this.handleInputChange.bind(this, 'password')}
+                    type="password" 
+                    placeholder="Gammelt passord (påkrevd)"
+                    />
+                <div className="errorMessage">
+                    {error && <p>{error}</p>}
+                </div>     
+            </label>
+            <label className="inputField" id="iconPassword">
+                <input 
+                    value={this.state.editForm.newPassword}
+                    onChange={this.handleInputChange.bind(this, 'newPassword')}
+                    type="password" 
+                    placeholder="Nytt passord (ikke påkrevd)"
+                    /> 
+            </label>
+            <label className="inputField" id="iconPassword">
+                <input 
+                    value={this.state.editForm.confirmPassword}
+                    onChange={this.handleInputChange.bind(this, 'confirmPassword')}
+                    type="password" 
+                    placeholder="Bekreft nytt passord"
+                    />
+                <div className="errorMessage">
+                    {passwordError && <p>{passwordError}</p>}
+                </div>     
+            </label>
+            </div>
 
-                {/* SKJEMA SLUTT */}
+            <div className="submit-button-password" >
+            <button className="save-button" onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
+            </div>
+            
+        
 
-                <div className="submit-button" >
-                    <button className="changePassword" onClick={this.handleChangePasswordClick.bind(this)}>Endre passord</button>
-                    <button className="delete-button" onClick={this.handleDeleteAttempt.bind(this)}>Slett bruker</button>
-                </div>
-
-                <footer className="nav-bar-edit">
+        <footer className="nav-bar-edit">
                     <div className="homeIcon" >
                         <svg onClick={this.handleHomeClicked.bind(this)} fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" height="30px" >
                         <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 15 L 14 15 L 14 21 L 20 21 L 20 12 L 23 12 
@@ -164,8 +150,12 @@ class EditProfile extends React.Component {
                     </div>  
                 </footer>
             </div>
+
+
+
+
         )
-    }
+    }    
 }
 
-export default EditProfile;
+export default changePassword;
