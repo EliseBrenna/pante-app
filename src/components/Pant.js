@@ -34,6 +34,7 @@ class Pant extends React.Component {
         amount: 0,
         activeSession: false,
         lotteryPop: false,
+        isClicked: false
       })
       
     }
@@ -42,6 +43,8 @@ class Pant extends React.Component {
 
 
   createCode = async () => {
+    const { isClicked} = this.state;
+    this.setState({isClicked: true})
     function makeCode(length) {
       var result           = '';
       var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -52,7 +55,9 @@ class Pant extends React.Component {
       
       return result;
    }
-
+   if(isClicked) {
+     this.setState({lockButton: 'disabled'})
+   }
    let resultCode = makeCode(4);
 
     await this.setState(({ code }) => ({
@@ -93,13 +98,14 @@ class Pant extends React.Component {
         code: '',
         amount: 0,
         timer: 25,
-        countValid: false
+        countValid: false,
+        isClicked: false
       })
     }
     
 
   render() {
-    const { timer, countValid } = this.state;
+    const { timer, countValid, isClicked } = this.state;
     return (
       <div className="panteContainer">
         <div className="panteAutomat">
@@ -117,7 +123,7 @@ class Pant extends React.Component {
           )}
 
           <div className="recycleButton">
-          	<button className="greenButton" onClick={() => this.createCode()}></button>
+          	<button className="greenButton" disabled={isClicked} onClick={() => this.createCode()} ></button>
           </div>
           <button className="redCross" onClick={() => this.lotteryPop()}>+</button>
           <img src="./pantomat2.svg" alt="panteautomat"></img>  
