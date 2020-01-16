@@ -47,25 +47,25 @@ class Signup extends React.Component {
         } else if(confirmPassword !== password) {
             this.setState({ error: "Passordene du har skrevet inn matcher ikke", passwordClass: 'invalid', confirmPassword: 'invalid' })
         } else {
-            this.setState({ emailError: null })
+            this.setState({
+                emailError: null,
+                EmailClass: '',
+            })
         }
         
         if (!passwordTest(password)) {
-            this.setState({ error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd", passwordClass: 'invalid', confirmPasswordClass: 'invalid' })
+            this.setState({ 
+                error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd", passwordClass: 'invalid',
+                confirmPasswordClass: 'invalid'
+            })
         } else if (confirmPassword !== password) {
             this.setState({ error: "Passordene du har skrevet inn matcher ikke", passwordClass: 'invalid', confirmPasswordClass: 'invalid' })
         } else {
-            try{
-                this.setState({
-                    isLoading: true,
-                    EmailClass: '', 
-                    passwordClass: '', 
-                    confirmPasswordClass: '',
-                    error: null,
-                })
-            } catch (error) {
-                this.setState({error})
-            }
+            this.setState({ 
+                error: null,
+                passwordClass: '',
+                confirmPasswordClass: ''      
+            })
         }
 
         
