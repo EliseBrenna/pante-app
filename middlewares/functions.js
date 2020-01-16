@@ -18,7 +18,7 @@ getUsers = async (id) => {
   }
   
 // Creating new users
-createUser = async (name, email, password, id) => {
+createNewUser = async (name, email, password, id) => {
     const { rows } = await pool.query(`
       INSERT INTO users(
         name,
@@ -258,7 +258,7 @@ deleteUser = async (id) => {
 
 module.exports = {
   getUsers,
-  createUser,
+  createNewUser,
   getUserByEmail,
   getUserById,
   amountQuery,

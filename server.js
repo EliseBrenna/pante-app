@@ -10,7 +10,7 @@ const { authenticate } = require('./middlewares/middleware')
 const { cryptPassword, decryptPassword } = require('./middlewares/bcrypt')
 const { 
   getUsers,
-  createUser,
+  createNewUser,
   getUserByEmail,
   getUserById,
   amountQuery,
@@ -144,7 +144,7 @@ api.post(`/signup`, async (req, res) => {
   if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Epostadresse er allerede i bruk'})
   } else {
-    const newUser = await createUser(name, email, hashPassword, id);
+    const newUser = await createNewUser(name, email, hashPassword, id);
     res.send(newUser);
   } 
 });
