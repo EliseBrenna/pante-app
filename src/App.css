@@ -691,6 +691,7 @@ svg path {
     justify-self: center;
     align-self: start;
     margin-bottom: 100px;
+    margin-top: 20px;
 }
 
 .activity ul {
