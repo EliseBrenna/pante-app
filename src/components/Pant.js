@@ -14,7 +14,6 @@ class Pant extends React.Component {
         activeSession: false,
         countValid: false
     }
-    this.timer = null;
   }
 
   // POSTING
@@ -27,7 +26,7 @@ class Pant extends React.Component {
     } else {
       this.setState({
         code: '',
-        amount: 0,
+        amount: panteSum,
         activeSession: false,
         lotteryPop: false,
         isClicked: false
