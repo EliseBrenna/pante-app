@@ -276,7 +276,7 @@ footer {
     border: 1.5px solid #0d5526;
     border-radius: 8px;
     max-width: 60%;
-    height: 250px;
+    max-height: auto;
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
@@ -518,15 +518,13 @@ footer {
     outline: none;
 }
 
-.submit-button .delete-button {
-    margin-top: 5px;
-    background-color: #0d5526;
-}
 
-.delete-button {
-    width: 140px;
+.submit-button .delete-button {
+    width: 120px;
     margin-top: 10px;
     justify-self: center;
+    background-color: rgb(212, 17, 17);
+    font-size: 14px;
 }
 
 .changePassword {
@@ -696,6 +694,7 @@ svg path {
     height: auto;
     justify-self: center;
     align-self: start;
+    margin-bottom: 100px;
 }
 
 .activity ul {
