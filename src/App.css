@@ -85,12 +85,8 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     outline: none;
-    transition: 1s;
 }
 
-.inputField input:focus {
-    border: 2px solid #0d5526;
-}
 
 .loginBtn, .signupBtn {
     display: grid;
