@@ -94,8 +94,6 @@ class changePassword extends React.Component {
                     <h3>Endre passord</h3>
                 </div>
 
-                {/* SKJEMA */}
-
         <div className="edit-form">
             <label className="inputField" id="iconPassword">
                 <input 
@@ -132,8 +130,6 @@ class changePassword extends React.Component {
             <div className="submit-button-password" >
             <button className="save-button" onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
             </div>
-            
-        
 
         <footer className="nav-bar-edit">
                     <div className="homeIcon" >

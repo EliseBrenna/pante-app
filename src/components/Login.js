@@ -76,7 +76,6 @@ class Login extends React.Component {
 
     render() {
         const { error } = this.state;
-        const { label } = this.props
 
         return (
             <div className="login">

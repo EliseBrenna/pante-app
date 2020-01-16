@@ -111,7 +111,6 @@ class Home extends React.Component {
                         <div className="home-content">
                             <h3>Tast inn kode fra <br/>panteautomaten</h3>
                         
-                            {/* Form to sumbit code */}
                             <form onSubmit={this.handleSubmit.bind(this)}>
                                 <label htmlFor='userCode'>
                                 <input 

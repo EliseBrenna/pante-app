@@ -19,9 +19,6 @@ class Authenticate extends React.Component {
                 <div className="loader">
                 </div>
             </div>
-
-
-                
         )
     }
 }

@@ -22,13 +22,13 @@ export function checkSession() {
     .then((res) => res.status === 200);
 }
 
-export async function createUser({name, email, phone, password}){
+export async function createUser({name, email, password}){
     const response = await fetch(`${API_URL}/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, phone, password })
+        body: JSON.stringify({ name, email, password })
     })
     return response.json();
 }
@@ -110,17 +110,6 @@ export async function deleteUser() {
     })
     return await response.json();
 }
-
-// export function withdrawAccountBalance() {
-//     return fetch(`${API_URL}/withdraw`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-Auth-Token': localStorage.getItem('pante_app_token')
-//         }
-//     })
-//     .then((res) => res.json());
-// }
 
 export function updatePantData (data) {
     return fetch (`${API_URL}/home`, {

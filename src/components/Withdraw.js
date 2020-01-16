@@ -75,11 +75,6 @@ class Withdraw extends React.Component {
                             <p>Dine kontoer ></p>
                             <p>Legg til konto ></p>
                         </div>
-                        // <div className="supportArrows">
-                        //     <p>></p>
-                        //     <p>></p>
-                        //     <p>></p>
-                        // </div>
                     ) : (
                         <div className="withdrawPop">
                             <div className="withdrawBtnContainer">

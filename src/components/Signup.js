@@ -51,7 +51,9 @@ class Signup extends React.Component {
             this.setState({ error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd" })
         } else if (confirmPassword !== password) {
             this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
-        } else {    
+        } 
+        
+        if (emailTest(email) && passwordTest(password) && confirmPassword === password) {    
             try {
                 this.setState({ isLoading: true });
                 const newUser = await createUser({ name, email, phone, password });
