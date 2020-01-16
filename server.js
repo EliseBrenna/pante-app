@@ -10,7 +10,7 @@ const { authenticate } = require('./middlewares/middleware')
 const { cryptPassword, decryptPassword } = require('./middlewares/bcrypt')
 const { 
   getUsers,
-  createUser,
+  createNewUser,
   getUserByEmail,
   getUserById,
   amountQuery,
@@ -144,7 +144,7 @@ api.post(`/signup`, async (req, res) => {
   if(+validateEmail.count) {
     return res.status(403).json({ status: 403, message: 'Epostadresse er allerede i bruk'})
   } else {
-    const newUser = await createUser(name, email, hashPassword, id);
+    const newUser = await createNewUser(name, email, hashPassword, id);
     res.send(newUser);
   } 
 });
@@ -180,7 +180,7 @@ api.post('/session', async (req, res) => {
     const user = await getUserByEmail(email)
 
     if(!user) {
-      return res.status(401).json({status: 401, message: 'Ukjent epostadresse' })
+      return res.status(400).json({status: 400, message: 'Ukjent epostadresse' })
     }
 
     const match = await decryptPassword(password, user.password);
@@ -199,7 +199,7 @@ api.post('/session', async (req, res) => {
       })
     
   } catch(error) {
-    return res.status(401).json({status: 401, message: 'Oops, noe gikk galt'})
+    return res.status(404).json({status: 404, message: 'Oops, noe gikk galt'})
   }
 });
 

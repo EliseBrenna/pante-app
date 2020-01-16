@@ -1,5 +1,6 @@
 import React from 'react';
 import { updatePantData, saldoData } from '../services/pantSession';
+import { withdrawAccountBalance } from '../services/session'
 
 class Home extends React.Component {
     constructor(props) {
@@ -12,7 +13,9 @@ class Home extends React.Component {
             error: null,
             showButton: false,
             saldo: '',
-            overlay: ''
+            overlay: '',
+            withdrawMessage: null,
+            messagePop: false
         }
     }
 
@@ -26,12 +29,17 @@ class Home extends React.Component {
         try {
             const inputCode = await updatePantData(session);
             const saldo = await saldoData();
+            console.log(saldo)
+            const sum = saldo
+            .map(({amount}) => amount)
+            .reduce((accu, curr) => accu+curr, 0)
             if (inputCode.status === 403) {
                 this.setState({ 
                     error: inputCode.message,
                     pantPop: true,
                     showButton: false,
-                    overlay: 'overlay'
+                    overlay: 'overlay',
+                    
                  })
             } else {
                 this.setState({
@@ -39,8 +47,8 @@ class Home extends React.Component {
                     userCode: "",
                     pantPop: true,
                     showButton: true,
-                    saldo,
-                    overlay: 'overlay'
+                    saldo: sum,
+                    overlay: 'overlay',
                 })
             }
         } catch (error) {
@@ -53,6 +61,16 @@ class Home extends React.Component {
             ...this.state,
             [field]: event.target.value.toUpperCase()
         });
+    }
+
+    handleWithdraw = async () => {
+        const withdrawAction = await withdrawAccountBalance();
+        this.setState({
+            messagePop: true,
+            withdrawMessage: withdrawAction.message,
+            pantPop: false,
+            overlay: ''
+         })
     }
 
     handleChangeView(view = '', params = {}) {
@@ -82,7 +100,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { error, showButton, overlay } = this.state;
+        const { error, showButton, overlay, saldo } = this.state;
 
         return (
             <div className="home" id={overlay}>
@@ -93,7 +111,6 @@ class Home extends React.Component {
                         <div className="home-content">
                             <h3>Tast inn kode fra <br/>panteautomaten</h3>
                         
-                            {/* Form to sumbit code */}
                             <form onSubmit={this.handleSubmit.bind(this)}>
                                 <label htmlFor='userCode'>
                                 <input 
@@ -114,7 +131,7 @@ class Home extends React.Component {
                             </div>
                             <div className="toAccount">
                                 {error && <h4>{error}</h4>}
-                                {showButton && <button className="toAccountBtn">Overfør til konto</button>}
+                                {showButton && <div><h5>Din saldo: {saldo}</h5> <button onClick={this.handleWithdraw.bind(this)} className="toAccountBtn">Overfør til konto</button></div>}
                             </div>
                         </div>
                     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import { updateUser, getUserById, deleteUser } from '../services/session';
-const { passwordTest, emailTest } = require('../RegExp')
+const { emailTest } = require('../services/RegExp')
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -117,8 +117,6 @@ class EditProfile extends React.Component {
                     <h3>Endre Profil</h3>
                 </div>
 
-                {/* SKJEMA */}
-
                 <div className="edit-form">
                     <label className="inputField" id="iconName">
                         <input 
@@ -141,8 +139,6 @@ class EditProfile extends React.Component {
                         <button className="saveButton" onClick={this.handleSubmitAttempt.bind(this)}>Lagre</button>
                     </div>
                 </div>
-
-                {/* SKJEMA SLUTT */}
 
                 <div className="submit-button" >
                     <button className="changePassword" onClick={this.handleChangePasswordClick.bind(this)}>Endre passord</button>

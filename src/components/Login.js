@@ -14,15 +14,8 @@ class Login extends React.Component {
             error: null,
             type: 'password',
             fill: false,
-            inputClass: "valid",
-            styles: {
-                email: {
-
-                },
-                password: {
-
-                }
-            }
+            emailClass: '',
+            passwordClass: ''
         }
     }
 
@@ -52,18 +45,24 @@ class Login extends React.Component {
         
 
         try {
-            this.setState({ isLoggingIn: true, error: null });
+            this.setState({ 
+                isLoggingIn: true, 
+                error: null,
+                emailClass: '',
+                passwordClass: ''
+            });
             const loginAttempt = await createSession({ email, password });
             const { token, error } = await createSession({ email, password });
             if (error) {
-                this.setState({ error: loginAttempt.message, inputClass: "invalid"});
-            } else if(loginAttempt.status === 401) {
-                this.setState({ error: loginAttempt.message, inputClass: "invalid" });
-                console.log(this.state.styles.border)
+                this.setState({ error: loginAttempt.message});
+            } else if(loginAttempt.status === 400) {
+                this.setState({ error: loginAttempt.message, emailClass: "invalid" });
+            } else if (loginAttempt.status === 401){
+                this.setState({ error: loginAttempt.message, passwordClass: "invalid" });
             } else if (this.state.email === '') {
-                this.setState({ error: 'Please put in an valid email', inputClass: "invalid"});
+                this.setState({ error: 'Please put in an valid email', emailClass: "invalid"});
             } else if (this.state.password === '') {
-                this.setState({ error: 'Please put in a valid password', inputClass: "invalid"});
+                this.setState({ error: 'Please put in a valid password', passwordClass: "invalid"});
             } else {
                 localStorage.setItem('pante_app_token', token);
                 history.push('/');
@@ -75,7 +74,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const { error } = this.state;
+        const { error, emailClass, passwordClass } = this.state;
         const { label } = this.props
 
         return (
@@ -86,7 +85,7 @@ class Login extends React.Component {
                         <label className="inputField" id="iconUsername">
                             <input 
                             type="email"
-                            className={this.state.inputClass}
+                            className={emailClass}
                             placeholder="Skriv inn e-post"
                             value={this.state.loginForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')} />
@@ -96,7 +95,7 @@ class Login extends React.Component {
                         <label className="inputField passwordEye" id="iconPassword">    
                             <input 
                             type={this.state.type} 
-                            className={this.state.inputClass}
+                            className={passwordClass}
                             placeholder="Skriv inn passord"
                             value={this.state.loginForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')} />

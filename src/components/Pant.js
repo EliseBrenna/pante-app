@@ -14,7 +14,6 @@ class Pant extends React.Component {
         activeSession: false,
         countValid: false
     }
-    this.timer = null;
   }
 
   // POSTING
@@ -27,11 +26,12 @@ class Pant extends React.Component {
     } else {
       this.setState({
         code: '',
-        amount: 0,
+        amount: panteSum,
         activeSession: false,
         lotteryPop: false,
         isClicked: false
       })
+      
     }
   };
 
@@ -72,6 +72,7 @@ class Pant extends React.Component {
     this.setState({
       lotteryPop: true,
       activeSession: true,
+      isClicked: true
     })
   }
 
@@ -118,7 +119,7 @@ class Pant extends React.Component {
           <div className="recycleButton">
           	<button className="greenButton" disabled={isClicked} onClick={() => this.createCode()} ></button>
           </div>
-          <button className="redCross" onClick={() => this.lotteryPop()}>+</button>
+          <button className="redCross" disabled={isClicked} onClick={() => this.lotteryPop()}>+</button>
           <img src="./pantomat2.svg" alt="panteautomat"></img>  
         </div>
 

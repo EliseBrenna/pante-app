@@ -9,7 +9,8 @@ class Withdraw extends React.Component {
           view: '',
           params: {},
           messagePop: false,
-          withdrawMessage: null
+          withdrawMessage: null,
+          overlay: ''
         }
     }
 
@@ -18,6 +19,7 @@ class Withdraw extends React.Component {
         this.setState({
             messagePop: true,
             withdrawMessage: withdrawAction.message,
+            overlay: 'overlay'
          })
     }
 
@@ -48,14 +50,15 @@ class Withdraw extends React.Component {
 
     handleMessageExit() {
         this.setState({
-            messagePop: false
+            messagePop: false,
+            overlay: ''
         })
     }
 
     render() {
-        const { withdrawMessage, messagePop } = this.state;
+        const { withdrawMessage, messagePop, overlay } = this.state;
         return (
-            <div>
+            <div id={overlay}>
                 <div className="helpContainer">
                     <div className="supportContainer">
                         <div className="arrowLeftHistory">
@@ -75,11 +78,6 @@ class Withdraw extends React.Component {
                             <p>Dine kontoer ></p>
                             <p>Legg til konto ></p>
                         </div>
-                        // <div className="supportArrows">
-                        //     <p>></p>
-                        //     <p>></p>
-                        //     <p>></p>
-                        // </div>
                     ) : (
                         <div className="withdrawPop">
                             <div className="withdrawBtnContainer">

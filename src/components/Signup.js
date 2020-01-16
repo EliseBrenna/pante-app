@@ -1,6 +1,6 @@
 import React from 'react';
 import { createUser, createSession } from '../services/session';
-const { passwordTest, emailTest } = require('../RegExp')
+const { passwordTest, emailTest } = require('../services/RegExp')
 
 class Signup extends React.Component {
     constructor(props){
@@ -12,7 +12,10 @@ class Signup extends React.Component {
                 email: '',
                 phone: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                EmailClass: '',
+                passwordClass: '',
+                confirmPasswordClass: ''
             },
             isLoading: false,
             error: null,
@@ -40,24 +43,49 @@ class Signup extends React.Component {
         const { name, email, phone, password, confirmPassword } = this.state.signupForm;
 
         if (!emailTest(email)) {
-            this.setState({ emailError: "Ikke gyldig e-postadresse" })
+            this.setState({ emailError: "Ikke gyldig e-postadresse", EmailClass: 'invalid'})
         } else if(confirmPassword !== password) {
-            this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
+            this.setState({ error: "Passordene du har skrevet inn matcher ikke", passwordClass: 'invalid', confirmPassword: 'invalid' })
         } else {
-            this.setState({ emailError: null })
+            this.setState({
+                emailError: null,
+                EmailClass: '',
+            })
         }
         
         if (!passwordTest(password)) {
-            this.setState({ error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd" })
+            this.setState({ 
+                error: "Passordet ikke gyldig. Minimum 8 tegn, minst en bokstav og et tall påkrevd", passwordClass: 'invalid',
+                confirmPasswordClass: 'invalid'
+            })
         } else if (confirmPassword !== password) {
-            this.setState({ error: "Passordene du har skrevet inn matcher ikke" })
-        } else {    
+            this.setState({ error: "Passordene du har skrevet inn matcher ikke", passwordClass: 'invalid', confirmPasswordClass: 'invalid' })
+        } else {
+            this.setState({ 
+                error: null,
+                passwordClass: '',
+                confirmPasswordClass: ''      
+            })
+        }
+
+        
+        
+        
+        
+        if (emailTest(email) && passwordTest(password) && confirmPassword === password) {    
             try {
-                this.setState({ isLoading: true });
+                this.setState(
+                    {
+                    isLoading: true,
+                    EmailClass: '', 
+                    passwordClass: '', 
+                    confirmPasswordClass: '',
+                    error: null,
+                    });
                 const newUser = await createUser({ name, email, phone, password });
 
                 if(newUser.status === 403) {
-                    this.setState({ error: newUser.message })
+                    this.setState({ error: newUser.message, EmailClass: 'invalid' })
                 } else {
                     const { token } = await createSession({ email, password });
                     localStorage.setItem('pante_app_token', token);
@@ -70,7 +98,7 @@ class Signup extends React.Component {
     }
 
     render() {
-        const { error, emailError } = this.state;
+        const { error, emailError, EmailClass, passwordClass, confirmPasswordClass } = this.state;
         return (
             <div className="signup">
                 <div className="arrowLeft" onClick={() => this.handleLogin()}>
@@ -97,9 +125,10 @@ class Signup extends React.Component {
                             onChange={this.handleInputChange.bind(this, 'name')}
                          />
                     </label>
-                    <label className="inputField" id="iconUsername">
+                    <label className='inputField' id="iconUsername">
                         <input 
                             type="email" 
+                            className={EmailClass}
                             placeholder="Skriv inn e-postadresse" required
                             value={this.state.signupForm.email}
                             onChange={this.handleInputChange.bind(this, 'email')}
@@ -108,9 +137,10 @@ class Signup extends React.Component {
                             {emailError && <p>{emailError}</p>}
                         </div>
                     </label>
-                    <label className="inputField" id="iconPassword">
+                    <label className='inputField' id="iconPassword">
                         <input 
-                            type="password" 
+                            type="password"
+                            className={passwordClass} 
                             placeholder="Skriv inn passord" required
                             value={this.state.signupForm.password}
                             onChange={this.handleInputChange.bind(this, 'password')}
@@ -118,7 +148,8 @@ class Signup extends React.Component {
                     </label>
                     <label className="inputField" id="iconPassword">
                         <input 
-                            type="password" 
+                            type="password"
+                            className={confirmPasswordClass}
                             placeholder="Gjenta passord" required
                             value={this.state.signupForm.confirmPassword}
                             onChange={this.handleInputChange.bind(this, 'confirmPassword')}
