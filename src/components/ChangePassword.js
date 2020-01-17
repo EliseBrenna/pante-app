@@ -58,7 +58,7 @@ class changePassword extends React.Component {
 
     handleBackProfile() {
         const { history } = this.props;
-        history.push('/profile');
+        history.push('/editprofile');
     }
 
     handleHomeClicked() {

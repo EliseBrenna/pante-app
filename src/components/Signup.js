@@ -67,10 +67,6 @@ class Signup extends React.Component {
                 confirmPasswordClass: ''      
             })
         }
-
-        
-        
-        
         
         if (emailTest(email) && passwordTest(password) && confirmPassword === password) {    
             try {
