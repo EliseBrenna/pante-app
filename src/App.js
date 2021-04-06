@@ -25,7 +25,7 @@ class App extends React.Component {
         <ScrollToTop />
         <Switch>
           <Route path="/" exact component={Authenticate} />
-          <Route path="/home" component={withAuthentication(Home)} />
+          <Route path="/home" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/profile" component={withAuthentication(Profile)} />
